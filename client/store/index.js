@@ -15,6 +15,8 @@ import singleConsensusReducer from './singleConsensusStore'
 import groupMembersReducer from './allGroupMembersStore'
 import singleGroupMemberReducer from './singleGroupMemberStore'
 import singleGroupQuestionReducer from './singleGroupQuestionStore'
+import singleUserResponseReducer from './singleUserResponseStore'
+import userResponsesReducer from './allUserResponsesStore'
 
 const reducer = combineReducers({ auth,
   allUsers: usersReducer,
@@ -29,6 +31,8 @@ const reducer = combineReducers({ auth,
   allGroupMembers: groupMembersReducer,
   singleGroupQuestion: singleGroupQuestionReducer,
   allGroupQuestions: groupQuestionsReducer,
+  singleUserResponse: singleUserResponseReducer,
+  allUserResponses: userResponsesReducer
 
  })
 const middleware = composeWithDevTools(
