@@ -14,9 +14,13 @@ const Question = db.define('question', {
     type: Sequelize.STRING,
     allowNull: false,
   },
-  expiresAt: {
+  dateAsked: {
     type: Sequelize.DATE,
+  },
+  expired: {
+    type: Sequelize.BOOLEAN,
     allowNull: false,
+    defaultValue: false
   },
 });
 
