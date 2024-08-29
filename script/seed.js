@@ -17,8 +17,13 @@ async function seed() {
   ])
 
   const questions = await Promise.all([
-    Question.create({text: "Pick an Actor", optionA:"Pacino", optionB:"Deniro" }),
+    Question.create({text: "Pick an Actor", optionA:"Al Pacino", optionB:"Robert Deniro" }),
+    Question.create({text: "Pick an Actor", optionA:"Ben Affleck", optionB:"Matt Damon" }),
     Question.create({text: "Pick a Food", optionA:"Cheez Itz", optionB:"Goldfish" }),
+    Question.create({text: "Pick a Food", optionA:"Hot Dog", optionB:"Burger" }),
+    Question.create({text: "Pick a Food", optionA:"PeanutButter", optionB:"Jelly" }),
+    Question.create({text: "Pick a Singer", optionA:"Billy Joel", optionB:"Bruce Springsteen" }),
+    Question.create({text: "Pick a Singer", optionA:"Whitney Houston", optionB:"Mariah Carey" }),
 
   ])
 

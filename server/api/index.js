@@ -7,6 +7,7 @@ router.use('/groupMembers', require('./groupMembers'))
 router.use('/groupQuestions', require('./groupQuestions'))
 router.use('/questions', require('./questions'))
 router.use('/groups', require('./groups'))
+router.use('/userResponses', require('./userResponses'))
 
 router.use((req, res, next) => {
   const error = new Error('Not Found')
