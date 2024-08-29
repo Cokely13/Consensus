@@ -15,7 +15,6 @@ import singleConsensusReducer from './singleConsensusStore'
 import groupMembersReducer from './allGroupMembersStore'
 import singleGroupMemberReducer from './singleGroupMemberStore'
 import singleGroupQuestionReducer from './singleGroupQuestionStore'
-import groupQuestionsReducer from './allGroupQuestionStore'
 
 const reducer = combineReducers({ auth,
   allUsers: usersReducer,
