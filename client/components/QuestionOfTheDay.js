@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchQuestions } from '../store/allQuestionsStore';
-import { createUserResponse } from '../store/userResponsesStore'; // Import the createUserResponse action
+import { createUserResponse } from '../store/allUserResponsesStore'; // Import the createUserResponse action
 
 function QuestionOfTheDay() {
   const dispatch = useDispatch();
@@ -24,10 +24,11 @@ function QuestionOfTheDay() {
 
   const handleVote = (option) => {
     // Create the userResponse object
+    const responseOption = option === 'optionA' ? 'option_a' : 'option_b';
     const userResponse = {
       userId: id, // Replace with actual logged-in user ID
       questionId: selectedQuestion.id,
-      response: option,
+      response: responseOption,
     };
 
     // Dispatch the createUserResponse action to save the vote
