@@ -1,11 +1,14 @@
 const router = require('express').Router()
-const { models: { UserResponse }} = require('../db')
+const { models: { UserResponse, User, Question }} = require('../db')
 module.exports = router
 
 
 router.get('/', async (req, res, next) => {
   try {
-    const userResponses = await UserResponse.findAll();
+    const userResponses = await UserResponse.findAll({
+      include: [  { model: User, attributes: ['id', 'username'] }, Question
+    ],
+    });
     res.json(userResponses);
   } catch (err) {
     next(err);
@@ -33,7 +36,10 @@ router.put('/:id', async (req, res, next) => {
 //Get read all userResponses
 router.get('/:id', async (req, res, next) => {
   try {
-    const userResponse = await UserResponse.findByPk();
+    const userResponse = await UserResponse.findByPk(req.params.id, {
+      include: [  { model: User, attributes: ['id', 'username'] }, Question
+      ],
+    });
     res.json(userResponse);
   } catch (err) {
     next(err);
