@@ -19,3 +19,23 @@ form div {
   margin: 1em;
   display: inline-block;
 }
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+  padding: 10px;
+}
+
+.grid-header {
+  display: contents;
+  font-weight: bold;
+  border-bottom: 1px solid #ddd;
+}
+
+.grid-row {
+  display: contents;
+  border-bottom: 1px solid #f0f0f0;
+  padding: 10px 0;
+}
+

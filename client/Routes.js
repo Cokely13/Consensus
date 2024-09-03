@@ -6,6 +6,7 @@ import Home from './components/Home';
 import {me} from './store'
 import Users from './components/Users'
 import Questions from './components/Questions'
+import Archive from './components/Archive';
 
 /**
  * COMPONENT
@@ -25,6 +26,7 @@ class Routes extends Component {
             <Route path="/home" component={Home} />
             <Route path="/users" component={Users} />
             <Route path="/questions" component={Questions} />
+            <Route path="/archive" component={Archive} />
             <Redirect to="/home" />
           </Switch>
         ) : (
