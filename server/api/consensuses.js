@@ -1,11 +1,12 @@
 const router = require('express').Router()
-const { models: { Consensus }} = require('../db')
+const { models: { Consensus, Question }} = require('../db')
 module.exports = router
 
 
 router.get('/', async (req, res, next) => {
   try {
-    const consensuses = await Consensus.findAll();
+    const consensuses = await Consensus.findAll({ include: [ Question
+    ]});
     res.json(consensuses);
   } catch (err) {
     next(err);
@@ -33,7 +34,8 @@ router.put('/:id', async (req, res, next) => {
 //Get read all consensuses
 router.get('/:id', async (req, res, next) => {
   try {
-    const consensus = await Consensus.findByPk();
+    const consensus = await Consensus.findByPk(req.params.id, { include: [ Question
+    ]});
     res.json(consensus);
   } catch (err) {
     next(err);
