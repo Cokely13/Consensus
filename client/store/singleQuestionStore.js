@@ -28,7 +28,7 @@ export const fetchQuestion = (id) => {
   };
 };
 
-export const updateSingleQuestion = (question, history) => {
+export const updateSingleQuestion = (question) => {
   return async (dispatch) => {
     try {
         await axios.put(`/api/questions/${question.id}`, question);

@@ -4,7 +4,6 @@ const db = require('../db');
 const Consensus = db.define('consensus', {
   groupId: {
     type: Sequelize.INTEGER,
-    allowNull: false,
     references: {
       model: 'groups',
       key: 'id',

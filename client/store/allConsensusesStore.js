@@ -35,6 +35,7 @@ export const fetchConsensuses = () => {
 
 export const createConsensus = (consensus) => {
   return async (dispatch) => {
+    console.log("HEYY!!!")
     const { data: created } = await Axios.post("/api/consensuses", consensus);
     dispatch(_createConsensus(created));
     // history.push("/consensuses");

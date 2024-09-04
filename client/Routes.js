@@ -7,6 +7,8 @@ import {me} from './store'
 import Users from './components/Users'
 import Questions from './components/Questions'
 import Archive from './components/Archive';
+import UserDetailPage from './components/UserDetailPage';
+import Profile from './components/Profile';
 
 /**
  * COMPONENT
@@ -23,10 +25,12 @@ class Routes extends Component {
       <div>
         {isLoggedIn ? (
           <Switch>
-            <Route path="/home" component={Home} />
-            <Route path="/users" component={Users} />
-            <Route path="/questions" component={Questions} />
-            <Route path="/archive" component={Archive} />
+            <Route exact path="/home" component={Home} />
+            <Route exact path="/profile" component={Profile} />
+            <Route exact path="/users" component={Users} />
+            <Route exact path="/users/:userId" component={UserDetailPage} />
+            <Route exact path="/questions" component={Questions} />
+            <Route exact path="/archive" component={Archive} />
             <Redirect to="/home" />
           </Switch>
         ) : (
