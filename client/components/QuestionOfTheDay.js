@@ -23,15 +23,17 @@ function QuestionOfTheDay() {
       // Extract the question IDs the user has already voted on
       const votedQuestionIds = new Set(user.user_responses.map((response) => response.questionId));
 
-      // Filter out questions the user hasn't voted on yet
-      const questionsNotVotedOn = questions.filter(
-        (question) => !votedQuestionIds.has(question.id)
+      console.log("votedQuestion", votedQuestionIds)
+
+      // Filter out questions the user hasn't voted on yet and have no consensus
+      const questionsNotVotedOrExpired = questions.filter(
+        (question) => !votedQuestionIds.has(question.id) && !question.consensus.length
       );
 
-      // Select a random question from those not voted on
-      if (questionsNotVotedOn.length > 0) {
-        const randomIndex = Math.floor(Math.random() * questionsNotVotedOn.length);
-        setSelectedQuestion(questionsNotVotedOn[randomIndex]);
+      // Select a random question from those not voted on and without consensus
+      if (questionsNotVotedOrExpired.length > 0) {
+        const randomIndex = Math.floor(Math.random() * questionsNotVotedOrExpired.length);
+        setSelectedQuestion(questionsNotVotedOrExpired[randomIndex]);
       } else {
         setSelectedQuestion(null); // No questions left to vote on
       }
