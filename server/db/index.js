@@ -1,5 +1,3 @@
-//this is the access point for all things database related!
-
 const db = require('./db')
 const Group = require('./models/Group');
 const GroupMember = require('./models/GroupMember');
