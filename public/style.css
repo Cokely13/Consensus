@@ -39,3 +39,9 @@ form div {
   padding: 10px 0;
 }
 
+.highlight {
+  font-weight: bold;
+  background-color: #d4edda; /* Light green background */
+  padding: 5px;
+  border-radius: 3px;
+}

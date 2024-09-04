@@ -1,3 +1,5 @@
+
+
 // import React, { useEffect } from 'react';
 // import { useDispatch, useSelector } from 'react-redux';
 // import { fetchQuestions } from '../store/allQuestionsStore';
@@ -10,7 +12,9 @@
 //     dispatch(fetchQuestions());
 //   }, [dispatch]);
 
-//   console.log("questions", questions)
+//   const calculateVotes = (userResponses, option) => {
+//     return userResponses.filter((response) => response.response === option).length;
+//   };
 
 //   return (
 //     <div>
@@ -27,9 +31,9 @@
 //           <div key={question.id} className="grid-row">
 //             <div>{question.text}</div>
 //             <div>{question.optionA}</div>
-//             <div>{question.optionAVotes || 0}</div>
+//             <div>{calculateVotes(question.user_responses, 'option_a')}</div>
 //             <div>{question.optionB}</div>
-//             <div>{question.optionBVotes || 0}</div>
+//             <div>{calculateVotes(question.user_responses, 'option_b')}</div>
 //           </div>
 //         ))}
 //       </div>
@@ -66,15 +70,24 @@ function Archive() {
           <div>Option B</div>
           <div>Votes for Option B</div>
         </div>
-        {questions.map((question) => (
-          <div key={question.id} className="grid-row">
-            <div>{question.text}</div>
-            <div>{question.optionA}</div>
-            <div>{calculateVotes(question.user_responses, 'option_a')}</div>
-            <div>{question.optionB}</div>
-            <div>{calculateVotes(question.user_responses, 'option_b')}</div>
-          </div>
-        ))}
+        {questions.map((question) => {
+          const optionAVotes = calculateVotes(question.user_responses, 'option_a');
+          const optionBVotes = calculateVotes(question.user_responses, 'option_b');
+
+          // Determine which option has more votes
+          const highlightOptionA = optionAVotes > optionBVotes ? 'highlight' : '';
+          const highlightOptionB = optionBVotes > optionAVotes ? 'highlight' : '';
+
+          return (
+            <div key={question.id} className="grid-row">
+              <div>{question.text}</div>
+              <div className={highlightOptionA}>{question.optionA}</div>
+              <div >{optionAVotes}</div>
+              <div className={highlightOptionB}>{question.optionB}</div>
+              <div >{optionBVotes}</div>
+            </div>
+          );
+        })}
       </div>
     </div>
   );
