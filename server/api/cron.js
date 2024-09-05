@@ -7,18 +7,17 @@ cron.schedule('* * * * *', async () => {
   try {
     // Get today's date in YYYY-MM-DD format
 
-    const today = new Date();
-    today.setDate(today.getDate());
-    const todayDateOnly = today.toISOString().split('T')[0];
+    const yesterday = new Date();
+    yesterday.setDate(yesterday.getDate() - 1);
+    const yesterdayDateOnly = yesterday.toISOString().split('T')[0];
 
-    console.log("todaySDate", todayDateOnly)
+    console.log("todaySDate", yesterdayDateOnly)
 
-    console.log("Question", Question)
 
     // Query to find a question with today's date
     const question = await Question.findOne({
       where: {
-        dateAsked: todayDateOnly,
+        dateAsked: yesterdayDateOnly,
         expired: false,
       },
       include: [{ model: UserResponse }],

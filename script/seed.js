@@ -43,10 +43,10 @@ async function seed() {
   ]);
 
 
-  const consensuses = await Promise.all([
-  //  Consensus.create({ questionId: 2, consensusAnswer: "option_a", calculatedAt: today }),
-   Consensus.create({ questionId: 1, consensusAnswer: "option_a", calculatedAt: today })
-  ])
+  // const consensuses = await Promise.all([
+  // //  Consensus.create({ questionId: 2, consensusAnswer: "option_a", calculatedAt: today }),
+  //  Consensus.create({ questionId: 1, consensusAnswer: "option_a", calculatedAt: today })
+  // ])
 
   const userResponses = await Promise.all([
     UserResponse.create({ userId: 1, questionId: 2, response: "option_a" }),
