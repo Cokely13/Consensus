@@ -24,6 +24,7 @@ function Questions() {
             <div>{question.text}</div>
             <div>{question.optionA}</div>
             <div>{question.optionB}</div>
+            <div>{question.dateAsked}</div>
             <div>{question.status}</div>
             </div>))}
     </div>
