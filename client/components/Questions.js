@@ -22,6 +22,9 @@ function Questions() {
         {questions.map((question) => (
           <div key={question.id}>
             <div>{question.text}</div>
+            <div>{question.optionA}</div>
+            <div>{question.optionB}</div>
+            <div>{question.status}</div>
             </div>))}
     </div>
     </div>

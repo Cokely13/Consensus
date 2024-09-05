@@ -26,6 +26,11 @@ const Question = db.define('question', {
   createdBy: {
     type: Sequelize.INTEGER,
     allowNull: true,
+  },
+  status: {
+    type: Sequelize.ENUM('waiting', 'accepted', 'rejected'),
+    allowNull: false,
+    defaultValue: 'waiting'
   }
 });
 
