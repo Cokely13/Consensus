@@ -20,18 +20,19 @@ async function seed() {
 
 
 
-  const today = new Date();
 
   // Helper function to add days to a date
   const addDays = (date, days) => {
     const result = new Date(date);
     result.setDate(result.getDate() + days);
-    return result;
+    return result.toISOString().split('T')[0]; // Convert to YYYY-MM-DD format
   };
+
+  const today = new Date().toISOString().split('T')[0]; // Get today's date in YYYY-MM-DD format
 
   // Creating Questions with dates
   const questions = await Promise.all([
-    Question.create({text: "Pick a Song", optionA: "Wonderwall", optionB: "Champagne Supernova", dateAsked: addDays(today, -1)}),
+    Question.create({ text: "Pick a Song", optionA: "Wonderwall", optionB: "Champagne Supernova", dateAsked: addDays(today, -1) }),
     Question.create({ text: "Pick an Actor", optionA: "Al Pacino", optionB: "Robert Deniro", dateAsked: today }),
     Question.create({ text: "Pick an Actor", optionA: "Ben Affleck", optionB: "Matt Damon", dateAsked: addDays(today, 1) }),
     Question.create({ text: "Pick a Food", optionA: "Cheez Itz", optionB: "Goldfish", dateAsked: addDays(today, 2) }),
@@ -41,8 +42,9 @@ async function seed() {
     Question.create({ text: "Pick a Singer", optionA: "Whitney Houston", optionB: "Mariah Carey", dateAsked: addDays(today, 6) }),
   ]);
 
+
   const consensuses = await Promise.all([
-   Consensus.create({ questionId: 2, consensusAnswer: "option_a", calculatedAt: today }),
+  //  Consensus.create({ questionId: 2, consensusAnswer: "option_a", calculatedAt: today }),
    Consensus.create({ questionId: 1, consensusAnswer: "option_a", calculatedAt: today })
   ])
 

@@ -15,7 +15,7 @@ const Question = db.define('question', {
     allowNull: false,
   },
   dateAsked: {
-    type: Sequelize.DATE,
+    type: Sequelize.DATEONLY,
     unique: true
   },
   expired: {

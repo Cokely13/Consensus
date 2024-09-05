@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchQuestions } from '../store/allQuestionsStore';
@@ -16,19 +15,24 @@ function QuestionOfTheDay() {
   const [yesterdayConsensus, setYesterdayConsensus] = useState('');
   const [yesterdayQuestionText, setYesterdayQuestionText] = useState('');
   const [yesterdayResult, setYesterdayResult] = useState('');
+  const [todayDate, setTodayDate] = useState(''); // State to hold today's date
 
   useEffect(() => {
     // Fetch questions and the user's data when the component mounts
     dispatch(fetchQuestions());
     dispatch(fetchSingleUser(userId));
+
+    // Set today's date in YYYY-MM-DD format
+    const today = new Date().toISOString().split('T')[0];
+    setTodayDate(today);
   }, [dispatch, userId]);
 
   useEffect(() => {
     if (questions.length > 0 && user.user_responses) {
       // Find today's question
-      const today = new Date();
+      const today = new Date().toISOString().split('T')[0]; // Get today's date in YYYY-MM-DD format
       const todayQuestion = questions.find(
-        (question) => new Date(question.dateAsked).toDateString() === today.toDateString()
+        (question) => question.dateAsked === today
       );
 
       if (todayQuestion) {
@@ -47,9 +51,9 @@ function QuestionOfTheDay() {
       // Determine yesterday's question and consensus
       const yesterday = new Date();
       yesterday.setDate(yesterday.getDate() - 1);
+      const yesterdayDate = yesterday.toISOString().split('T')[0]; // Get yesterday's date in YYYY-MM-DD format
       const yesterdayQuestion = questions.find(
-        (question) =>
-          new Date(question.dateAsked).toDateString() === yesterday.toDateString()
+        (question) => question.dateAsked === yesterdayDate
       );
 
       if (yesterdayQuestion) {
@@ -135,6 +139,7 @@ function QuestionOfTheDay() {
 
   return (
     <div>
+      <h4>Today's Date is: {todayDate}</h4>
       <div>{yesterdayQuestionText}</div>
       <div>{yesterdayConsensus}</div>
       <div>{yesterdayResult}</div>
