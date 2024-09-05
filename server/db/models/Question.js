@@ -16,6 +16,7 @@ const Question = db.define('question', {
   },
   dateAsked: {
     type: Sequelize.DATE,
+    unique: true
   },
   expired: {
     type: Sequelize.BOOLEAN,

@@ -11,6 +11,8 @@
 //   const user = useSelector((state) => state.singleUser); // Get user details including responses
 //   const [selectedQuestion, setSelectedQuestion] = useState(null);
 //   const [hasVoted, setHasVoted] = useState(false);
+//   const [timeLeft, setTimeLeft] = useState('');
+//   const [yesterdayConsensus, setYesterdayConsensus] = useState('');
 
 //   useEffect(() => {
 //     // Fetch questions and the user's data when the component mounts
@@ -35,8 +37,52 @@
 //       } else {
 //         setSelectedQuestion(null); // No questions left to vote on
 //       }
+
+//       // Determine yesterday's consensus
+//       const yesterday = new Date();
+//       yesterday.setDate(yesterday.getDate() - 1);
+//       const yesterdayQuestion = questions.find(
+//         (question) => new Date(question.dateAsked).toDateString() === yesterday.toDateString() && question.consensus.length
+//       );
+
+//       if (yesterdayQuestion) {
+//         const consensusAnswer = yesterdayQuestion.consensus[0].consensusAnswer;
+//         const otherOption = consensusAnswer === 'option_a' ? yesterdayQuestion.optionB : yesterdayQuestion.optionA;
+//         const consensusOption = consensusAnswer === 'option_a' ? yesterdayQuestion.optionA : yesterdayQuestion.optionB;
+//         setYesterdayConsensus(`The consensus yesterday was that ${consensusOption} is better than ${otherOption}.`);
+//       } else {
+//         setYesterdayConsensus('No consensus was reached yesterday.');
+//       }
 //     }
 //   }, [questions, user]);
+
+//   useEffect(() => {
+//     const calculateTimeLeft = () => {
+//       const now = new Date();
+//       const midnight = new Date();
+//       midnight.setHours(24, 0, 0, 0); // Set to midnight
+
+//       const timeDifference = midnight - now;
+
+//       if (timeDifference > 0) {
+//         const hours = Math.floor((timeDifference / (1000 * 60 * 60)) % 24);
+//         const minutes = Math.floor((timeDifference / (1000 * 60)) % 60);
+//         const seconds = Math.floor((timeDifference / 1000) % 60);
+//         setTimeLeft(`${hours}h ${minutes}m ${seconds}s`);
+//       } else {
+//         setTimeLeft('Time is up!');
+//       }
+//     };
+
+//     // Initial call
+//     calculateTimeLeft();
+
+//     // Update every second
+//     const timer = setInterval(calculateTimeLeft, 1000);
+
+//     // Clear the interval on component unmount
+//     return () => clearInterval(timer);
+//   }, []);
 
 //   const handleVote = (option) => {
 //     const responseOption = option === 'optionA' ? 'option_a' : 'option_b';
@@ -52,6 +98,8 @@
 
 //   return (
 //     <div>
+//       <div>{yesterdayConsensus}</div>
+//       <h3>Time Left to Answer the Question: {timeLeft}</h3>
 //       {selectedQuestion ? (
 //         <div>
 //           <h2>Question of the Day</h2>
@@ -97,35 +145,44 @@ function QuestionOfTheDay() {
   }, [dispatch, userId]);
 
   useEffect(() => {
-    if (questions.length > 0 && user.user_responses && user.user_responses.length >= 0) {
-      // Extract the question IDs the user has already voted on
-      const votedQuestionIds = new Set(user.user_responses.map((response) => response.questionId));
-
-      // Filter out questions the user hasn't voted on yet and have no consensus
-      const questionsNotVotedOrExpired = questions.filter(
-        (question) => !votedQuestionIds.has(question.id) && !question.consensus.length
+    if (questions.length > 0 && user.user_responses) {
+      // Find today's question
+      const today = new Date();
+      const todayQuestion = questions.find(
+        (question) => new Date(question.dateAsked).toDateString() === today.toDateString()
       );
 
-      // Select a random question from those not voted on and without consensus
-      if (questionsNotVotedOrExpired.length > 0) {
-        const randomIndex = Math.floor(Math.random() * questionsNotVotedOrExpired.length);
-        setSelectedQuestion(questionsNotVotedOrExpired[randomIndex]);
+      if (todayQuestion) {
+        setSelectedQuestion(todayQuestion);
+
+        // Check if the user has already voted on today's question
+        const hasUserVoted = user.user_responses.some(
+          (response) => response.questionId === todayQuestion.id
+        );
+
+        setHasVoted(hasUserVoted);
       } else {
-        setSelectedQuestion(null); // No questions left to vote on
+        setSelectedQuestion(null); // No question for today
       }
 
       // Determine yesterday's consensus
       const yesterday = new Date();
       yesterday.setDate(yesterday.getDate() - 1);
       const yesterdayQuestion = questions.find(
-        (question) => new Date(question.dateAsked).toDateString() === yesterday.toDateString() && question.consensus.length
+        (question) =>
+          new Date(question.dateAsked).toDateString() === yesterday.toDateString() &&
+          question.consensus.length
       );
 
       if (yesterdayQuestion) {
         const consensusAnswer = yesterdayQuestion.consensus[0].consensusAnswer;
-        const otherOption = consensusAnswer === 'option_a' ? yesterdayQuestion.optionB : yesterdayQuestion.optionA;
-        const consensusOption = consensusAnswer === 'option_a' ? yesterdayQuestion.optionA : yesterdayQuestion.optionB;
-        setYesterdayConsensus(`The consensus yesterday was that ${consensusOption} is better than ${otherOption}.`);
+        const otherOption =
+          consensusAnswer === 'option_a' ? yesterdayQuestion.optionB : yesterdayQuestion.optionA;
+        const consensusOption =
+          consensusAnswer === 'option_a' ? yesterdayQuestion.optionA : yesterdayQuestion.optionB;
+        setYesterdayConsensus(
+          `The consensus yesterday was that ${consensusOption} is better than ${otherOption}.`
+        );
       } else {
         setYesterdayConsensus('No consensus was reached yesterday.');
       }
@@ -175,7 +232,9 @@ function QuestionOfTheDay() {
   return (
     <div>
       <div>{yesterdayConsensus}</div>
-      <h3>Time Left to Answer the Question: {timeLeft}</h3>
+      <h3>
+        {hasVoted ? 'Time Until the Next Question:' : 'Time Left to Answer the Question:'} {timeLeft}
+      </h3>
       {selectedQuestion ? (
         <div>
           <h2>Question of the Day</h2>
@@ -190,7 +249,7 @@ function QuestionOfTheDay() {
           )}
         </div>
       ) : (
-        <div>{questions.length > 0 ? 'No more questions available to vote on.' : 'Loading questions...'}</div>
+        <div>{questions.length > 0 ? 'No question for today.' : 'Loading questions...'}</div>
       )}
     </div>
   );
