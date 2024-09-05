@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchQuestions } from '../store/allQuestionsStore';
@@ -14,6 +15,7 @@ function QuestionOfTheDay() {
   const [timeLeft, setTimeLeft] = useState('');
   const [yesterdayConsensus, setYesterdayConsensus] = useState('');
   const [yesterdayQuestionText, setYesterdayQuestionText] = useState('');
+  const [yesterdayResult, setYesterdayResult] = useState('');
 
   useEffect(() => {
     // Fetch questions and the user's data when the component mounts
@@ -28,9 +30,6 @@ function QuestionOfTheDay() {
       const todayQuestion = questions.find(
         (question) => new Date(question.dateAsked).toDateString() === today.toDateString()
       );
-
-      console.log("user!!", user)
-      console.log("question", todayQuestion)
 
       if (todayQuestion) {
         setSelectedQuestion(todayQuestion);
@@ -67,12 +66,29 @@ function QuestionOfTheDay() {
           setYesterdayConsensus(
             `The consensus yesterday was that ${consensusOption} is better than ${otherOption}.`
           );
+
+          // Check if the user voted on yesterday's question
+          const userResponse = user.user_responses.find(
+            (response) => response.questionId === yesterdayQuestion.id
+          );
+
+          if (userResponse) {
+            if (userResponse.response === consensusAnswer) {
+              setYesterdayResult('You were right yesterday!');
+            } else {
+              setYesterdayResult('You were WRONG yesterday!');
+            }
+          } else {
+            setYesterdayResult("You didn't vote yesterday!!");
+          }
         } else {
           setYesterdayConsensus('No consensus was reached yesterday.');
+          setYesterdayResult(''); // No result if no consensus was reached
         }
       } else {
         setYesterdayQuestionText('No question was asked yesterday.');
         setYesterdayConsensus('');
+        setYesterdayResult('');
       }
     }
   }, [questions, user]);
@@ -121,6 +137,7 @@ function QuestionOfTheDay() {
     <div>
       <div>{yesterdayQuestionText}</div>
       <div>{yesterdayConsensus}</div>
+      <div>{yesterdayResult}</div>
       <h3>
         {hasVoted ? 'Time Until the Next Question:' : 'Time Left to Answer the Question:'} {timeLeft}
       </h3>

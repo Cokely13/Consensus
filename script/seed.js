@@ -50,6 +50,8 @@ async function seed() {
     UserResponse.create({ userId: 1, questionId: 2, response: "option_a" }),
     UserResponse.create({ userId: 1, questionId: 1, response: "option_a" }),
     UserResponse.create({ userId: 2, questionId: 2, response: "option_a" }),
+    UserResponse.create({ userId: 2, questionId: 1, response: "option_a" }),
+    UserResponse.create({ userId: 4, questionId: 1, response: "option_b" }),
     // UserResponse.create({ userId: 3, questionId: 2, response: "option_a" }),
     UserResponse.create({ userId: 4, questionId: 2, response: "option_b" }),
     // UserResponse.create({ userId: 1, questionId: 2, response: "option_a" }),
