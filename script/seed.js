@@ -18,16 +18,36 @@ async function seed() {
     User.create({ username: 'Jamal', email: "jamalcoston@gmail.com",  password: '123'}),
   ])
 
-  const questions = await Promise.all([
-    Question.create({text: "Pick an Actor", optionA:"Al Pacino", optionB:"Robert Deniro" }),
-    Question.create({text: "Pick an Actor", optionA:"Ben Affleck", optionB:"Matt Damon" }),
-    Question.create({text: "Pick a Food", optionA:"Cheez Itz", optionB:"Goldfish" }),
-    Question.create({text: "Pick a Food", optionA:"Hot Dog", optionB:"Burger" }),
-    Question.create({text: "Pick a Food", optionA:"PeanutButter", optionB:"Jelly" }),
-    Question.create({text: "Pick a Singer", optionA:"Billy Joel", optionB:"Bruce Springsteen" }),
-    Question.create({text: "Pick a Singer", optionA:"Whitney Houston", optionB:"Mariah Carey" }),
+  // const questions = await Promise.all([
+  //   Question.create({text: "Pick an Actor", optionA:"Al Pacino", optionB:"Robert Deniro" }),
+  //   Question.create({text: "Pick an Actor", optionA:"Ben Affleck", optionB:"Matt Damon" }),
+  //   Question.create({text: "Pick a Food", optionA:"Cheez Itz", optionB:"Goldfish" }),
+  //   Question.create({text: "Pick a Food", optionA:"Hot Dog", optionB:"Burger" }),
+  //   Question.create({text: "Pick a Food", optionA:"PeanutButter", optionB:"Jelly" }),
+  //   Question.create({text: "Pick a Singer", optionA:"Billy Joel", optionB:"Bruce Springsteen" }),
+  //   Question.create({text: "Pick a Singer", optionA:"Whitney Houston", optionB:"Mariah Carey" }),
 
-  ])
+  // ])
+
+  const today = new Date();
+
+  // Helper function to add days to a date
+  const addDays = (date, days) => {
+    const result = new Date(date);
+    result.setDate(result.getDate() + days);
+    return result;
+  };
+
+  // Creating Questions with dates
+  const questions = await Promise.all([
+    Question.create({ text: "Pick an Actor", optionA: "Al Pacino", optionB: "Robert Deniro", dateAsked: today }),
+    Question.create({ text: "Pick an Actor", optionA: "Ben Affleck", optionB: "Matt Damon", dateAsked: addDays(today, 1) }),
+    Question.create({ text: "Pick a Food", optionA: "Cheez Itz", optionB: "Goldfish", dateAsked: addDays(today, 2) }),
+    Question.create({ text: "Pick a Food", optionA: "Hot Dog", optionB: "Burger", dateAsked: addDays(today, 3) }),
+    Question.create({ text: "Pick a Food", optionA: "PeanutButter", optionB: "Jelly", dateAsked: addDays(today, 4) }),
+    Question.create({ text: "Pick a Singer", optionA: "Billy Joel", optionB: "Bruce Springsteen", dateAsked: addDays(today, 5) }),
+    Question.create({ text: "Pick a Singer", optionA: "Whitney Houston", optionB: "Mariah Carey", dateAsked: addDays(today, 6) }),
+  ]);
 
   console.log(`seeded ${users.length} users`)
   console.log(`seeded successfully`)
