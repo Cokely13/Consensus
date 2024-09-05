@@ -40,6 +40,7 @@ async function seed() {
 
   // Creating Questions with dates
   const questions = await Promise.all([
+    Question.create({ text: "Pick a Song", optionA: "Wonderwall", optionB: "Champagne Supernova", dateAsked: addDays(today, -1)}),
     Question.create({ text: "Pick an Actor", optionA: "Al Pacino", optionB: "Robert Deniro", dateAsked: today }),
     Question.create({ text: "Pick an Actor", optionA: "Ben Affleck", optionB: "Matt Damon", dateAsked: addDays(today, 1) }),
     Question.create({ text: "Pick a Food", optionA: "Cheez Itz", optionB: "Goldfish", dateAsked: addDays(today, 2) }),
