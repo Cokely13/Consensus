@@ -32,14 +32,14 @@ async function seed() {
 
   // Creating Questions with dates
   const questions = await Promise.all([
-    Question.create({ text: "Pick a Song", optionA: "Wonderwall", optionB: "Champagne Supernova", dateAsked: addDays(today, -1) }),
-    Question.create({ text: "Pick an Actor", optionA: "Al Pacino", optionB: "Robert Deniro", dateAsked: today }),
-    Question.create({ text: "Pick an Actor", optionA: "Ben Affleck", optionB: "Matt Damon", dateAsked: addDays(today, 1) }),
-    Question.create({ text: "Pick a Food", optionA: "Cheez Itz", optionB: "Goldfish", dateAsked: addDays(today, 2) }),
-    Question.create({ text: "Pick a Food", optionA: "Hot Dog", optionB: "Burger", dateAsked: addDays(today, 3) }),
-    Question.create({ text: "Pick a Food", optionA: "PeanutButter", optionB: "Jelly", dateAsked: addDays(today, 4) }),
-    Question.create({ text: "Pick a Singer", optionA: "Billy Joel", optionB: "Bruce Springsteen", dateAsked: addDays(today, 5) }),
-    Question.create({ text: "Pick a Singer", optionA: "Whitney Houston", optionB: "Mariah Carey", dateAsked: addDays(today, 6) }),
+    Question.create({ text: "Pick a Song", optionA: "Wonderwall", optionB: "Champagne Supernova", dateAsked: addDays(today, -1), status: "accepted" }),
+    Question.create({ text: "Pick an Actor", optionA: "Al Pacino", optionB: "Robert Deniro", dateAsked: today, status: "accepted" }),
+    Question.create({ text: "Pick an Actor", optionA: "Ben Affleck", optionB: "Matt Damon", dateAsked: addDays(today, 1), status: "accepted" }),
+    Question.create({ text: "Pick a Food", optionA: "Cheez Itz", optionB: "Goldfish", dateAsked: addDays(today, 2), status: "accepted" }),
+    Question.create({ text: "Pick a Food", optionA: "Hot Dog", optionB: "Burger", dateAsked: addDays(today, 3), status: "accepted" }),
+    Question.create({ text: "Pick a Food", optionA: "PeanutButter", optionB: "Jelly", dateAsked: addDays(today, 4), status: "accepted" }),
+    Question.create({ text: "Pick a Singer", optionA: "Billy Joel", optionB: "Bruce Springsteen", dateAsked: addDays(today, 5), status: "accepted" }),
+    Question.create({ text: "Pick a Singer", optionA: "Whitney Houston", optionB: "Mariah Carey", dateAsked: addDays(today, 6), status: "accepted" }),
   ]);
 
 

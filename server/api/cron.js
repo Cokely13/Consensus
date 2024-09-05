@@ -2,7 +2,7 @@ const cron = require('node-cron');
 const { models:  {Question, UserResponse, Consensus} } = require('../db');
 
 // Schedule a job to run every day at midnight
-cron.schedule('* * * * *', async () => {
+cron.schedule('* * * * 0', async () => {
   console.log('Running scheduled task to create consensus at midnight...');
   try {
     // Get today's date in YYYY-MM-DD format

@@ -9,6 +9,7 @@ import Questions from './components/Questions'
 import Archive from './components/Archive';
 import UserDetailPage from './components/UserDetailPage';
 import Profile from './components/Profile';
+import CreateQuestion from './components/CreateQuestion';
 
 /**
  * COMPONENT
@@ -31,6 +32,7 @@ class Routes extends Component {
             <Route exact path="/users/:userId" component={UserDetailPage} />
             <Route exact path="/questions" component={Questions} />
             <Route exact path="/archive" component={Archive} />
+            <Route exact path="/create" component={CreateQuestion} />
             <Redirect to="/home" />
           </Switch>
         ) : (

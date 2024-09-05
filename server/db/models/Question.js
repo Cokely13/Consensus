@@ -23,6 +23,10 @@ const Question = db.define('question', {
     allowNull: false,
     defaultValue: false
   },
+  createdBy: {
+    type: Sequelize.INTEGER,
+    allowNull: true,
+  }
 });
 
 module.exports = Question;
