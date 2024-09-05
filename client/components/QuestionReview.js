@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchQuestions, updateQuestion } from '../store/allQuestionsStore';
+import { fetchQuestions } from '../store/allQuestionsStore';
+import { updateSingleQuestion } from '../store/singleQuestionStore';
 
 function QuestionReview() {
   const dispatch = useDispatch();
@@ -26,7 +27,7 @@ function QuestionReview() {
       return;
     }
 
-    let updatedFields = { status: newStatus };
+    let updatedFields = { ...question, status: newStatus };
 
     if (newStatus === 'accepted') {
       // Find the latest dateAsked from all questions
@@ -37,8 +38,8 @@ function QuestionReview() {
       updatedFields.dateAsked = newDateAsked.toISOString().split('T')[0];
     }
 
-    // Dispatch update question action
-    dispatch(updateQuestion(question.id, updatedFields));
+    // Dispatch updateSingleQuestion action
+    dispatch(updateSingleQuestion(updatedFields));
   };
 
   return (
