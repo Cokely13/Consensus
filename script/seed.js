@@ -1,6 +1,6 @@
 'use strict'
 
-const {db, models: {User, Question} } = require('../server/db')
+const {db, models: {User, Question, Consensus, UserResponse} } = require('../server/db')
 
 /**
  * seed - this function clears the database, updates tables to
@@ -18,16 +18,7 @@ async function seed() {
     User.create({ username: 'Jamal', email: "jamalcoston@gmail.com",  password: '123'}),
   ])
 
-  // const questions = await Promise.all([
-  //   Question.create({text: "Pick an Actor", optionA:"Al Pacino", optionB:"Robert Deniro" }),
-  //   Question.create({text: "Pick an Actor", optionA:"Ben Affleck", optionB:"Matt Damon" }),
-  //   Question.create({text: "Pick a Food", optionA:"Cheez Itz", optionB:"Goldfish" }),
-  //   Question.create({text: "Pick a Food", optionA:"Hot Dog", optionB:"Burger" }),
-  //   Question.create({text: "Pick a Food", optionA:"PeanutButter", optionB:"Jelly" }),
-  //   Question.create({text: "Pick a Singer", optionA:"Billy Joel", optionB:"Bruce Springsteen" }),
-  //   Question.create({text: "Pick a Singer", optionA:"Whitney Houston", optionB:"Mariah Carey" }),
 
-  // ])
 
   const today = new Date();
 
@@ -40,7 +31,7 @@ async function seed() {
 
   // Creating Questions with dates
   const questions = await Promise.all([
-    Question.create({ text: "Pick a Song", optionA: "Wonderwall", optionB: "Champagne Supernova", dateAsked: addDays(today, -1)}),
+    Question.create({text: "Pick a Song", optionA: "Wonderwall", optionB: "Champagne Supernova", dateAsked: addDays(today, -1)}),
     Question.create({ text: "Pick an Actor", optionA: "Al Pacino", optionB: "Robert Deniro", dateAsked: today }),
     Question.create({ text: "Pick an Actor", optionA: "Ben Affleck", optionB: "Matt Damon", dateAsked: addDays(today, 1) }),
     Question.create({ text: "Pick a Food", optionA: "Cheez Itz", optionB: "Goldfish", dateAsked: addDays(today, 2) }),
@@ -49,6 +40,20 @@ async function seed() {
     Question.create({ text: "Pick a Singer", optionA: "Billy Joel", optionB: "Bruce Springsteen", dateAsked: addDays(today, 5) }),
     Question.create({ text: "Pick a Singer", optionA: "Whitney Houston", optionB: "Mariah Carey", dateAsked: addDays(today, 6) }),
   ]);
+
+  const consensuses = await Promise.all([
+   Consensus.create({ questionId: 2, consensusAnswer: "option_a", calculatedAt: today }),
+   Consensus.create({ questionId: 1, consensusAnswer: "option_a", calculatedAt: today })
+  ])
+
+  const userResponses = await Promise.all([
+    UserResponse.create({ userId: 1, questionId: 2, response: "option_a" }),
+    UserResponse.create({ userId: 1, questionId: 1, response: "option_a" }),
+    UserResponse.create({ userId: 2, questionId: 2, response: "option_a" }),
+    UserResponse.create({ userId: 3, questionId: 2, response: "option_a" }),
+    UserResponse.create({ userId: 4, questionId: 2, response: "option_b" }),
+    UserResponse.create({ userId: 1, questionId: 2, response: "option_a" }),
+   ])
 
   console.log(`seeded ${users.length} users`)
   console.log(`seeded successfully`)
