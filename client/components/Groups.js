@@ -12,6 +12,8 @@ function Groups() {
     dispatch(fetchGroups());
   }, [dispatch]);
 
+  console.log("groups", groups)
+
   // Filter out the current group from the list
   const filteredGroups = groups.filter((group) => group.id !== currentGroupId);
 
@@ -19,7 +21,7 @@ function Groups() {
     <div className="group-page-container">
       <h1 className="group-page-heading"><u><b>Groups</b></u></h1>
       <div className="group-card-container">
-        {filteredGroups.map((group) => (
+        {groups.map((group) => (
           <div key={group.id} className="group-card">
             {/* Uncomment if group image is needed */}
             {/* {group.image && (
