@@ -1,35 +1,3 @@
-// import React, { useState, useEffect } from 'react';
-// import { useSelector, useDispatch } from 'react-redux';
-// import { useParams } from 'react-router-dom';
-// import { fetchUsers } from '../store/allUsersStore'
-// import { fetchQuestions } from '../store/allQuestionsStore';
-// import { Link } from 'react-router-dom';
-
-// function UserDetailPage() {
-//   const dispatch = useDispatch();
-//   const { userId } = useParams();
-//   const { id } = useSelector((state) => state.auth);
-//   const users = useSelector(state => state.allUsers);
-//   const questions = useSelector((state) => state.allQuestions);
-//   const myId = userId
-//   const otherUserId = userId
-
-//   useEffect(() => {
-//     dispatch(fetchUsers());
-//     dispatch(fetchQuestions());
-//   }, [dispatch, userId]);
-
-
-
-//   return (
-//     <div>
-//       Hey
-//       </div>
-//   );
-// }
-
-// export default UserDetailPage;
-
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';

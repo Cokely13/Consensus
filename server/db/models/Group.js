@@ -5,6 +5,7 @@ const Group = db.define('group', {
   name: {
     type: Sequelize.STRING,
     allowNull: false,
+    unique: true
   },
   leaderId: {
     type: Sequelize.INTEGER,
