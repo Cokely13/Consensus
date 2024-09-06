@@ -14,7 +14,19 @@ const User = db.define('user', {
   },
   password: {
     type: Sequelize.STRING,
-  }
+  },
+  careerHighWinStreak: {
+    type: Sequelize.INTEGER,
+    defaultValue: 0,
+  },
+  careerHighLossStreak: {
+    type: Sequelize.INTEGER,
+    defaultValue: 0,
+  },
+  careerHighNoVoteStreak: {
+    type: Sequelize.INTEGER,
+    defaultValue: 0,
+  },
 })
 
 module.exports = User

@@ -10,7 +10,7 @@ module.exports = router;
 router.get('/', async (req, res, next) => {
   try {
     const users = await User.findAll({
-      attributes: ['id', 'username'], // Explicitly select only the id and username fields
+      attributes: ['id', 'username', 'careerHighWinStreak', 'careerHighLossStreak', 'careerHighNoVoteStreak'], // Explicitly select only the id and username fields
       include: [
         {
           model: Group, // Include associated groups
@@ -29,6 +29,23 @@ router.get('/', async (req, res, next) => {
   }
 });
 
+router.put('/:id', async (req, res, next) => {
+  try {
+    const user = await User.findByPk(req.params.id);
+    if (!user) {
+      return res.status(404).send('User not found');
+    }
+
+    // Update user fields
+    await user.update(req.body);
+
+    // Return the updated user
+    res.json(user);
+  } catch (error) {
+    next(error);
+  }
+});
+
 router.post('/', async (req, res, next) => {
   try {
     res.status(201).send(await User.create(req.body));
@@ -40,7 +57,7 @@ router.post('/', async (req, res, next) => {
 router.get('/:id', async (req, res, next) => {
   try {
     const user = await User.findByPk(req.params.id, {
-      attributes: ['id', 'username'],
+      attributes: ['id', 'username', 'careerHighWinStreak', 'careerHighLossStreak', 'careerHighNoVoteStreak'],
       include: [
         {
           model: Group, // Include associated groups
