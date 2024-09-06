@@ -33,7 +33,7 @@ router.put('/:id', async (req, res, next) => {
 //Get read all groupQuestions
 router.get('/:id', async (req, res, next) => {
   try {
-    const groupQuestion = await GroupQuestion.findByPk();
+    const groupQuestion = await GroupQuestion.findByPk(req.params.id,);
     res.json(groupQuestion);
   } catch (err) {
     next(err);

@@ -23,6 +23,9 @@ UserResponse.belongsTo(Question);
 User.hasMany(UserResponse);
 UserResponse.belongsTo(User);
 
+Group.hasMany(GroupMember);
+GroupMember.belongsTo(Group);
+
 Group.hasMany(Consensus);
 Consensus.belongsTo(Group);
 

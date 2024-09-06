@@ -1,11 +1,12 @@
 const router = require('express').Router()
-const { models: { Group }} = require('../db')
+const { models: { Group, GroupMember }} = require('../db')
 module.exports = router
 
 
 router.get('/', async (req, res, next) => {
   try {
-    const groups = await Group.findAll();
+    const groups = await Group.findAll( {include : [GroupMember]}
+    );
     res.json(groups);
   } catch (err) {
     next(err);
@@ -33,7 +34,7 @@ router.put('/:id', async (req, res, next) => {
 //Get read all groups
 router.get('/:id', async (req, res, next) => {
   try {
-    const group = await Group.findByPk();
+    const group = await Group.findByPk(req.params.id,{include : [GroupMember]});
     res.json(group);
   } catch (err) {
     next(err);
