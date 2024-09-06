@@ -14,7 +14,9 @@ const Navbar = ({handleClick, isLoggedIn}) => (
           <Link to="/profile">Profile</Link>
           <Link to="/questions">Questions</Link>
           <Link to="/users">Users</Link>
-          <Link to="/create">Create</Link>
+          <Link to="/create">CreateQuestion</Link>
+          <Link to="/group">CreateGroup</Link>
+          <Link to="/groups">Groups</Link>
           <Link to="/archive">Archive</Link>
           <Link to="/review">Review</Link>
           <a href="#" onClick={handleClick}>
