@@ -90,6 +90,9 @@ function UserDetailPage() {
       {selectedUser ? (
         <>
           <h2>{selectedUser.username}'s Profile</h2>
+          <p>Career High Win Streak: {selectedUser.careerHighWinStreak}</p>
+          <p>Career High Loss Streak: {selectedUser.careerHighLossStreak}</p>
+          <p>Career High No Vote Streak: {selectedUser.careerHighNoVoteStreak}</p>
           <p>Similarity with you: {similarityScore}%</p>
         </>
       ) : (
