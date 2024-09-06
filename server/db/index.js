@@ -2,6 +2,7 @@ const db = require('./db')
 const Group = require('./models/Group');
 const GroupMember = require('./models/GroupMember');
 const Question = require('./models/Question');
+const Invite = require('./models/Invite');
 const GroupQuestion = require('./models/GroupQuestion');
 const UserResponse = require('./models/UserResponse');
 const Consensus = require('./models/Consensus');
@@ -12,6 +13,13 @@ const User = require('./models/User')
 User.belongsToMany(Group, { through: GroupMember });
 Group.belongsToMany(User, { through: GroupMember });
 
+
+Invite.belongsTo(User, { as: 'inviter', foreignKey: 'inviterId' });
+Invite.belongsTo(User, { as: 'invitee', foreignKey: 'inviteeId' });
+Invite.belongsTo(Group);
+
+User.hasMany(Invite);
+Group.hasMany(Invite);
 Group.belongsTo(User, { as: 'leader', foreignKey: 'leaderId' });
 
 Group.belongsToMany(Question, { through: GroupQuestion });
@@ -42,5 +50,6 @@ module.exports = {
     GroupQuestion,
     UserResponse,
     Consensus,
+    Invite
   },
 }

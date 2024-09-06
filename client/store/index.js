@@ -9,7 +9,7 @@ import singleQuestionReducer from './singleQuestionStore'
 import questionsReducer from './allQuestionsStore'
 import groupQuestionsReducer from './allGroupQuestionStore'
 import singleGroupReducer from './singleGroupStore'
-import allGroupsReducer from './allGroupsStore'
+import groupsReducer from './allGroupsStore'
 import consensusesReducer from './allConsensusesStore'
 import singleConsensusReducer from './singleConsensusStore'
 import groupMembersReducer from './allGroupMembersStore'
@@ -17,6 +17,8 @@ import singleGroupMemberReducer from './singleGroupMemberStore'
 import singleGroupQuestionReducer from './singleGroupQuestionStore'
 import singleUserResponseReducer from './singleUserResponseStore'
 import userResponsesReducer from './allUserResponsesStore'
+import singleInviteReducer from './singleInviteStore'
+import invitesReducer from './allInvitesStore'
 
 const reducer = combineReducers({ auth,
   allUsers: usersReducer,
@@ -24,7 +26,7 @@ const reducer = combineReducers({ auth,
   singleQuestion: singleQuestionReducer,
   singleUser: singleUserReducer,
   singleGroup: singleGroupReducer,
-  allGroups: allGroupsReducer,
+  allGroups: groupsReducer,
   singleConsensus: singleConsensusReducer,
   allConsensuses: consensusesReducer,
   singleGroupMember: singleGroupMemberReducer,
@@ -32,7 +34,9 @@ const reducer = combineReducers({ auth,
   singleGroupQuestion: singleGroupQuestionReducer,
   allGroupQuestions: groupQuestionsReducer,
   singleUserResponse: singleUserResponseReducer,
-  allUserResponses: userResponsesReducer
+  allUserResponses: userResponsesReducer,
+  singleInvite: singleInviteReducer,
+  allInvitess: invitesReducer,
 
  })
 const middleware = composeWithDevTools(
