@@ -36,7 +36,7 @@ const reducer = combineReducers({ auth,
   singleUserResponse: singleUserResponseReducer,
   allUserResponses: userResponsesReducer,
   singleInvite: singleInviteReducer,
-  allInvitess: invitesReducer,
+  allInvites: invitesReducer,
 
  })
 const middleware = composeWithDevTools(

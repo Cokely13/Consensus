@@ -14,6 +14,7 @@ import QuestionReview from './components/QuestionReview';
 import CreateGroup from './components/CreateGroup';
 import Groups from './components/Groups';
 import GroupDetailPage from './components/GroupDetailPage';
+import Invites from './components/Invites';
 
 /**
  * COMPONENT
@@ -38,6 +39,7 @@ class Routes extends Component {
             <Route exact path="/archive" component={Archive} />
             <Route exact path="/group" component={CreateGroup} />
             <Route exact path="/groups" component={Groups} />
+            <Route exact path="/invites" component={Invites} />
             <Route exact path="/groups/:groupId" component={GroupDetailPage} />
             <Route exact path="/create" component={CreateQuestion} />
             <Route exact path="/review" component={QuestionReview} />
