@@ -31,6 +31,9 @@ UserResponse.belongsTo(Question);
 User.hasMany(UserResponse);
 UserResponse.belongsTo(User);
 
+User.hasMany(GroupMember);
+GroupMember.belongsTo(User);
+
 Group.hasMany(GroupMember);
 GroupMember.belongsTo(Group);
 

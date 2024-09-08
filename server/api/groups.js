@@ -1,12 +1,17 @@
 const router = require('express').Router()
-const { models: { Group, GroupMember }} = require('../db')
+const { models: { Group, GroupMember, User }} = require('../db')
 module.exports = router
 
 
 router.get('/', async (req, res, next) => {
   try {
-    const groups = await Group.findAll( {include : [GroupMember]}
-    );
+    const groups = await Group.findAll( { include: [
+      {
+        model: GroupMember,
+        include: [{ model: User, attributes: ['id', 'username'] }], // Include the User details
+      },
+    ],
+  })
     res.json(groups);
   } catch (err) {
     next(err);
@@ -34,7 +39,13 @@ router.put('/:id', async (req, res, next) => {
 //Get read all groups
 router.get('/:id', async (req, res, next) => {
   try {
-    const group = await Group.findByPk(req.params.id,{include : [GroupMember]});
+    const group = await Group.findByPk(req.params.id, { include: [
+      {
+        model: GroupMember,
+        include: [{ model: User, attributes: ['id', 'username'] }], // Include the User details
+      },
+    ],
+  });
     res.json(group);
   } catch (err) {
     next(err);
