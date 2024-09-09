@@ -143,12 +143,14 @@ function GroupDetailPage() {
     selectedGroup &&
     selectedGroup.group_members.some((member) => member.userId === currentUserId);
 
+    console.log("leader", leader)
+
   return (
     <div>
       {selectedGroup ? (
         <>
           <h2>{selectedGroup.name}'s Profile</h2>
-          {leader && <h3>Leader: {leader.username}</h3>}
+          {leader && <h3>Leader:<Link to={`/users/${leader.id}`}> {leader.username}</Link></h3>}
           <h3>
             Group Members:{' '}
             <span onClick={handleToggleMembers} style={{ cursor: 'pointer', color: 'blue' }}>
