@@ -54,6 +54,45 @@
 //     dispatch(updateSingleInvite({ ...invite, status: 'rejected' }));
 //   };
 
+//   // const handleQuestionDateChange = (event) => {
+//   //   const selectedDate = event.target.value;
+//   //   setSelectedQuestionDate(selectedDate);
+
+//   //   // Fetch consensus data for the selected date
+//   //   if (selectedGroup) {
+//   //     const selectedConsensus = questions.find(
+//   //       (question) => question.dateAsked === selectedDate && question.consensus.length > 0
+//   //     );
+
+//   //     if (selectedConsensus) {
+//   //       const totalMembers = selectedGroup.group_members.length;
+//   //       const votesA = selectedGroup.group_members.filter(
+//   //         (member) =>
+//   //           member.user_responses.some(
+//   //             (response) =>
+//   //               response.questionId === selectedConsensus.id && response.response === 'option_a'
+//   //           )
+//   //       ).length;
+//   //       const votesB = selectedGroup.group_members.filter(
+//   //         (member) =>
+//   //           member.user_responses.some(
+//   //             (response) =>
+//   //               response.questionId === selectedConsensus.id && response.response === 'option_b'
+//   //           )
+//   //       ).length;
+//   //       const noVotes = totalMembers - votesA - votesB;
+
+//   //       const percentageA = ((votesA / totalMembers) * 100).toFixed(2);
+//   //       const percentageB = ((votesB / totalMembers) * 100).toFixed(2);
+//   //       const percentageNoVote = ((noVotes / totalMembers) * 100).toFixed(2);
+
+//   //       setConsensusData({ percentageA, percentageB, percentageNoVote });
+//   //     } else {
+//   //       setConsensusData(null);
+//   //     }
+//   //   }
+//   // };
+
 //   const handleQuestionDateChange = (event) => {
 //     const selectedDate = event.target.value;
 //     setSelectedQuestionDate(selectedDate);
@@ -66,20 +105,23 @@
 
 //       if (selectedConsensus) {
 //         const totalMembers = selectedGroup.group_members.length;
+
 //         const votesA = selectedGroup.group_members.filter(
 //           (member) =>
-//             member.user_responses.some(
+//             member.user_responses?.some(
 //               (response) =>
 //                 response.questionId === selectedConsensus.id && response.response === 'option_a'
 //             )
 //         ).length;
+
 //         const votesB = selectedGroup.group_members.filter(
 //           (member) =>
-//             member.user_responses.some(
+//             member.user_responses?.some(
 //               (response) =>
 //                 response.questionId === selectedConsensus.id && response.response === 'option_b'
 //             )
 //         ).length;
+
 //         const noVotes = totalMembers - votesA - votesB;
 
 //         const percentageA = ((votesA / totalMembers) * 100).toFixed(2);
@@ -111,6 +153,11 @@
 
 //   // Filter questions that have consensuses
 //   const questionsWithConsensuses = questions.filter(question => question.consensus && question.consensus.length > 0);
+
+//   // Check if the current user is a member of the group
+//   const isMember = selectedGroup && selectedGroup.group_members.some((member) => member.userId === currentUserId);
+
+//   console.log("questions", questionsWithConsensuses)
 
 //   return (
 //     <div>
@@ -176,8 +223,8 @@
 //             </div>
 //           )}
 
-//           {/* Question Consensus Section */}
-//           {selectedGroup && (
+//           {/* Show "Question of the Day Consensuses" only if the user is a member */}
+//           {isMember && (
 //             <>
 //               <h3>Question of the Day Consensuses:</h3>
 //               <select value={selectedQuestionDate} onChange={handleQuestionDateChange}>
@@ -213,7 +260,7 @@ import { useParams } from 'react-router-dom';
 import { fetchGroups } from '../store/allGroupsStore';
 import { fetchUsers } from '../store/allUsersStore';
 import { fetchInvites, createInvite } from '../store/allInvitesStore';
-import { fetchQuestions } from '../store/allQuestionsStore'; // Import to fetch questions
+import { fetchQuestions } from '../store/allQuestionsStore';
 import { updateSingleInvite } from '../store/singleInviteStore';
 
 function GroupDetailPage() {
@@ -222,7 +269,7 @@ function GroupDetailPage() {
   const groups = useSelector((state) => state.allGroups);
   const users = useSelector((state) => state.allUsers);
   const invites = useSelector((state) => state.allInvites);
-  const questions = useSelector((state) => state.allQuestions); // Fetch all questions from the store
+  const questions = useSelector((state) => state.allQuestions);
   const [selectedGroup, setSelectedGroup] = useState(null);
   const [selectedUserId, setSelectedUserId] = useState('');
   const [showMembers, setShowMembers] = useState(false);
@@ -234,7 +281,7 @@ function GroupDetailPage() {
     dispatch(fetchGroups());
     dispatch(fetchUsers());
     dispatch(fetchInvites());
-    dispatch(fetchQuestions()); // Fetch all questions on component mount
+    dispatch(fetchQuestions());
   }, [dispatch, groupId]);
 
   useEffect(() => {
@@ -263,74 +310,29 @@ function GroupDetailPage() {
     dispatch(updateSingleInvite({ ...invite, status: 'rejected' }));
   };
 
-  // const handleQuestionDateChange = (event) => {
-  //   const selectedDate = event.target.value;
-  //   setSelectedQuestionDate(selectedDate);
-
-  //   // Fetch consensus data for the selected date
-  //   if (selectedGroup) {
-  //     const selectedConsensus = questions.find(
-  //       (question) => question.dateAsked === selectedDate && question.consensus.length > 0
-  //     );
-
-  //     if (selectedConsensus) {
-  //       const totalMembers = selectedGroup.group_members.length;
-  //       const votesA = selectedGroup.group_members.filter(
-  //         (member) =>
-  //           member.user_responses.some(
-  //             (response) =>
-  //               response.questionId === selectedConsensus.id && response.response === 'option_a'
-  //           )
-  //       ).length;
-  //       const votesB = selectedGroup.group_members.filter(
-  //         (member) =>
-  //           member.user_responses.some(
-  //             (response) =>
-  //               response.questionId === selectedConsensus.id && response.response === 'option_b'
-  //           )
-  //       ).length;
-  //       const noVotes = totalMembers - votesA - votesB;
-
-  //       const percentageA = ((votesA / totalMembers) * 100).toFixed(2);
-  //       const percentageB = ((votesB / totalMembers) * 100).toFixed(2);
-  //       const percentageNoVote = ((noVotes / totalMembers) * 100).toFixed(2);
-
-  //       setConsensusData({ percentageA, percentageB, percentageNoVote });
-  //     } else {
-  //       setConsensusData(null);
-  //     }
-  //   }
-  // };
-
   const handleQuestionDateChange = (event) => {
     const selectedDate = event.target.value;
     setSelectedQuestionDate(selectedDate);
 
-    // Fetch consensus data for the selected date
     if (selectedGroup) {
       const selectedConsensus = questions.find(
         (question) => question.dateAsked === selectedDate && question.consensus.length > 0
       );
 
       if (selectedConsensus) {
+        const groupMembersIds = selectedGroup.group_members.map(member => member.userId);
+
+        const votesA = selectedConsensus.user_responses.filter(
+          (response) =>
+            groupMembersIds.includes(response.userId) && response.response === 'option_a'
+        ).length;
+
+        const votesB = selectedConsensus.user_responses.filter(
+          (response) =>
+            groupMembersIds.includes(response.userId) && response.response === 'option_b'
+        ).length;
+
         const totalMembers = selectedGroup.group_members.length;
-
-        const votesA = selectedGroup.group_members.filter(
-          (member) =>
-            member.user_responses?.some(
-              (response) =>
-                response.questionId === selectedConsensus.id && response.response === 'option_a'
-            )
-        ).length;
-
-        const votesB = selectedGroup.group_members.filter(
-          (member) =>
-            member.user_responses?.some(
-              (response) =>
-                response.questionId === selectedConsensus.id && response.response === 'option_b'
-            )
-        ).length;
-
         const noVotes = totalMembers - votesA - votesB;
 
         const percentageA = ((votesA / totalMembers) * 100).toFixed(2);
@@ -360,13 +362,8 @@ function GroupDetailPage() {
       invite.status === 'pending'
   );
 
-  // Filter questions that have consensuses
   const questionsWithConsensuses = questions.filter(question => question.consensus && question.consensus.length > 0);
-
-  // Check if the current user is a member of the group
   const isMember = selectedGroup && selectedGroup.group_members.some((member) => member.userId === currentUserId);
-
-  console.log("questions", questionsWithConsensuses)
 
   return (
     <div>
@@ -432,7 +429,6 @@ function GroupDetailPage() {
             </div>
           )}
 
-          {/* Show "Question of the Day Consensuses" only if the user is a member */}
           {isMember && (
             <>
               <h3>Question of the Day Consensuses:</h3>
