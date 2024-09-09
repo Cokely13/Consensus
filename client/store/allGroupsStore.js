@@ -26,19 +26,23 @@ const _deleteGroup = (group) => {
   };
 };
 
-export const fetchGroups = () => {
-  return async (dispatch) => {
-        const {data}= await Axios.get("/api/groups");
-        dispatch(setGroups(data));
-  };
+export const fetchGroups = () => async (dispatch) => {
+  try {
+    const { data } = await Axios.get('/api/groups');
+    dispatch(setGroups(data));
+  } catch (error) {
+    console.error('Failed to fetch groups:', error);
+  }
 };
 
-export const createGroup = (group) => {
-  return async (dispatch) => {
-    const { data: created } = await Axios.post("/api/groups", group);
-    dispatch(_createGroup(created));
-    // history.push("/groups");
-  };
+export const createGroup = (group) => async (dispatch) => {
+  try {
+    const { data: createdGroup } = await Axios.post('/api/groups', group);
+    dispatch(_createGroup(createdGroup));
+    return createdGroup; // Return the created group to the caller
+  } catch (error) {
+    console.error('Failed to create group:', error);
+  }
 };
 
 export const deleteGroup = (id, history) => {

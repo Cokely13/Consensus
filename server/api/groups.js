@@ -19,9 +19,19 @@ router.get('/', async (req, res, next) => {
 });
 
 //POST: add a new Group
-router.post("/", async (req, res, next) => {
+// router.post("/", async (req, res, next) => {
+//   try {
+//     res.status(201).send(await Group.create(req.body));
+//   } catch (error) {
+//     next(error);
+//   }
+// });
+
+router.post('/', async (req, res, next) => {
   try {
-    res.status(201).send(await Group.create(req.body));
+    const newGroup = await Group.create(req.body);
+    // Send the created group back to the client
+    res.status(201).json(newGroup);
   } catch (error) {
     next(error);
   }
