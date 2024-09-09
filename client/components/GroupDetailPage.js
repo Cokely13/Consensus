@@ -1,109 +1,26 @@
-// import React, { useState, useEffect } from 'react';
-// import { useSelector, useDispatch } from 'react-redux';
-// import { useParams } from 'react-router-dom';
-// import { fetchGroups } from '../store/allGroupsStore';
-// import { fetchUsers } from '../store/allUsersStore'; // Action to fetch all users
-// import { createInvite } from '../store/allInvitesStore'; // Correct action to invite user to group
-
-// function GroupDetailPage() {
-//   const dispatch = useDispatch();
-//   const { groupId } = useParams();
-//   const groups = useSelector((state) => state.allGroups);
-//   const users = useSelector((state) => state.allUsers); // Fetch all users
-//   const [selectedGroup, setSelectedGroup] = useState(null);
-//   const [selectedUserId, setSelectedUserId] = useState('');
-//   const { id: currentUserId } = useSelector((state) => state.auth);
-
-//   useEffect(() => {
-//     dispatch(fetchGroups());
-//     dispatch(fetchUsers()); // Fetch all users
-//   }, [dispatch, groupId]);
-
-//   useEffect(() => {
-//     if (groups.length > 0) {
-//       const foundGroup = groups.find((group) => group.id === Number(groupId));
-//       setSelectedGroup(foundGroup);
-//     }
-//   }, [groups, groupId]);
-
-//   const handleInvite = () => {
-//     if (selectedUserId) {
-//       dispatch(createInvite({ groupId, inviteeId: selectedUserId, inviterId: currentUserId })); // Send invite
-//       setSelectedUserId(''); // Clear the selection after inviting
-//     }
-//   };
-
-//   // Find group leader's name
-//   const leader = selectedGroup ? users.find(user => user.id === selectedGroup.leaderId) : null;
-
-//   // Get IDs of users already in the group
-//   const membersIds = selectedGroup ? selectedGroup.group_members.map(member => member.userId) : [];
-
-//   console.log("selected", selectedGroup);
-
-//   return (
-//     <div>
-//       {selectedGroup ? (
-//         <>
-//           <h2>{selectedGroup.name}'s Profile</h2>
-//           {leader && <h3>Leader: {leader.username}</h3>}
-//           <h3>Group Members:</h3>
-//           <ul>
-//             {selectedGroup.group_members.map((member) => (
-//               <li key={`${member.userId}-${member.groupId}`}>
-//                 {member.user ? member.user.username : member.userId}
-//               </li>
-//             ))}
-//           </ul>
-
-//           {currentUserId === selectedGroup.leaderId && (
-//             <>
-//               <h3>Invite Users to Group:</h3>
-//               <select value={selectedUserId} onChange={(e) => setSelectedUserId(e.target.value)}>
-//                 <option value="">Select a user to invite</option>
-//                 {users
-//                   .filter(user => !membersIds.includes(user.id)) // Filter out users already in the group
-//                   .map((user) => (
-//                     <option key={user.id} value={user.id}>
-//                       {user.username}
-//                     </option>
-//                   ))}
-//               </select>
-//               <button onClick={handleInvite}>Invite</button>
-//             </>
-//           )}
-//         </>
-//       ) : (
-//         <p>Loading group data...</p>
-//       )}
-//     </div>
-//   );
-// }
-
-// export default GroupDetailPage;
-
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { fetchGroups } from '../store/allGroupsStore';
-import { fetchUsers } from '../store/allUsersStore'; // Action to fetch all users
-import { createInvite } from '../store/allInvitesStore'; // Correct action to invite user to group
-import { updateSingleInvite } from '../store/singleInviteStore'; // Action to accept/reject invites
+import { fetchUsers } from '../store/allUsersStore';
+import { fetchInvites, createInvite } from '../store/allInvitesStore'; // Fetch and create invites
+import { updateSingleInvite } from '../store/singleInviteStore';
 
 function GroupDetailPage() {
   const dispatch = useDispatch();
   const { groupId } = useParams();
   const groups = useSelector((state) => state.allGroups);
-  const users = useSelector((state) => state.allUsers); // Fetch all users
-  const invites = useSelector((state) => state.allInvites); // Fetch all invites
+  const users = useSelector((state) => state.allUsers);
+  const invites = useSelector((state) => state.allInvites);
   const [selectedGroup, setSelectedGroup] = useState(null);
   const [selectedUserId, setSelectedUserId] = useState('');
-  const [showMembers, setShowMembers] = useState(false); // State to toggle member display
+  const [showMembers, setShowMembers] = useState(false);
   const { id: currentUserId } = useSelector((state) => state.auth);
 
   useEffect(() => {
     dispatch(fetchGroups());
     dispatch(fetchUsers());
+    dispatch(fetchInvites()); // Fetch invites on component mount
   }, [dispatch, groupId]);
 
   useEffect(() => {
@@ -116,7 +33,7 @@ function GroupDetailPage() {
   const handleInvite = () => {
     if (selectedUserId) {
       dispatch(createInvite({ groupId, inviteeId: selectedUserId, inviterId: currentUserId }));
-      setSelectedUserId(''); // Clear the selection after inviting
+      setSelectedUserId('');
     }
   };
 
@@ -139,7 +56,20 @@ function GroupDetailPage() {
   const membersIds = selectedGroup ? selectedGroup.group_members.map(member => member.userId) : [];
 
   // Check if the user has a pending invite for this group
-  const pendingInvite = invites.find(invite => invite.groupId === Number(groupId) && invite.inviteeId === currentUserId && invite.status === 'pending');
+  const pendingInvite = invites.find(
+    (invite) =>
+      invite.groupId === Number(groupId) &&
+      invite.inviteeId === currentUserId &&
+      invite.status === 'pending'
+  );
+
+  // Filter pending invites sent by the current user (leader) for this group
+  const pendingInvitesFromLeader = invites.filter(
+    (invite) =>
+      invite.groupId === Number(groupId) &&
+      invite.inviterId === currentUserId &&
+      invite.status === 'pending'
+  );
 
   return (
     <div>
@@ -147,8 +77,10 @@ function GroupDetailPage() {
         <>
           <h2>{selectedGroup.name}'s Profile</h2>
           {leader && <h3>Leader: {leader.username}</h3>}
-          <h3>Group Members: <span onClick={handleToggleMembers} style={{ cursor: 'pointer', color: 'blue' }}>
-            {selectedGroup.group_members.length}</span>
+          <h3>
+            Group Members: <span onClick={handleToggleMembers} style={{ cursor: 'pointer', color: 'blue' }}>
+              {selectedGroup.group_members.length}
+            </span>
           </h3>
           {showMembers && (
             <ul>
@@ -166,7 +98,11 @@ function GroupDetailPage() {
               <select value={selectedUserId} onChange={(e) => setSelectedUserId(e.target.value)}>
                 <option value="">Select a user to invite</option>
                 {users
-                  .filter(user => !membersIds.includes(user.id))
+                  .filter(
+                    (user) =>
+                      !membersIds.includes(user.id) &&
+                      !pendingInvitesFromLeader.some((invite) => invite.inviteeId === user.id)
+                  )
                   .map((user) => (
                     <option key={user.id} value={user.id}>
                       {user.username}
@@ -174,6 +110,20 @@ function GroupDetailPage() {
                   ))}
               </select>
               <button onClick={handleInvite}>Invite</button>
+
+              {/* Pending invites section for the leader */}
+              {pendingInvitesFromLeader.length > 0 && (
+                <div className="pending-invites">
+                  <h3>Pending Invites:</h3>
+                  <ul>
+                    {pendingInvitesFromLeader.map((invite) => (
+                      <li key={invite.id}>
+                        {invite.invitee ? invite.invitee.username : "Invite"} - Pending
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
             </>
           )}
 
