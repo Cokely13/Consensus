@@ -1,3 +1,5 @@
+
+
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
@@ -5,7 +7,10 @@ import { fetchGroups } from '../store/allGroupsStore';
 import { fetchUsers } from '../store/allUsersStore';
 import { fetchInvites, createInvite } from '../store/allInvitesStore';
 import { fetchQuestions } from '../store/allQuestionsStore';
+import { fetchMessages, createMessage, deleteMessage } from '../store/allMessagesStore';
 import { updateSingleInvite } from '../store/singleInviteStore';
+import { Link } from 'react-router-dom';
+
 
 function GroupDetailPage() {
   const dispatch = useDispatch();
@@ -14,11 +19,14 @@ function GroupDetailPage() {
   const users = useSelector((state) => state.allUsers);
   const invites = useSelector((state) => state.allInvites);
   const questions = useSelector((state) => state.allQuestions);
+  const messages = useSelector((state) => state.allMessages);
   const [selectedGroup, setSelectedGroup] = useState(null);
   const [selectedUserId, setSelectedUserId] = useState('');
   const [showMembers, setShowMembers] = useState(false);
+  const [showMessageBoard, setShowMessageBoard] = useState(false); // State to control message board visibility
   const [selectedQuestionDate, setSelectedQuestionDate] = useState('');
   const [consensusData, setConsensusData] = useState(null);
+  const [newMessage, setNewMessage] = useState('');
   const { id: currentUserId } = useSelector((state) => state.auth);
 
   useEffect(() => {
@@ -26,6 +34,7 @@ function GroupDetailPage() {
     dispatch(fetchUsers());
     dispatch(fetchInvites());
     dispatch(fetchQuestions());
+    dispatch(fetchMessages(groupId));
   }, [dispatch, groupId]);
 
   useEffect(() => {
@@ -46,6 +55,10 @@ function GroupDetailPage() {
     setShowMembers(!showMembers);
   };
 
+  const handleToggleMessageBoard = () => {
+    setShowMessageBoard(!showMessageBoard);
+  };
+
   const handleAcceptInvite = (invite) => {
     dispatch(updateSingleInvite({ ...invite, status: 'accepted' }));
   };
@@ -64,7 +77,7 @@ function GroupDetailPage() {
       );
 
       if (selectedConsensus) {
-        const groupMembersIds = selectedGroup.group_members.map(member => member.userId);
+        const groupMembersIds = selectedGroup.group_members.map((member) => member.userId);
 
         const votesA = selectedConsensus.user_responses.filter(
           (response) =>
@@ -90,8 +103,19 @@ function GroupDetailPage() {
     }
   };
 
-  const leader = selectedGroup ? users.find(user => user.id === selectedGroup.leaderId) : null;
-  const membersIds = selectedGroup ? selectedGroup.group_members.map(member => member.userId) : [];
+  const handlePostMessage = () => {
+    if (newMessage.trim()) {
+      dispatch(createMessage({ content: newMessage, userId: currentUserId, groupId }));
+      setNewMessage('');
+    }
+  };
+
+  const handleDeleteMessage = (id) => {
+    dispatch(deleteMessage(id));
+  };
+
+  const leader = selectedGroup ? users.find((user) => user.id === selectedGroup.leaderId) : null;
+  const membersIds = selectedGroup ? selectedGroup.group_members.map((member) => member.userId) : [];
   const pendingInvite = invites.find(
     (invite) =>
       invite.groupId === Number(groupId) &&
@@ -106,8 +130,12 @@ function GroupDetailPage() {
       invite.status === 'pending'
   );
 
-  const questionsWithConsensuses = questions.filter(question => question.consensus && question.consensus.length > 0);
-  const isMember = selectedGroup && selectedGroup.group_members.some((member) => member.userId === currentUserId);
+  const questionsWithConsensuses = questions.filter(
+    (question) => question.consensus && question.consensus.length > 0
+  );
+  const isMember =
+    selectedGroup &&
+    selectedGroup.group_members.some((member) => member.userId === currentUserId);
 
   return (
     <div>
@@ -116,7 +144,8 @@ function GroupDetailPage() {
           <h2>{selectedGroup.name}'s Profile</h2>
           {leader && <h3>Leader: {leader.username}</h3>}
           <h3>
-            Group Members: <span onClick={handleToggleMembers} style={{ cursor: 'pointer', color: 'blue' }}>
+            Group Members:{' '}
+            <span onClick={handleToggleMembers} style={{ cursor: 'pointer', color: 'blue' }}>
               {selectedGroup.group_members.length}
             </span>
           </h3>
@@ -124,7 +153,11 @@ function GroupDetailPage() {
             <ul>
               {selectedGroup.group_members.map((member) => (
                 <li key={`${member.userId}-${member.groupId}`}>
-                  {member.user ? member.user.username : member.userId}
+
+
+                  {member.user ? <Link to={`/users/${member.userId}`}>
+              <h2>{member.user.username}</h2>
+            </Link>: member.userId}
                 </li>
               ))}
             </ul>
@@ -155,7 +188,7 @@ function GroupDetailPage() {
                   <ul>
                     {pendingInvitesFromLeader.map((invite) => (
                       <li key={invite.id}>
-                        {invite.invitee ? invite.invitee.username : "Invite"} - Pending
+                        {invite.invitee ? invite.invitee.username : 'Invite'} - Pending
                       </li>
                     ))}
                   </ul>
@@ -189,6 +222,35 @@ function GroupDetailPage() {
                   <p>Option A: {consensusData.percentageA}%</p>
                   <p>Option B: {consensusData.percentageB}%</p>
                   <p>No Vote: {consensusData.percentageNoVote}%</p>
+                </div>
+              )}
+                <div>
+              {/* Message Board Toggle Button */}
+              <button onClick={handleToggleMessageBoard}>
+                {showMessageBoard ? 'Hide Message Board' : 'Show Message Board'}
+              </button>
+              </div>
+              {/* Conditional Rendering of Message Board */}
+              {showMessageBoard && (
+                <div className="message-board">
+                  <h3>Message Board</h3>
+                  {messages.map((message) => (
+                    <div key={message.id} className="message">
+                      <p>
+                        <strong>{message.user ? message.user.username : 'New Post'}:</strong>{' '}
+                        {message.content}
+                      </p>
+                      {message.userId === currentUserId && (
+                        <button onClick={() => handleDeleteMessage(message.id)}>Delete</button>
+                      )}
+                    </div>
+                  ))}
+                  <textarea
+                    value={newMessage}
+                    onChange={(e) => setNewMessage(e.target.value)}
+                    placeholder="Type a message"
+                  />
+                  <button onClick={handlePostMessage}>Post Message</button>
                 </div>
               )}
             </>
