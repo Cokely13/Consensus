@@ -33,6 +33,8 @@
 //     }
 //   };
 
+//   console.log("selected", selectedGroup)
+
 //   return (
 //     <div>
 //       {selectedGroup ? (
@@ -41,7 +43,10 @@
 //           <h3>Group Members:</h3>
 //           <ul>
 //             {selectedGroup.group_members.map((member) => (
-//               <li key={member.id}>{member.userId}</li>
+//               // Assuming group_members contain user details including the username
+//               <li key={`${member.userId}-${member.groupId}`}>
+//                 {member.user ? member.user.username : member.userId}
+//               </li>
 //             ))}
 //           </ul>
 
@@ -100,33 +105,45 @@ function GroupDetailPage() {
     }
   };
 
-  console.log("selected", selectedGroup)
+  // Find group leader's name
+  const leader = selectedGroup ? users.find(user => user.id === selectedGroup.leaderId) : null;
+
+  // Get IDs of users already in the group
+  const membersIds = selectedGroup ? selectedGroup.group_members.map(member => member.userId) : [];
+
+  console.log("selected", selectedGroup);
 
   return (
     <div>
       {selectedGroup ? (
         <>
           <h2>{selectedGroup.name}'s Profile</h2>
+          {leader && <h3>Leader: {leader.username}</h3>}
           <h3>Group Members:</h3>
           <ul>
             {selectedGroup.group_members.map((member) => (
-              // Assuming group_members contain user details including the username
               <li key={`${member.userId}-${member.groupId}`}>
                 {member.user ? member.user.username : member.userId}
               </li>
             ))}
           </ul>
 
-          <h3>Invite Users to Group:</h3>
-          <select value={selectedUserId} onChange={(e) => setSelectedUserId(e.target.value)}>
-            <option value="">Select a user to invite</option>
-            {users.map((user) => (
-              <option key={user.id} value={user.id}>
-                {user.username}
-              </option>
-            ))}
-          </select>
-          <button onClick={handleInvite}>Invite</button>
+          {currentUserId === selectedGroup.leaderId && (
+            <>
+              <h3>Invite Users to Group:</h3>
+              <select value={selectedUserId} onChange={(e) => setSelectedUserId(e.target.value)}>
+                <option value="">Select a user to invite</option>
+                {users
+                  .filter(user => !membersIds.includes(user.id)) // Filter out users already in the group
+                  .map((user) => (
+                    <option key={user.id} value={user.id}>
+                      {user.username}
+                    </option>
+                  ))}
+              </select>
+              <button onClick={handleInvite}>Invite</button>
+            </>
+          )}
         </>
       ) : (
         <p>Loading group data...</p>
