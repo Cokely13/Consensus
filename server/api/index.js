@@ -9,6 +9,7 @@ router.use('/questions', require('./questions'))
 router.use('/groups', require('./groups'))
 router.use('/invites', require('./invites'))
 router.use('/userResponses', require('./userResponses'))
+router.use('/messages', require('./messages'))
 
 router.use((req, res, next) => {
   const error = new Error('Not Found')

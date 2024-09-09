@@ -19,6 +19,7 @@ import singleUserResponseReducer from './singleUserResponseStore'
 import userResponsesReducer from './allUserResponsesStore'
 import singleInviteReducer from './singleInviteStore'
 import invitesReducer from './allInvitesStore'
+import messagesReducer from './allMessagesStore'
 
 const reducer = combineReducers({ auth,
   allUsers: usersReducer,
@@ -37,7 +38,7 @@ const reducer = combineReducers({ auth,
   allUserResponses: userResponsesReducer,
   singleInvite: singleInviteReducer,
   allInvites: invitesReducer,
-
+  allMessages: messagesReducer
  })
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({collapsed: true}))

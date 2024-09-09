@@ -6,12 +6,19 @@ const Invite = require('./models/Invite');
 const GroupQuestion = require('./models/GroupQuestion');
 const UserResponse = require('./models/UserResponse');
 const Consensus = require('./models/Consensus');
+const Message = require('./models/Message');
 
 const User = require('./models/User')
 
 //associations:
 User.belongsToMany(Group, { through: GroupMember });
 Group.belongsToMany(User, { through: GroupMember });
+
+Message.belongsTo(User);
+User.hasMany(Message);
+
+Message.belongsTo(Group);
+Group.hasMany(Message);
 
 
 Invite.belongsTo(User, { as: 'inviter', foreignKey: 'inviterId' });
@@ -53,6 +60,7 @@ module.exports = {
     GroupQuestion,
     UserResponse,
     Consensus,
-    Invite
+    Invite,
+    Message
   },
 }
