@@ -76,8 +76,14 @@ function GroupDetailPage() {
         (question) => question.dateAsked === selectedDate && question.consensus.length > 0
       );
 
+
+
       if (selectedConsensus) {
         const groupMembersIds = selectedGroup.group_members.map((member) => member.userId);
+
+        const text = selectedConsensus.text
+        const optionA = selectedConsensus.optionA
+        const optionB = selectedConsensus.optionB
 
         const votesA = selectedConsensus.user_responses.filter(
           (response) =>
@@ -96,7 +102,7 @@ function GroupDetailPage() {
         const percentageB = ((votesB / totalMembers) * 100).toFixed(2);
         const percentageNoVote = ((noVotes / totalMembers) * 100).toFixed(2);
 
-        setConsensusData({ percentageA, percentageB, percentageNoVote });
+        setConsensusData({ percentageA, percentageB, percentageNoVote, text, optionA, optionB });
       } else {
         setConsensusData(null);
       }
@@ -219,8 +225,9 @@ function GroupDetailPage() {
               </select>
               {consensusData && (
                 <div>
-                  <p>Option A: {consensusData.percentageA}%</p>
-                  <p>Option B: {consensusData.percentageB}%</p>
+                  <p>Asked Question: {consensusData.text}</p>
+                  <p>Option A:{consensusData.optionA}: {consensusData.percentageA}%</p>
+                  <p>Option B: {consensusData.optionA}: {consensusData.percentageB}%</p>
                   <p>No Vote: {consensusData.percentageNoVote}%</p>
                 </div>
               )}

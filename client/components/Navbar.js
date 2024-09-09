@@ -17,6 +17,7 @@ const Navbar = ({handleClick, isLoggedIn}) => (
           <Link to="/create">CreateQuestion</Link>
           <Link to="/group">CreateGroup</Link>
           <Link to="/groups">Groups</Link>
+          <Link to="/mygroups">MyGroups</Link>
           <Link to="/invites">Invites</Link>
           <Link to="/archive">Archive</Link>
           <Link to="/review">Review</Link>
