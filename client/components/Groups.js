@@ -40,7 +40,7 @@ function Groups() {
               </div>
             )} */}
             <Link to={`/groups/${group.id}`} className="group-link">
-              <h2 className="group-card-heading">{group.name}</h2>
+              <h2 className="group-card-heading">{group.name} - # of Members {group.group_members ? group.group_members.length : 0}</h2>
             </Link>
           </div>
         ))}
