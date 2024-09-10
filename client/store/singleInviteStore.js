@@ -1,55 +1,131 @@
+// // import axios from "axios";
+
+// // // Action Types
+// // const SET_SINGLE_INVITE = "SET_SINGLE_INVITE";
+// // const UPDATE_SINGLE_INVITE = "UPDATE_SINGLE_INVITE";
+// // const TOKEN = "token";
+
+// // // Action creators
+// // export const _setSingleInvite= (invitedata) => {
+// //   return {
+// //     type: SET_SINGLE_INVITE,
+// //     invitedata,
+// //   };
+// // };
+
+// // const _updateSingleInvite = (invitedata) => {
+// //   return {
+// //     type: UPDATE_SINGLE_INVITE,
+// //     invitedata,
+// //   };
+// // };
+
+// // //Thunks
+// // export const fetchInvite = (id) => {
+// //   return async (dispatch) => {
+// //     const { data } = await axios.get(`/api/invites/${id}`);
+// //     dispatch(_setSingleInvite(data));
+// //   };
+// // };
+
+// // export const updateSingleInvite = (invite, history) => {
+// //   return async (dispatch) => {
+// //     try {
+// //         await axios.put(`/api/invites/${invite.id}`, invite);
+// //         const { data: inviteData } = await axios.get(`/api/invites/${invite.id}`);
+// //         dispatch(_updateSingleInvite(inviteData));
+// //         history.push(`/invites/${invite.id}`)
+// //       }
+// //      catch (error) {
+// //       console.log("INVITE", invite)
+// //     }
+// //   };
+// // };
+
+// // // reducer
+// // const initialState = [];
+// // const singleInviteReducer = (state = initialState, action) => {
+// //   switch (action.type) {
+// //     case SET_SINGLE_INVITE:
+// //       return action.invitedata;
+// //     case UPDATE_SINGLE_INVITE:
+// //       return action.invitedata;
+// //     default:
+// //       return state;
+// //   }
+// // };
+
+// // export default singleInviteReducer;
+
 // import axios from "axios";
 
 // // Action Types
 // const SET_SINGLE_INVITE = "SET_SINGLE_INVITE";
 // const UPDATE_SINGLE_INVITE = "UPDATE_SINGLE_INVITE";
-// const TOKEN = "token";
 
 // // Action creators
-// export const _setSingleInvite= (invitedata) => {
+// export const _setSingleInvite = (inviteData) => {
 //   return {
 //     type: SET_SINGLE_INVITE,
-//     invitedata,
+//     inviteData,
 //   };
 // };
 
-// const _updateSingleInvite = (invitedata) => {
+// const _updateSingleInvite = (inviteData) => {
 //   return {
 //     type: UPDATE_SINGLE_INVITE,
-//     invitedata,
+//     inviteData,
 //   };
 // };
 
-// //Thunks
+// // Thunks
 // export const fetchInvite = (id) => {
 //   return async (dispatch) => {
-//     const { data } = await axios.get(`/api/invites/${id}`);
-//     dispatch(_setSingleInvite(data));
-//   };
-// };
-
-// export const updateSingleInvite = (invite, history) => {
-//   return async (dispatch) => {
 //     try {
-//         await axios.put(`/api/invites/${invite.id}`, invite);
-//         const { data: inviteData } = await axios.get(`/api/invites/${invite.id}`);
-//         dispatch(_updateSingleInvite(inviteData));
-//         history.push(`/invites/${invite.id}`)
-//       }
-//      catch (error) {
-//       console.log("INVITE", invite)
+//       const { data } = await axios.get(`/api/invites/${id}`);
+//       dispatch(_setSingleInvite(data));
+//     } catch (error) {
+//       console.error("Error fetching invite:", error);
 //     }
 //   };
 // };
 
-// // reducer
-// const initialState = [];
+// // export const updateSingleInvite = (invite, history) => {
+// //   return async (dispatch) => {
+// //     try {
+// //       await axios.put(`/api/invites/${invite.id}`, invite);
+// //       const { data: inviteData } = await axios.get(`/api/invites/${invite.id}`);
+// //       dispatch(_updateSingleInvite(inviteData));
+// //       if (history) {
+// //         history.push(`/invites/${invite.id}`);
+// //       }
+// //     } catch (error) {
+// //       console.error("Error updating invite:", error);
+// //     }
+// //   };
+// // };
+
+// export const updateSingleInvite = (invite) => {
+//   return async (dispatch) => {
+//     try {
+//       const { data: updatedInvite } = await axios.put(`/api/invites/${invite.id}`, invite);
+//       dispatch({ type: UPDATE_SINGLE_INVITE, invite: updatedInvite });
+//       // Removed history push to stay on the same page
+//     } catch (error) {
+//       console.error('Error updating invite:', error);
+//     }
+//   };
+// };
+
+// // Reducer
+// const initialState = {};
+
 // const singleInviteReducer = (state = initialState, action) => {
 //   switch (action.type) {
 //     case SET_SINGLE_INVITE:
-//       return action.invitedata;
+//       return action.inviteData;
 //     case UPDATE_SINGLE_INVITE:
-//       return action.invitedata;
+//       return action.inviteData;
 //     default:
 //       return state;
 //   }
@@ -57,65 +133,61 @@
 
 // export default singleInviteReducer;
 
-import axios from "axios";
+// singleInviteStore.js
+
+import axios from 'axios';
 
 // Action Types
-const SET_SINGLE_INVITE = "SET_SINGLE_INVITE";
-const UPDATE_SINGLE_INVITE = "UPDATE_SINGLE_INVITE";
+const SET_SINGLE_INVITE = 'SET_SINGLE_INVITE';
+const UPDATE_SINGLE_INVITE = 'UPDATE_SINGLE_INVITE';
+const TOKEN = 'token';
 
 // Action creators
-export const _setSingleInvite = (inviteData) => {
+export const _setSingleInvite = (invitedata) => {
   return {
     type: SET_SINGLE_INVITE,
-    inviteData,
+    invitedata,
   };
 };
 
-const _updateSingleInvite = (inviteData) => {
+const _updateSingleInvite = (invitedata) => {
   return {
     type: UPDATE_SINGLE_INVITE,
-    inviteData,
+    invitedata,
   };
 };
 
 // Thunks
 export const fetchInvite = (id) => {
   return async (dispatch) => {
-    try {
-      const { data } = await axios.get(`/api/invites/${id}`);
-      dispatch(_setSingleInvite(data));
-    } catch (error) {
-      console.error("Error fetching invite:", error);
-    }
+    const { data } = await axios.get(`/api/invites/${id}`);
+    dispatch(_setSingleInvite(data));
   };
 };
 
-export const updateSingleInvite = (invite, history) => {
+export const updateSingleInvite = (invite) => {
   return async (dispatch) => {
     try {
       await axios.put(`/api/invites/${invite.id}`, invite);
       const { data: inviteData } = await axios.get(`/api/invites/${invite.id}`);
       dispatch(_updateSingleInvite(inviteData));
-      if (history) {
-        history.push(`/invites/${invite.id}`);
-      }
     } catch (error) {
-      console.error("Error updating invite:", error);
+      console.error('Error updating invite:', error);
     }
   };
 };
 
 // Reducer
-const initialState = {};
+const initialState = {}; // Initialize state to an empty object instead of an array
 
 const singleInviteReducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_SINGLE_INVITE:
-      return action.inviteData;
+      return action.invitedata;
     case UPDATE_SINGLE_INVITE:
-      return action.inviteData;
+      return action.invitedata;
     default:
-      return state;
+      return state; // Always return the current state for unknown actions
   }
 };
 
