@@ -509,6 +509,7 @@ function GroupDetailPage() {
                   <p>Option B: {consensusData.optionB}: {consensusData.percentageB}%</p>
                   <p>No Vote: {consensusData.percentageNoVote}%</p>
                   {/* Render PieChart */}
+                  <div style={{ width: '300px', margin: '0 auto' }}>
                   <PieChart
                     data={{
                       percentageA: parseFloat(consensusData.percentageA),
@@ -519,6 +520,7 @@ function GroupDetailPage() {
                     optionALabel={consensusData.optionA}
                     optionBLabel={consensusData.optionB}
                   />
+                  </div>
                 </div>
               )}
               <div>
