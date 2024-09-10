@@ -32,7 +32,7 @@ module.exports = router;
 router.get('/', async (req, res, next) => {
   try {
     const users = await User.findAll({
-      attributes: ['id', 'username', 'careerHighWinStreak', 'careerHighLossStreak', 'careerHighNoVoteStreak'],
+      attributes: ['id', 'username', 'careerHighWinStreak', 'careerHighLossStreak', 'careerHighNoVoteStreak', 'admin'],
       include: [
         {
           model: Group,
@@ -110,7 +110,7 @@ router.post('/', async (req, res, next) => {
 router.get('/:id', async (req, res, next) => {
   try {
     const user = await User.findByPk(req.params.id, {
-      attributes: ['id', 'username', 'careerHighWinStreak', 'careerHighLossStreak', 'careerHighNoVoteStreak'],
+      attributes: ['id', 'username', 'careerHighWinStreak', 'careerHighLossStreak', 'careerHighNoVoteStreak', 'admin'],
       include: [
         {
           model: Group,

@@ -6,14 +6,13 @@
 // function QuestionReview() {
 //   const dispatch = useDispatch();
 //   const questions = useSelector((state) => state.allQuestions);
-//   const waitingQuestions = useSelector((state) =>
-//     state.allQuestions.filter((q) => q.status === 'waiting')
-//   );
+//   const waitingQuestions = questions.filter((q) => q.status === 'waiting'); // Get questions with 'waiting' status
 
 //   const [selectedStatus, setSelectedStatus] = useState({});
 //   const [error, setError] = useState('');
 
 //   useEffect(() => {
+//     // Fetch all questions when the component mounts
 //     dispatch(fetchQuestions());
 //   }, [dispatch]);
 
@@ -45,8 +44,11 @@
 //     // Dispatch updateSingleQuestion action
 //     await dispatch(updateSingleQuestion(updatedFields));
 
-//     // Reload the page after submitting the update
-//     window.location.reload();
+//     // Refresh the data by re-fetching questions
+//     dispatch(fetchQuestions());
+
+//     // Clear the error message
+//     setError('');
 //   };
 
 //   return (
@@ -97,6 +99,7 @@ import { updateSingleQuestion } from '../store/singleQuestionStore';
 function QuestionReview() {
   const dispatch = useDispatch();
   const questions = useSelector((state) => state.allQuestions);
+  const user = useSelector((state) => state.auth); // Get user information from the Redux store
   const waitingQuestions = questions.filter((q) => q.status === 'waiting'); // Get questions with 'waiting' status
 
   const [selectedStatus, setSelectedStatus] = useState({});
@@ -141,6 +144,11 @@ function QuestionReview() {
     // Clear the error message
     setError('');
   };
+
+  // Check if the user is an admin
+  if (!user || !user.admin) {
+    return <p>You Are not an Admin!</p>;
+  }
 
   return (
     <div>
