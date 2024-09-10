@@ -7,6 +7,7 @@
 // function Archive() {
 //   const dispatch = useDispatch();
 //   const questions = useSelector((state) => state.allQuestions);
+//   const user = useSelector((state) => state.auth); // Get user information from the Redux store
 
 //   useEffect(() => {
 //     dispatch(fetchQuestions());
@@ -28,9 +29,6 @@
 //     // Determine the consensus answer
 //     const consensusAnswer = optionAVotes > optionBVotes ? 'option_a' : 'option_b';
 
-//     // Update the question to mark it as expired
-//     // dispatch(updateSingleQuestion(question.id, { expired: true }));
-
 //     // Create a new consensus
 //     dispatch(
 //       createConsensus({
@@ -43,8 +41,13 @@
 
 //   const handleReopenQuestion = (question) => {
 //     // Reopen the question by setting expired to false
-//     dispatch(updateQuestion(question.id, { expired: false }));
+//     dispatch(updateSingleQuestion(question.id, { expired: false }));
 //   };
+
+//   // Check if the user is an admin
+//   if (!user || !user.admin) {
+//     return <p>You Are not an Admin!</p>;
+//   }
 
 //   return (
 //     <div>
@@ -65,8 +68,7 @@
 //           const highlightOptionA = optionAVotes > optionBVotes ? 'highlight' : '';
 //           const highlightOptionB = optionBVotes > optionAVotes ? 'highlight' : '';
 
-//           const hasConsensus = optionAVotes !== optionBVotes;
-//           const isExpired = question.consensus.length ? true : false
+//           const isExpired = question.consensus.length ? true : false;
 
 //           return (
 //             <div key={question.id} className="grid-row">
@@ -96,6 +98,7 @@
 
 // export default Archive;
 
+
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchQuestions } from '../store/allQuestionsStore';
@@ -115,7 +118,7 @@ function Archive() {
     return userResponses.filter((response) => response.response === option).length;
   };
 
-  const handleCreateConsensus = (question) => {
+  const handleCreateConsensus = async (question) => {
     const optionAVotes = calculateVotes(question.user_responses, 'option_a');
     const optionBVotes = calculateVotes(question.user_responses, 'option_b');
 
@@ -128,18 +131,24 @@ function Archive() {
     const consensusAnswer = optionAVotes > optionBVotes ? 'option_a' : 'option_b';
 
     // Create a new consensus
-    dispatch(
+    await dispatch(
       createConsensus({
         questionId: question.id,
         consensusAnswer,
         calculatedAt: new Date().toISOString(),
       })
     );
+
+    // Refetch the questions to refresh the component state
+    dispatch(fetchQuestions());
   };
 
-  const handleReopenQuestion = (question) => {
+  const handleReopenQuestion = async (question) => {
     // Reopen the question by setting expired to false
-    dispatch(updateSingleQuestion(question.id, { expired: false }));
+    await dispatch(updateSingleQuestion(question.id, { expired: false }));
+
+    // Refetch the questions to refresh the component state
+    dispatch(fetchQuestions());
   };
 
   // Check if the user is an admin
@@ -195,4 +204,3 @@ function Archive() {
 }
 
 export default Archive;
-

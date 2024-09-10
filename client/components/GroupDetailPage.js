@@ -1,16 +1,12 @@
-
-
 // import React, { useState, useEffect } from 'react';
 // import { useSelector, useDispatch } from 'react-redux';
-// import { useParams } from 'react-router-dom';
+// import { useParams, Link } from 'react-router-dom';
 // import { fetchGroups } from '../store/allGroupsStore';
 // import { fetchUsers } from '../store/allUsersStore';
 // import { fetchInvites, createInvite } from '../store/allInvitesStore';
 // import { fetchQuestions } from '../store/allQuestionsStore';
 // import { fetchMessages, createMessage, deleteMessage } from '../store/allMessagesStore';
 // import { updateSingleInvite } from '../store/singleInviteStore';
-// import { Link } from 'react-router-dom';
-
 
 // function GroupDetailPage() {
 //   const dispatch = useDispatch();
@@ -23,7 +19,7 @@
 //   const [selectedGroup, setSelectedGroup] = useState(null);
 //   const [selectedUserId, setSelectedUserId] = useState('');
 //   const [showMembers, setShowMembers] = useState(false);
-//   const [showMessageBoard, setShowMessageBoard] = useState(false); // State to control message board visibility
+//   const [showMessageBoard, setShowMessageBoard] = useState(false);
 //   const [selectedQuestionDate, setSelectedQuestionDate] = useState('');
 //   const [consensusData, setConsensusData] = useState(null);
 //   const [newMessage, setNewMessage] = useState('');
@@ -59,12 +55,19 @@
 //     setShowMessageBoard(!showMessageBoard);
 //   };
 
-//   const handleAcceptInvite = (invite) => {
-//     dispatch(updateSingleInvite({ ...invite, status: 'accepted' }));
+//   const handleAcceptInvite = async (invite) => {
+//     await dispatch(updateSingleInvite({ ...invite, status: 'accepted' }));
+//     refreshData(); // Refresh data after accepting the invite
 //   };
 
-//   const handleRejectInvite = (invite) => {
-//     dispatch(updateSingleInvite({ ...invite, status: 'rejected' }));
+//   const handleRejectInvite = async (invite) => {
+//     await dispatch(updateSingleInvite({ ...invite, status: 'rejected' }));
+//     refreshData(); // Refresh data after rejecting the invite
+//   };
+
+//   const refreshData = () => {
+//     dispatch(fetchInvites());
+//     dispatch(fetchGroups());
 //   };
 
 //   const handleQuestionDateChange = (event) => {
@@ -76,14 +79,11 @@
 //         (question) => question.dateAsked === selectedDate && question.consensus.length > 0
 //       );
 
-
-
 //       if (selectedConsensus) {
 //         const groupMembersIds = selectedGroup.group_members.map((member) => member.userId);
-
-//         const text = selectedConsensus.text
-//         const optionA = selectedConsensus.optionA
-//         const optionB = selectedConsensus.optionB
+//         const text = selectedConsensus.text;
+//         const optionA = selectedConsensus.optionA;
+//         const optionB = selectedConsensus.optionB;
 
 //         const votesA = selectedConsensus.user_responses.filter(
 //           (response) =>
@@ -143,8 +143,6 @@
 //     selectedGroup &&
 //     selectedGroup.group_members.some((member) => member.userId === currentUserId);
 
-//     console.log("leader", leader)
-
 //   return (
 //     <div>
 //       {selectedGroup ? (
@@ -161,11 +159,13 @@
 //             <ul>
 //               {selectedGroup.group_members.map((member) => (
 //                 <li key={`${member.userId}-${member.groupId}`}>
-
-
-//                   {member.user ? <Link to={`/users/${member.userId}`}>
-//               <h2>{member.user.username}</h2>
-//             </Link>: member.userId}
+//                   {member.user ? (
+//                     <Link to={`/users/${member.userId}`}>
+//                       <h2>{member.user.username}</h2>
+//                     </Link>
+//                   ) : (
+//                     member.userId
+//                   )}
 //                 </li>
 //               ))}
 //             </ul>
@@ -228,16 +228,16 @@
 //               {consensusData && (
 //                 <div>
 //                   <p>Asked Question: {consensusData.text}</p>
-//                   <p>Option A:{consensusData.optionA}: {consensusData.percentageA}%</p>
-//                   <p>Option B: {consensusData.optionA}: {consensusData.percentageB}%</p>
+//                   <p>Option A: {consensusData.optionA}: {consensusData.percentageA}%</p>
+//                   <p>Option B: {consensusData.optionB}: {consensusData.percentageB}%</p>
 //                   <p>No Vote: {consensusData.percentageNoVote}%</p>
 //                 </div>
 //               )}
-//                 <div>
-//               {/* Message Board Toggle Button */}
-//               <button onClick={handleToggleMessageBoard}>
-//                 {showMessageBoard ? 'Hide Message Board' : 'Show Message Board'}
-//               </button>
+//               <div>
+//                 {/* Message Board Toggle Button */}
+//                 <button onClick={handleToggleMessageBoard}>
+//                   {showMessageBoard ? 'Hide Message Board' : 'Show Message Board'}
+//                 </button>
 //               </div>
 //               {/* Conditional Rendering of Message Board */}
 //               {showMessageBoard && (
@@ -274,7 +274,6 @@
 
 // export default GroupDetailPage;
 
-
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams, Link } from 'react-router-dom';
@@ -284,6 +283,7 @@ import { fetchInvites, createInvite } from '../store/allInvitesStore';
 import { fetchQuestions } from '../store/allQuestionsStore';
 import { fetchMessages, createMessage, deleteMessage } from '../store/allMessagesStore';
 import { updateSingleInvite } from '../store/singleInviteStore';
+import PieChart from './PieChart'; // Import PieChart component
 
 function GroupDetailPage() {
   const dispatch = useDispatch();
@@ -508,6 +508,17 @@ function GroupDetailPage() {
                   <p>Option A: {consensusData.optionA}: {consensusData.percentageA}%</p>
                   <p>Option B: {consensusData.optionB}: {consensusData.percentageB}%</p>
                   <p>No Vote: {consensusData.percentageNoVote}%</p>
+                  {/* Render PieChart */}
+                  <PieChart
+                    data={{
+                      percentageA: parseFloat(consensusData.percentageA),
+                      percentageB: parseFloat(consensusData.percentageB),
+                      percentageNoVote: parseFloat(consensusData.percentageNoVote),
+                    }}
+                    questionText={`Question of the Day: ${consensusData.text}`}
+                    optionALabel={consensusData.optionA}
+                    optionBLabel={consensusData.optionB}
+                  />
                 </div>
               )}
               <div>
