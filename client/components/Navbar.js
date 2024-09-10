@@ -72,6 +72,7 @@ const Navbar = ({ handleClick, isLoggedIn, isAdmin }) => (
           <Link to="/profile">Profile</Link>
           <Link to="/questions">Questions</Link>
           <Link to="/users">Users</Link>
+          <Link to="/myvotes">MyVotes</Link>
           <Link to="/create">CreateQuestion</Link>
           <Link to="/group">CreateGroup</Link>
           <Link to="/groups">Groups</Link>

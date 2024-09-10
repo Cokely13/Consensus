@@ -16,6 +16,7 @@ import Groups from './components/Groups';
 import GroupDetailPage from './components/GroupDetailPage';
 import Invites from './components/Invites';
 import MyGroups from './components/MyGroups';
+import MyVotes from './components/MyVotes';
 
 /**
  * COMPONENT
@@ -37,6 +38,7 @@ class Routes extends Component {
             <Route exact path="/users" component={Users} />
             <Route exact path="/users/:userId" component={UserDetailPage} />
             <Route exact path="/questions" component={Questions} />
+            <Route exact path="/myvotes" component={MyVotes} />
             <Route exact path="/archive" component={Archive} />
             <Route exact path="/group" component={CreateGroup} />
             <Route exact path="/groups" component={Groups} />
