@@ -166,6 +166,7 @@ function Archive() {
           <div>Votes for Option A</div>
           <div>Option B</div>
           <div>Votes for Option B</div>
+          <div>Date Asked</div>
           <div>Action</div>
         </div>
         {questions.map((question) => {
@@ -184,6 +185,7 @@ function Archive() {
               <div>{optionAVotes}</div>
               <div className={highlightOptionB}>{question.optionB}</div>
               <div>{optionBVotes}</div>
+              <div>{question.dateAsked}</div>
               <div>
                 {isExpired ? (
                   <button onClick={() => handleReopenQuestion(question)}>

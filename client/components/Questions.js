@@ -52,6 +52,8 @@ function Questions() {
     (a, b) => new Date(b.dateAsked) - new Date(a.dateAsked)
   );
 
+  console.log("questions", questions)
+
   return (
     <div>
       <h2>Questions</h2>
@@ -71,7 +73,7 @@ function Questions() {
               <td>{question.text}</td>
               <td>{question.optionA}</td>
               <td>{question.optionB}</td>
-              <td>{new Date(question.dateAsked).toLocaleDateString()}</td>
+              <td>{question.dateAsked}</td>
               <td>{question.status}</td>
             </tr>
           ))}

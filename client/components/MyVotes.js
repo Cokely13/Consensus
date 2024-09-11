@@ -60,7 +60,7 @@ function MyVotes() {
               <td>{question.text}</td>
               <td>{question.optionA}</td>
               <td>{question.optionB}</td>
-              <td>{new Date(question.dateAsked).toLocaleDateString()}</td>
+              <td>{question.dateAsked}</td>
               <td>{question.status}</td>
               <td>{getUserVote(question.id)}</td>
             </tr>
