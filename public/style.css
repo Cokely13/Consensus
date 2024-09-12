@@ -65,6 +65,57 @@ a:hover {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
+/* Navbar Container */
+.navbar {
+  background-color: #fff; /* White background for a clean look */
+  border-bottom: 1px solid #ddd; /* Subtle border to separate from content */
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Logo or Title */
+.navbar h1 {
+  font-size: 1.8rem;
+  margin: 0;
+  color: #333; /* Dark text color for contrast */
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+/* Navbar Links Container */
+.navbar-links {
+  display: flex;
+  gap: 20px; /* Spacing between links */
+  align-items: center;
+}
+
+/* Navbar Links */
+.navbar-links a {
+  text-decoration: none;
+  color: #333;
+  font-size: 1rem;
+  font-weight: 500;
+  padding: 8px 12px;
+  border-radius: 4px;
+  transition: background-color 0.3s, color 0.3s; /* Smooth transition for hover effect */
+}
+
+.navbar-links a:hover {
+  background-color: #007BFF; /* Accent color for hover */
+  color: #fff;
+}
+
+/* Logout Link */
+.navbar-links a.logout {
+  color: #FF4D4D; /* Red color for logout to signify action */
+}
+
+.navbar-links a.logout:hover {
+  background-color: #FF4D4D;
+  color: #fff;
+}
 
 a {
   text-decoration: none;
