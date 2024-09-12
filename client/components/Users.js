@@ -6,39 +6,22 @@ import { Link } from 'react-router-dom';
 function UserPage() {
   const dispatch = useDispatch();
   const users = useSelector((state) => state.allUsers);
-  const { id: currentUserId } = useSelector((state) => state.auth); // Get current user's ID from auth state
+  const { id: currentUserId } = useSelector((state) => state.auth);
 
   useEffect(() => {
     dispatch(fetchUsers());
   }, [dispatch]);
 
-  // Filter out the current user from the list
   const filteredUsers = users.filter((user) => user.id !== currentUserId);
 
   return (
-    <div className="user-page-container">
-      <h1 className="user-page-heading"><u><b>Users</b></u></h1>
-      <div className="user-card-container">
+    <div className="page-container">
+      <h1 className="page-heading"><u><b>Users</b></u></h1>
+      <div className="card-container">
         {filteredUsers.map((user) => (
-          <div key={user.id} className="user-card">
-            {/* Uncomment if user image is needed */}
-            {/* {user.image && (
-              <div>
-                <div className="user-image-container" style={{
-                  width: '200px',
-                  height: '200px',
-                  borderRadius: '50%',
-                  margin: 'auto',
-                  backgroundImage: `url('${user.image}')`,
-                  backgroundSize: 'cover',
-                  backgroundPosition: 'center',
-                  backgroundRepeat: 'no-repeat',
-                  border: '3px solid black'
-                }}> </div>
-              </div>
-            )} */}
-            <Link to={`/users/${user.id}`} className="user-link">
-              <h2 className="user-card-heading">{user.username}</h2>
+          <div key={user.id} className="card">
+            <Link to={`/users/${user.id}`} className="card-link">
+              <h2 className="card-heading">{user.username}</h2>
             </Link>
           </div>
         ))}
