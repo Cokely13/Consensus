@@ -208,3 +208,35 @@ form div {
   width: 300px;
   margin: 20px auto; /* Center the PieChart and add space around it */
 }
+
+/* Main Container for Profile Component */
+.profile-container {
+  max-width: 600px; /* Limits the width to maintain readability */
+  margin: 0 auto; /* Centers the container horizontally */
+  padding: 20px;
+  background-color: #f9f9f9; /* Light background color for contrast */
+  border-radius: 8px; /* Rounded corners for a modern look */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  text-align: center; /* Center-align all text */
+}
+
+/* Headings */
+.profile-container h2 {
+  color: #333; /* Darker text color for heading */
+  margin-bottom: 20px; /* Space below the heading */
+  font-weight: 700; /* Bold font weight for the heading */
+}
+
+/* Paragraphs */
+.profile-container p {
+  color: #666; /* Lighter text color for paragraphs */
+  margin-bottom: 15px; /* Space below each paragraph */
+  font-size: 16px; /* Standard font size for readability */
+}
+
+/* Loader */
+.profile-container p.loading {
+  color: #999; /* Grey color for loading text */
+  font-style: italic; /* Italic style to differentiate loading text */
+}
+
