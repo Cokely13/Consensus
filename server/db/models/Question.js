@@ -10,6 +10,14 @@ const Question = db.define('question', {
     type: Sequelize.STRING,
     allowNull: false,
   },
+  imageA: {
+    type: Sequelize.STRING,
+    defaultValue: 'client/images.q.jpg', // Provide a default image if needed
+  },
+  imageB: {
+    type: Sequelize.STRING,
+    defaultValue: 'client/images.q.jpg', // Provide a default image if needed
+  },
   optionB: {
     type: Sequelize.STRING,
     allowNull: false,

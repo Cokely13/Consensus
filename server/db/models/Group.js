@@ -15,6 +15,10 @@ const Group = db.define('group', {
       key: 'id',
     },
   },
+  image: {
+    type: Sequelize.STRING,
+    defaultValue: 'client/images.imax.jpg' // Provide a default image if needed
+  },
 });
 
 module.exports = Group;

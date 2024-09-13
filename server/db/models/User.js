@@ -16,6 +16,15 @@ const User = db.define('user', {
     type: Sequelize.BOOLEAN,
     defaultValue: false
   },
+  email: {
+    type: Sequelize.STRING,
+    isEmail: true,
+    unique: true,
+  },
+  image: {
+    type: Sequelize.STRING,
+    defaultValue: 'client/images.qb.jpg', // Provide a default image if needed
+  },
   password: {
     type: Sequelize.STRING,
   },
