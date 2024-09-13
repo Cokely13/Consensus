@@ -47,7 +47,6 @@
 //       }
 
 //       const yesterday = new Date();
-
 //       yesterday.setDate(yesterday.getDate() - 1);
 //       const yesterdayDate = yesterday.toISOString().split('T')[0];
 
@@ -101,7 +100,7 @@
 //     }
 //   }, [questions, user]);
 
-//   const calculateStreak = (userResponses, streakType) => {
+//    const calculateStreak = (userResponses, streakType) => {
 //     let currentStreak = 0;
 
 //     const sortedResponses = userResponses.sort(
@@ -265,9 +264,9 @@
 //   const chartData = calculateChartData();
 
 //   return (
-//     <div>
+//     <div className="question-of-the-day-container">
 //       {yesterdayQuestion && (
-//         <div style={{ width: '300px', margin: '0 auto' }}>
+//         <div className="pie-chart-container">
 //           <PieChart
 //             data={chartData}
 //             questionText={`Yesterday's Question: ${yesterdayQuestion.text}`}
@@ -337,14 +336,12 @@ function QuestionOfTheDay() {
   const [streak, setStreak] = useState({ correct: 0, incorrect: 0, noVote: 0 });
   const [careerHigh, setCareerHigh] = useState({ winStreak: 0, lossStreak: 0, noVoteStreak: 0 });
 
-  // Fetch data once when the component mounts
   useEffect(() => {
     dispatch(fetchQuestions());
     dispatch(fetchUsers());
     dispatch(fetchSingleUser(userId));
   }, [dispatch, userId]);
 
-  // Process questions and user data when fetched
   useEffect(() => {
     if (questions.length > 0 && user.user_responses) {
       const today = new Date().toISOString().split('T')[0];
@@ -415,7 +412,7 @@ function QuestionOfTheDay() {
     }
   }, [questions, user]);
 
-   const calculateStreak = (userResponses, streakType) => {
+    const calculateStreak = (userResponses, streakType) => {
     let currentStreak = 0;
 
     const sortedResponses = userResponses.sort(
@@ -581,14 +578,24 @@ function QuestionOfTheDay() {
   return (
     <div className="question-of-the-day-container">
       {yesterdayQuestion && (
-        <div className="pie-chart-container">
-          <PieChart
-            data={chartData}
-            questionText={`Yesterday's Question: ${yesterdayQuestion.text}`}
-            optionALabel={yesterdayQuestion.optionA}
-            optionBLabel={yesterdayQuestion.optionB}
-          />
-        </div>
+        <>
+          <div className="pie-chart-container">
+            <PieChart
+              data={chartData}
+              questionText={`Yesterday's Question: ${yesterdayQuestion.text}`}
+              optionALabel={yesterdayQuestion.optionA}
+              optionBLabel={yesterdayQuestion.optionB}
+            />
+          </div>
+          <div className="winner-image-container">
+            <h4>Yesterday's Winner:</h4>
+            <img
+              src={yesterdayQuestion.consensus[0].consensusAnswer === 'option_a' ? yesterdayQuestion.imageA : yesterdayQuestion.imageB}
+              alt="Yesterday's Winner"
+              className="winner-image"
+            />
+          </div>
+        </>
       )}
       <h3>Today's Date: {new Date().toLocaleDateString()}</h3>
       <div>{yesterdayQuestionText}</div>
@@ -610,9 +617,23 @@ function QuestionOfTheDay() {
           <h2>Today's Question</h2>
           <div>{selectedQuestion.text}</div>
           {!hasVoted ? (
-            <div>
-              <button onClick={() => handleVote('optionA')}>{selectedQuestion.optionA}</button>
-              <button onClick={() => handleVote('optionB')}>{selectedQuestion.optionB}</button>
+            <div className="options-container">
+              <div className="option-image">
+                <img
+                  src={selectedQuestion.imageA}
+                  alt={selectedQuestion.optionA}
+                  className="option-image"
+                />
+                <button onClick={() => handleVote('optionA')}>{selectedQuestion.optionA}</button>
+              </div>
+              <div className="option-image">
+                <img
+                  src={selectedQuestion.imageB}
+                  alt={selectedQuestion.optionB}
+                  className="option-image"
+                />
+                <button onClick={() => handleVote('optionB')}>{selectedQuestion.optionB}</button>
+              </div>
             </div>
           ) : (
             <div>You have already voted</div>

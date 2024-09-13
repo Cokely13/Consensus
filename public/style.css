@@ -938,3 +938,40 @@ tbody td {
   height: auto;
   border-radius: 8px; /* Optional: round the corners */
 }
+
+.question-of-the-day-container {
+  padding: 20px;
+}
+
+.pie-chart-container {
+  width: 300px;
+  margin: 0 auto;
+}
+
+.winner-image-container {
+  text-align: center;
+  margin: 20px 0;
+}
+
+.winner-image {
+  width: 150px;
+  height: auto;
+  border-radius: 10px;
+}
+
+.options-container {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20px;
+}
+
+.option-image {
+  text-align: center;
+}
+
+.option-image img {
+  width: 100px;
+  height: auto;
+  display: block;
+  margin: 0 auto 10px;
+}
