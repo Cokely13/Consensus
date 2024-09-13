@@ -5,15 +5,13 @@
 
 // function CreateGroup() {
 //   const dispatch = useDispatch();
-//   const { id: userId } = useSelector((state) => state.auth); // Get the user ID from the auth state
-
+//   const { id: userId } = useSelector((state) => state.auth);
 //   const [text, setText] = useState('');
 //   const [error, setError] = useState('');
 
 //   const handleSubmit = async (e) => {
 //     e.preventDefault();
 
-//     // Validation
 //     if (!text) {
 //       setError('Group name is required');
 //       return;
@@ -25,10 +23,8 @@
 //     };
 
 //     try {
-//       // Dispatch the action to create a group
 //       const createdGroup = await dispatch(createGroup(newGroup));
 
-//       // Ensure createdGroup has the ID before dispatching createGroupMember
 //       if (createdGroup && createdGroup.id) {
 //         dispatch(createGroupMember({ groupId: createdGroup.id, userId }));
 //         setText('');
@@ -40,9 +36,8 @@
 //     } catch (error) {
 //       console.error('Failed to create group or add member:', error);
 
-//       // Check if the error is due to a duplicate group name
 //       if (error.response && error.response.status === 400 && error.response.data === 'There is already a group with that name!') {
-//         alert('There is already a group with that name!'); // Display an alert
+//         alert('There is already a group with that name!');
 //       } else {
 //         setError('Failed to create group.');
 //       }
@@ -50,10 +45,10 @@
 //   };
 
 //   return (
-//     <div>
+//     <div className="form-container">
 //       <h2>Create a New Group</h2>
 //       <form onSubmit={handleSubmit}>
-//         {error && <p style={{ color: 'red' }}>{error}</p>}
+//         {error && <p className="error">{error}</p>}
 //         <div>
 //           <label>Group Name:</label>
 //           <input
@@ -79,8 +74,19 @@ import { createGroupMember } from '../store/allGroupMembersStore';
 function CreateGroup() {
   const dispatch = useDispatch();
   const { id: userId } = useSelector((state) => state.auth);
+
   const [text, setText] = useState('');
   const [error, setError] = useState('');
+  const [selectedFile, setSelectedFile] = useState(null);
+  const [previewUrl, setPreviewUrl] = useState(null);
+
+  const handleFileChange = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      setSelectedFile(file);
+      setPreviewUrl(URL.createObjectURL(file)); // Set the URL for preview
+    }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -90,18 +96,23 @@ function CreateGroup() {
       return;
     }
 
-    const newGroup = {
-      name: text,
-      leaderId: userId,
-    };
+    const formData = new FormData();
+    formData.append('name', text);
+    formData.append('leaderId', userId);
+
+    if (selectedFile) {
+      formData.append('image', selectedFile); // Append the selected file to the form data
+    }
 
     try {
-      const createdGroup = await dispatch(createGroup(newGroup));
+      const createdGroup = await dispatch(createGroup(formData));
 
       if (createdGroup && createdGroup.id) {
         dispatch(createGroupMember({ groupId: createdGroup.id, userId }));
         setText('');
         setError('');
+        setSelectedFile(null);
+        setPreviewUrl(null);
       } else {
         console.error('Failed to get created group ID');
         setError('Failed to create group. Already a group with that name!');
@@ -109,7 +120,11 @@ function CreateGroup() {
     } catch (error) {
       console.error('Failed to create group or add member:', error);
 
-      if (error.response && error.response.status === 400 && error.response.data === 'There is already a group with that name!') {
+      if (
+        error.response &&
+        error.response.status === 400 &&
+        error.response.data === 'There is already a group with that name!'
+      ) {
         alert('There is already a group with that name!');
       } else {
         setError('Failed to create group.');
@@ -131,6 +146,15 @@ function CreateGroup() {
             required
           />
         </div>
+        <div>
+          <label>Group Image:</label>
+          <input type="file" onChange={handleFileChange} />
+        </div>
+        {previewUrl && (
+          <div className="preview-container">
+            <img src={previewUrl} alt="Preview" style={{ maxWidth: '200px', height: 'auto' }} />
+          </div>
+        )}
         <button type="submit">Create Group</button>
       </form>
     </div>
