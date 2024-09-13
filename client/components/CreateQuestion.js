@@ -4,7 +4,7 @@
 
 // function CreateQuestion() {
 //   const dispatch = useDispatch();
-//   const { id: userId } = useSelector((state) => state.auth); // Get the user ID from the auth state
+//   const { id: userId } = useSelector((state) => state.auth);
 
 //   const [text, setText] = useState('');
 //   const [optionA, setOptionA] = useState('');
@@ -14,13 +14,11 @@
 //   const handleSubmit = (e) => {
 //     e.preventDefault();
 
-//     // Validation
 //     if (!text || !optionA || !optionB) {
 //       setError('All fields are required');
 //       return;
 //     }
 
-//     // Create a new question object
 //     const newQuestion = {
 //       text,
 //       optionA,
@@ -28,10 +26,8 @@
 //       createdBy: userId,
 //     };
 
-//     // Dispatch the action to create a question
 //     dispatch(createQuestion(newQuestion));
 
-//     // Reset form fields after submission
 //     setText('');
 //     setOptionA('');
 //     setOptionB('');
@@ -39,10 +35,10 @@
 //   };
 
 //   return (
-//     <div>
+//     <div className="form-container">
 //       <h2>Create a New Question</h2>
 //       <form onSubmit={handleSubmit}>
-//         {error && <p style={{ color: 'red' }}>{error}</p>}
+//         {error && <p className="error">{error}</p>}
 //         <div>
 //           <label>Question Text:</label>
 //           <input
@@ -89,9 +85,29 @@ function CreateQuestion() {
   const [text, setText] = useState('');
   const [optionA, setOptionA] = useState('');
   const [optionB, setOptionB] = useState('');
+  const [imageA, setImageA] = useState(null);
+  const [imageB, setImageB] = useState(null);
+  const [previewUrlA, setPreviewUrlA] = useState(null);
+  const [previewUrlB, setPreviewUrlB] = useState(null);
   const [error, setError] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleFileChangeA = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      setImageA(file);
+      setPreviewUrlA(URL.createObjectURL(file)); // Set the URL for preview
+    }
+  };
+
+  const handleFileChangeB = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      setImageB(file);
+      setPreviewUrlB(URL.createObjectURL(file)); // Set the URL for preview
+    }
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!text || !optionA || !optionB) {
@@ -99,19 +115,37 @@ function CreateQuestion() {
       return;
     }
 
-    const newQuestion = {
-      text,
-      optionA,
-      optionB,
-      createdBy: userId,
-    };
+    const formData = new FormData();
+    formData.append('text', text);
+    formData.append('optionA', optionA);
+    formData.append('optionB', optionB);
+    formData.append('createdBy', userId);
 
-    dispatch(createQuestion(newQuestion));
+    // Append images if selected
+    if (imageA) {
+      formData.append('imageA', imageA);
+    }
+    if (imageB) {
+      formData.append('imageB', imageB);
+    }
 
-    setText('');
-    setOptionA('');
-    setOptionB('');
-    setError('');
+    try {
+      // Dispatch the action to create a question with image uploads
+      await dispatch(createQuestion(formData));
+
+      // Clear form fields after submission
+      setText('');
+      setOptionA('');
+      setOptionB('');
+      setImageA(null);
+      setImageB(null);
+      setPreviewUrlA(null);
+      setPreviewUrlB(null);
+      setError('');
+    } catch (error) {
+      console.error('Failed to create question:', error);
+      setError('Failed to create question. Please try again.');
+    }
   };
 
   return (
@@ -138,6 +172,15 @@ function CreateQuestion() {
           />
         </div>
         <div>
+          <label>Image for Option A:</label>
+          <input type="file" onChange={handleFileChangeA} />
+          {previewUrlA && (
+            <div className="image-preview">
+              <img src={previewUrlA} alt="Preview for Option A" style={{ maxWidth: '20%', height: 'auto' }} />
+            </div>
+          )}
+        </div>
+        <div>
           <label>Option B:</label>
           <input
             type="text"
@@ -145,6 +188,15 @@ function CreateQuestion() {
             onChange={(e) => setOptionB(e.target.value)}
             required
           />
+        </div>
+        <div>
+          <label>Image for Option B:</label>
+          <input type="file" onChange={handleFileChangeB} />
+          {previewUrlB && (
+            <div className="image-preview">
+              <img src={previewUrlB} alt="Preview for Option B" style={{ maxWidth: '20%', height: 'auto' }} />
+            </div>
+          )}
         </div>
         <button type="submit">Create Question</button>
       </form>
