@@ -870,3 +870,13 @@ tbody td {
   margin-top: 20px;
 }
 
+.user-image-container {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  margin: auto;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border: 3px solid black;
+}
