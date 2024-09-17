@@ -959,7 +959,7 @@ tbody td {
   border-radius: 10px;
 }
 
-.options-container {
+/* .options-container {
   display: flex;
   justify-content: space-around;
   margin-top: 20px;
@@ -974,4 +974,31 @@ tbody td {
   height: auto;
   display: block;
   margin: 0 auto 10px;
+} */
+
+.options-container {
+  display: flex;
+  justify-content: space-between; /* Aligns the options side by side */
+  margin-top: 20px; /* Adds some space at the top */
+}
+
+.option-image {
+  display: flex;
+  flex-direction: column; /* Aligns the image and button vertically */
+  align-items: center; /* Centers the image and button */
+  width: 150px; /* Fixed width for consistency */
+  text-align: center; /* Center-aligns text and button */
+}
+
+.option-image img {
+  width: 100%; /* Ensures the image fills the container width */
+  height: 150px; /* Fixed height for consistency */
+  object-fit: cover; /* Crops the image to cover the container */
+  border: 2px solid #ddd; /* Optional: Adds a border around the image */
+  border-radius: 8px; /* Optional: Rounds the image corners */
+  margin-bottom: 10px; /* Adds some space between image and button */
+}
+
+.option-image button {
+  margin-top: 5px; /* Adds space between the image and the button */
 }
