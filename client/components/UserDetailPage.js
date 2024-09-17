@@ -54,17 +54,19 @@
 //   }, [selectedUser, users, questions, mainUserId]);
 
 //   return (
-//     <div>
+//     <div className="user-detail-page-container">
 //       {selectedUser ? (
 //         <>
-//           <h2>{selectedUser.username}'s Profile</h2>
-//           <p>Career High Win Streak: {selectedUser.careerHighWinStreak}</p>
-//           <p>Career High Loss Streak: {selectedUser.careerHighLossStreak}</p>
-//           <p>Career High No Vote Streak: {selectedUser.careerHighNoVoteStreak}</p>
-//           <p>Similarity with you: {similarityScore}%</p>
+//           <h2 className="user-detail-page-heading">{selectedUser.username}'s Profile</h2>
+//           <div className="user-detail-info">
+//             <p><strong>Career High Win Streak:</strong> {selectedUser.careerHighWinStreak}</p>
+//             <p><strong>Career High Loss Streak:</strong> {selectedUser.careerHighLossStreak}</p>
+//             <p><strong>Career High No Vote Streak:</strong> {selectedUser.careerHighNoVoteStreak}</p>
+//             <p><strong>Similarity with you:</strong> {similarityScore}%</p>
+//           </div>
 //         </>
 //       ) : (
-//         <p>Loading user data...</p>
+//         <p className="loading-message">Loading user data...</p>
 //       )}
 //     </div>
 //   );
@@ -131,6 +133,14 @@ function UserDetailPage() {
     <div className="user-detail-page-container">
       {selectedUser ? (
         <>
+          {/* Display User Image */}
+          {selectedUser.image && (
+            <img
+              src={selectedUser.image}
+              alt={selectedUser.username}
+              className="userdetail-image-thumbnail"
+            />
+          )}
           <h2 className="user-detail-page-heading">{selectedUser.username}'s Profile</h2>
           <div className="user-detail-info">
             <p><strong>Career High Win Streak:</strong> {selectedUser.careerHighWinStreak}</p>
