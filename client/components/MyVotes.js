@@ -41,38 +41,41 @@
 //   };
 
 //   return (
-//     <div>
+//     <div className="my-votes-container">
 //       <h2>My Votes</h2>
-//       <table>
-//         <thead>
-//           <tr>
-//             <th>Question</th>
-//             <th>Option A</th>
-//             <th>Option B</th>
-//             <th>Date Asked</th>
-//             <th>Status</th>
-//             <th>Your Vote</th>
-//           </tr>
-//         </thead>
-//         <tbody>
-//           {filteredQuestions.map((question) => (
-//             <tr key={question.id}>
-//               <td>{question.text}</td>
-//               <td>{question.optionA}</td>
-//               <td>{question.optionB}</td>
-//               <td>{question.dateAsked}</td>
-//               <td>{question.status}</td>
-//               <td>{getUserVote(question.id)}</td>
+//       {filteredQuestions.length > 0 ? (
+//         <table>
+//           <thead>
+//             <tr>
+//               <th>Question</th>
+//               <th>Option A</th>
+//               <th>Option B</th>
+//               <th>Date Asked</th>
+//               {/* <th>Status</th> */}
+//               <th>Your Vote</th>
 //             </tr>
-//           ))}
-//         </tbody>
-//       </table>
+//           </thead>
+//           <tbody>
+//             {filteredQuestions.map((question) => (
+//               <tr key={question.id}>
+//                 <td>{question.text}</td>
+//                 <td>{question.optionA}</td>
+//                 <td>{question.optionB}</td>
+//                 <td>{new Date(question.dateAsked).toLocaleDateString()}</td>
+//                 {/* <td>{question.status}</td> */}
+//                 <td>{getUserVote(question.id)}</td>
+//               </tr>
+//             ))}
+//           </tbody>
+//         </table>
+//       ) : (
+//         <p className="loading">Loading or No Votes Found...</p>
+//       )}
 //     </div>
 //   );
 // }
 
 // export default MyVotes;
-
 
 import { useDispatch, useSelector } from 'react-redux';
 import React, { useEffect, useState } from 'react';
@@ -106,14 +109,31 @@ function MyVotes() {
     setFilteredQuestions(sorted);
   }, [questions]);
 
-  // Helper function to determine user's vote
-  const getUserVote = (questionId) => {
+  // Helper function to determine user's vote and return the corresponding image
+  const getUserVote = (question) => {
     const userResponse = user.user_responses?.find(
-      (response) => response.questionId === questionId
+      (response) => response.questionId === question.id
     );
 
     if (!userResponse) return 'Did Not Vote';
-    return userResponse.response === 'option_a' ? 'Option A' : 'Option B';
+
+    if (userResponse.response === 'option_a') {
+      return (
+        <img
+          src={question.imageA}
+          alt="Your Vote - Option A"
+          style={{ width: '50px', height: '50px', objectFit: 'cover', borderRadius: '4px' }}
+        />
+      );
+    } else if (userResponse.response === 'option_b') {
+      return (
+        <img
+          src={question.imageB}
+          alt="Your Vote - Option B"
+          style={{ width: '50px', height: '50px', objectFit: 'cover', borderRadius: '4px' }}
+        />
+      );
+    }
   };
 
   return (
@@ -127,7 +147,6 @@ function MyVotes() {
               <th>Option A</th>
               <th>Option B</th>
               <th>Date Asked</th>
-              <th>Status</th>
               <th>Your Vote</th>
             </tr>
           </thead>
@@ -138,8 +157,7 @@ function MyVotes() {
                 <td>{question.optionA}</td>
                 <td>{question.optionB}</td>
                 <td>{new Date(question.dateAsked).toLocaleDateString()}</td>
-                <td>{question.status}</td>
-                <td>{getUserVote(question.id)}</td>
+                <td>{getUserVote(question)}</td>
               </tr>
             ))}
           </tbody>
