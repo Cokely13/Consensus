@@ -8,13 +8,15 @@ function EditQuestion() {
   const dispatch = useDispatch();
   const history = useHistory();
   const question = useSelector((state) => state.singleQuestion);
+
+  // Initialize state with empty strings to avoid uncontrolled to controlled input warning
   const [text, setText] = useState('');
   const [optionA, setOptionA] = useState('');
   const [optionB, setOptionB] = useState('');
   const [imageA, setImageA] = useState(null);
   const [imageB, setImageB] = useState(null);
-  const [previewImageA, setPreviewImageA] = useState(null);
-  const [previewImageB, setPreviewImageB] = useState(null);
+  const [previewImageA, setPreviewImageA] = useState('');
+  const [previewImageB, setPreviewImageB] = useState('');
 
   useEffect(() => {
     // Fetch the question to edit when component mounts
@@ -23,11 +25,11 @@ function EditQuestion() {
 
   useEffect(() => {
     if (question) {
-      setText(question.text);
-      setOptionA(question.optionA);
-      setOptionB(question.optionB);
-      setPreviewImageA(question.imageA);
-      setPreviewImageB(question.imageB);
+      setText(question.text || ''); // Use empty string as a fallback
+      setOptionA(question.optionA || '');
+      setOptionB(question.optionB || '');
+      setPreviewImageA(question.imageA || '');
+      setPreviewImageB(question.imageB || '');
     }
   }, [question]);
 
@@ -47,10 +49,32 @@ function EditQuestion() {
     }
   };
 
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+
+  //   const formData = new FormData();
+  //   formData.append('text', text);
+  //   formData.append('id', id);
+  //   formData.append('optionA', optionA);
+  //   formData.append('optionB', optionB);
+  //   if (imageA) formData.append('imageA', imageA);
+  //   if (imageB) formData.append('imageB', imageB);
+
+  //   try {
+  //     await dispatch(updateSingleQuestion(formData));
+  //     alert('Question updated successfully!');
+  //     history.push('/questions'); // Redirect back to questions list
+  //   } catch (error) {
+  //     console.error('Failed to update question:', error);
+  //     alert('Failed to update question.');
+  //   }
+  // };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     const formData = new FormData();
+    formData.append('id', id); // Make sure to include the question ID in FormData
     formData.append('text', text);
     formData.append('optionA', optionA);
     formData.append('optionB', optionB);
@@ -58,7 +82,8 @@ function EditQuestion() {
     if (imageB) formData.append('imageB', imageB);
 
     try {
-      await dispatch(updateSingleQuestion(id, formData));
+      // Pass the FormData directly to the thunk
+      await dispatch(updateSingleQuestion(formData));
       alert('Question updated successfully!');
       history.push('/questions'); // Redirect back to questions list
     } catch (error) {

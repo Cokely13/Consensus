@@ -28,19 +28,39 @@ export const fetchQuestion = (id) => {
   };
 };
 
-export const updateSingleQuestion = (question) => {
+// export const updateSingleQuestion = (question) => {
+//   return async (dispatch) => {
+//     try {
+//         await axios.put(`/api/questions/${question.id}`, question);
+//         const { data: questionData } = await axios.get(`/api/questions/${question.id}`);
+//         dispatch(_updateSingleQuestion(questionData));
+//         history.push(`/questions/${question.id}`)
+//       }
+//      catch (error) {
+//       console.log("QUESTION", question)
+//     }
+//   };
+// };
+
+export const updateSingleQuestion = (formData) => {
   return async (dispatch) => {
     try {
-        await axios.put(`/api/questions/${question.id}`, question);
-        const { data: questionData } = await axios.get(`/api/questions/${question.id}`);
-        dispatch(_updateSingleQuestion(questionData));
-        history.push(`/questions/${question.id}`)
-      }
-     catch (error) {
-      console.log("QUESTION", question)
+      // Make sure to pass the formData directly to axios.put
+      await axios.put(`/api/questions/${formData.get('id')}`, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+
+      // Fetch the updated question data
+      const { data: questionData } = await axios.get(`/api/questions/${formData.get('id')}`);
+      dispatch(_updateSingleQuestion(questionData));
+    } catch (error) {
+      console.error('Failed to update question:', error);
     }
   };
 };
+
 
 // reducer
 const initialState = [];
