@@ -1002,3 +1002,17 @@ tbody td {
 .option-image button {
   margin-top: 5px; /* Adds space between the image and the button */
 }
+
+/* Add this to your CSS file */
+.group-info {
+  display: flex;
+  align-items: center;
+}
+
+.group-image-thumbnail {
+  width: 40px; /* Adjust the size as needed */
+  height: 40px; /* Ensure the image is square */
+  object-fit: cover; /* Maintain aspect ratio while filling the box */
+  margin-right: 10px; /* Space between image and text */
+  border-radius: 4px; /* Optional: Rounded corners */
+}
