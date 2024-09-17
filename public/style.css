@@ -1016,3 +1016,12 @@ tbody td {
   margin-right: 10px; /* Space between image and text */
   border-radius: 4px; /* Optional: Rounded corners */
 }
+
+/* Add this to your CSS file */
+.user-image-thumbnail {
+  width: 100px; /* Adjust size as needed */
+  height: 100px; /* Ensure the image is square */
+  object-fit: cover; /* Maintain aspect ratio while filling the box */
+  margin-bottom: 10px; /* Space between image and text */
+  border-radius: 50%; /* Rounded corners for a circular image */
+}
