@@ -72,7 +72,7 @@ function Archive() {
           const isExpired = question.consensus.length ? true : false;
 
           return (
-            <React.Fragment key={question.id}>
+            <React.Fragment  key={question.id}>
               <div className="archive-grid-cell">{question.text}</div>
               <div className={`archive-grid-cell ${highlightOptionA}`}>{question.optionA}</div>
               <div className="archive-grid-cell">{optionAVotes}</div>

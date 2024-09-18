@@ -684,15 +684,26 @@ tbody td {
 }
 
 .archive-page-container {
-  max-width: 60%; /* Adjust the width of the component */
-  margin: 0 auto; /* Center the component */
+  /* max-width: 900px;  */
+  width: 70%;
+  margin: 20px auto; /* Center horizontally and add vertical spacing */
+  padding: 20px; /* Inner padding for content */
+  background-color: #fff; /* White background color for contrast */
+  border-radius: 8px; /* Rounded corners for modern look */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05); /* Subtle shadow for depth */
+  text-align: center; /* Center text alignment */
+  overflow-x: auto;
 }
+
+
 
 .archive-grid-container {
   display: grid;
   grid-template-columns: 15% 15% 15% 15% 15% 15% 15%; /* Adjust widths of columns */
   gap: 5px; /* Space between columns */
-  width: 100%; /* Full width for the grid */
+  max-width: 100%;
+  margin: 0 auto; /* Center the grid */
+  width: 80%; /* Full width for the grid */
 }
 
 .archive-grid-header {
@@ -1277,4 +1288,11 @@ tbody td {
   height: auto;
   border: 1px solid #ddd;
   border-radius: 4px;
+}
+
+.content-container {
+  background-color: #2e2e2e;
+  /* color: white;  */
+  min-height: 100vh; /* Ensure it takes up the full viewport height */
+  padding: 20px; /* Add some padding to the content */
 }
