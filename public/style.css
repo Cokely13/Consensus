@@ -981,17 +981,17 @@ tbody td {
 }
 
 .card-image-container {
+  width: 100%; /* Make sure the container takes up the full width */
+  height: 200px; /* Set a fixed height to force the image to fit within this space */
+  display: flex;
+  justify-content: center;
   align-items: center;
-  width: 250px;
-  height: 250px; /* Adjust height as needed */
-  overflow: hidden;
-  margin-bottom: 10px; /* Space between image and text */
 }
 
 .card-image {
-  width: 50%;
-  height: 50%;
-  object-fit: cover; /* Cover the entire container while maintaining aspect ratio */
+  width: 100%; /* Take up 100% of the container's width */
+  height: 100%; /* Take up 100% of the container's height */
+  object-fit: cover; /* Force the image to cover the entire container while maintaining aspect ratio */
   border-radius: 8px; /* Optional: round the corners */
 }
 
