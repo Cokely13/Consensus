@@ -28,22 +28,33 @@ export const fetchGroup = (id) => {
   };
 };
 
-export const updateSingleGroup = (group, history) => {
+// export const updateSingleGroup = (group, history) => {
+//   return async (dispatch) => {
+//     try {
+//         await axios.put(`/api/groups/${group.id}`, group);
+//         const { data: groupData } = await axios.get(`/api/groups/${group.id}`);
+//         dispatch(_updateSingleGroup(groupData));
+//         history.push(`/groups/${group.id}`)
+//       }
+//      catch (error) {
+//       console.log("GROUP", group)
+//     }
+//   };
+// };
+
+export const updateSingleGroup = (group) => {
   return async (dispatch) => {
     try {
-        await axios.put(`/api/groups/${group.id}`, group);
-        const { data: groupData } = await axios.get(`/api/groups/${group.id}`);
-        dispatch(_updateSingleGroup(groupData));
-        history.push(`/groups/${group.id}`)
-      }
-     catch (error) {
-      console.log("GROUP", group)
+      const { data } = await axios.put(`/api/groups/${group.get('id')}`, group); // Passing FormData with 'id'
+      dispatch(_updateSingleGroup(data)); // No need to fetch again, just use the response
+    } catch (error) {
+      console.error('GROUP UPDATE ERROR:', error);
     }
   };
 };
 
 // reducer
-const initialState = [];
+const initialState = {};
 const singleGroupReducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_SINGLE_GROUP:

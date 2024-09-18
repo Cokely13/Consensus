@@ -21,7 +21,7 @@ function Groups() {
     <div className="page-container">
       <h1 className="page-heading"><u><b>Groups</b></u></h1>
       <div className="card-container">
-        {filteredGroups.map((group) => {
+        {groups.map((group) => {
           const isMember = group.group_members && group.group_members.some(member => member.userId == currentUserId);
           const hasPendingInvite = invites.some(invite => invite.groupId === group.id && invite.inviteeId == currentUserId && invite.status === 'pending');
 

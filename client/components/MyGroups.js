@@ -111,8 +111,7 @@ function MyGroups() {
                   )}
                   {/* Group Name and Info */}
                   <h2 className="card-heading">
-                    {group.name} - # of Members {group.group_members ? group.group_members.length : 0}
-                    <span> (Member)</span>
+                    {group.name} - ( {group.group_members ? group.group_members.length : 0} )
                     {hasPendingInvite && <span> (Invite)</span>}
                   </h2>
                 </div>

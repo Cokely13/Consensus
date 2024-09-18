@@ -814,6 +814,7 @@ tbody td {
   border-radius: 8px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
   text-align: center;
+
 }
 
 /* Heading Styling */
@@ -832,6 +833,7 @@ tbody td {
   font-size: 1.1rem;
   line-height: 1.6;
   color: #555;
+  text-align: center;
 }
 
 /* Loading Message Styling */
@@ -850,7 +852,7 @@ tbody td {
   background-color: #fff;
   border-radius: 8px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-  text-align: left;
+  text-align: center;
 }
 
 /* Heading Styling */
@@ -1295,4 +1297,113 @@ tbody td {
   /* color: white;  */
   min-height: 100vh; /* Ensure it takes up the full viewport height */
   padding: 20px; /* Add some padding to the content */
+}
+
+.invitesGrid {
+  display: grid;
+  grid-template-columns: 20% 20% 20% 20% 20%; /* Five equal columns */
+  gap: 10px; /* Add some spacing between cells */
+  max-width: 100%;
+  margin: 0 auto; /* Center the grid */
+  width: 80%; /* Full width for the grid */
+}
+
+
+
+.invitesGrid-header {
+  font-weight: bold;
+  text-align: center;
+  padding: 10px;
+  background-color: #f4f4f4;
+  border-bottom: 2px solid #ddd;
+}
+
+.invitesGrid-cell {
+  padding: 10px;
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+}
+
+.invitesGrid button {
+  padding: 5px 10px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.invitesGrid button:hover {
+  background-color: #218838;
+}
+
+.invitesGrid .no-invites {
+  grid-column: span 5;
+  text-align: center;
+  padding: 20px;
+  font-size: 16px;
+  color: #777;
+}
+
+/* Add this to your global stylesheet or component-specific stylesheet */
+
+.edit-question-container {
+  max-width: 600px;
+  margin: 20px auto; /* Center the container and add vertical margin */
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+.edit-question-container h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.edit-question-container form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px; /* Space between form elements */
+}
+
+.edit-question-container label {
+  font-weight: bold;
+  text-align: center;
+}
+
+.edit-question-container input[type="text"],
+.edit-question-container input[type="file"] {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.edit-question-container img {
+  display: block;
+  margin: 10px auto;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.edit-question-container button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.edit-question-container button:hover {
+  background-color: #45a049;
+}
+
+.question-image-thumbnail {
+  max-width: 250px;
+  height: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
 }

@@ -18,6 +18,7 @@ import Invites from './components/Invites';
 import MyGroups from './components/MyGroups';
 import MyVotes from './components/MyVotes';
 import EditQuestion from './components/EditQuestion';
+import EditGroup from './components/EditGroup';
 
 /**
  * COMPONENT
@@ -49,6 +50,7 @@ class Routes extends Component {
             <Route exact path="/create" component={CreateQuestion} />
             <Route exact path="/review" component={QuestionReview} />
             <Route path="/edit-question/:id" component={EditQuestion} />
+            <Route path="/edit-group/:id" component={EditGroup} />
             <Redirect to="/home" />
           </Switch>
         ) : (
