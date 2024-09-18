@@ -73,7 +73,10 @@ a:hover {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  width: 110vw;
 }
+
+
 
 /* Logo or Title */
 .navbar h1 {
