@@ -138,7 +138,7 @@ function CreateGroup() {
       <form onSubmit={handleSubmit}>
         {error && <p className="error">{error}</p>}
         <div>
-          <label>Group Name:</label>
+          <label style={{textAlign: "center"}}>Group Name:</label>
           <input
             type="text"
             value={text}
@@ -146,8 +146,8 @@ function CreateGroup() {
             required
           />
         </div>
-        <div>
-          <label>Group Image:</label>
+        <div >
+          <label style={{textAlign: "center"}}>Group Image:</label>
           <input type="file" onChange={handleFileChange} />
         </div>
         {previewUrl && (

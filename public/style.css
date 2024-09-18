@@ -54,6 +54,8 @@ a:hover {
 .card {
   background-color: #fff;
   border: 1px solid #ddd;
+  /* display: flex;
+  align-items: center; */
   border-radius: 8px;
   padding: 20px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
@@ -385,7 +387,9 @@ form div {
 
 /* Card container for both groups and users */
 .card-container {
-  display: grid; /* Grid layout for cards */
+  /* display: grid;  */
+  display: flex;
+  justify-content: center;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Responsive grid */
   gap: 20px; /* Space between cards */
   margin-top: 20px; /* Space above the cards */
@@ -399,6 +403,8 @@ form div {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for card depth */
   transition: transform 0.2s ease; /* Smooth transition for hover effects */
   text-align: center; /* Center text inside cards */
+  display: flex;
+  justify-content: center;
 }
 
 /* Card hover effect */
@@ -975,15 +981,16 @@ tbody td {
 }
 
 .card-image-container {
-  width: 100%;
-  height: 100%; /* Adjust height as needed */
+  align-items: center;
+  width: 250px;
+  height: 250px; /* Adjust height as needed */
   overflow: hidden;
   margin-bottom: 10px; /* Space between image and text */
 }
 
 .card-image {
-  width: 100%;
-  height: 100%;
+  width: 50%;
+  height: 50%;
   object-fit: cover; /* Cover the entire container while maintaining aspect ratio */
   border-radius: 8px; /* Optional: round the corners */
 }
