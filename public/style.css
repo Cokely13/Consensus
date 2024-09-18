@@ -1054,3 +1054,98 @@ tbody td {
   font-size: 3rem;
   margin-bottom: 20px;
 }
+/*
+.questionstable-custom {
+  width: 100%;
+  table-layout: fixed;
+}
+
+.questionstable-custom th,
+.questionstable-custom td {
+  padding: 8px;
+  text-align: left;
+}
+
+.questionstable-custom th {
+  width: 20%;
+}
+
+.questionstable-custom .column-question {
+  width: 20%;
+}
+
+.questionstable-custom .column-option {
+  width: 10%;
+}
+
+.questionstable-custom .column-image {
+  width: 10%;
+}
+
+.questionstable-custom .column-date {
+  width: 15%;
+}
+
+.questionstable-custom .column-status {
+  width: 10%;
+}
+
+.questionstable-custom .column-action {
+  width: 15%;
+}
+
+.questionstable-custom img {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+} */
+
+.questionstable-custom {
+  width: 100%;
+  max-width: 1200px; /* Set a max width for the entire table */
+  margin: 0 auto; /* Center the table on the page */
+  table-layout: fixed; /* Ensures equal column widths */
+  border-collapse: collapse; /* For cleaner table borders */
+}
+
+.questionstable-custom th,
+.questionstable-custom td {
+  padding: 16px; /* Increase padding for more spacing */
+  text-align: center; /* Center align the text */
+  border: 1px solid #ddd; /* Add borders to each cell */
+}
+
+.questionstable-custom th {
+  width: 20%;
+  background-color: #f2f2f2; /* Optional: Light background for headers */
+  font-weight: bold;
+}
+
+.questionstable-custom .column-question,
+.questionstable-custom .column-option,
+.questionstable-custom .column-image,
+.questionstable-custom .column-date,
+.questionstable-custom .column-status,
+.questionstable-custom .column-action {
+  width: auto; /* Auto-distribute widths based on content */
+}
+
+.questionstable-custom img {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+}
+
+.edit-button {
+  font-size: 12px; /* Reduce font size */
+  padding: 5px 10px; /* Adjust padding */
+  background-color: #4CAF50; /* Set a background color */
+  color: white; /* Set the text color */
+  border: none; /* Remove the border */
+  border-radius: 4px; /* Add slight rounding */
+  cursor: pointer; /* Pointer cursor on hover */
+}
+
+.edit-button:hover {
+  background-color: #45a049; /* Darken background on hover */
+}

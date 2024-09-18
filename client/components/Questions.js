@@ -17,12 +17,11 @@ function Questions() {
     (a, b) => new Date(b.dateAsked) - new Date(a.dateAsked)
   );
 
-  console.log("questions", questions);
 
   return (
     <div className="page-container">
       <h2 className="page-heading">Questions</h2>
-      <table>
+      <table className="questionstable-custom">
         <thead>
           <tr>
             <th>Question</th>
@@ -62,7 +61,7 @@ function Questions() {
               {user.admin && (
                 <td>
                   <Link to={`/edit-question/${question.id}`}>
-                    <button>Edit Question</button>
+                    <button className="edit-button">Edit Question</button>
                   </Link>
                 </td>
               )}
