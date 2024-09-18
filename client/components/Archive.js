@@ -82,7 +82,7 @@ function Archive() {
               <div className="archive-grid-cell">
                 {isExpired ? (
                   <button
-                    className="archive-button"
+                    className="reopen-button"
                     onClick={() => handleReopenQuestion(question)}
                   >
                     Reopen the Question

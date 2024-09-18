@@ -218,7 +218,7 @@ form div {
   /* margin-top: 200px; */
   max-width: 600px; /* Limits the width to maintain readability */
   margin: 0 auto; /* Centers the container horizontally */
-  /* padding: 20px; */
+  padding: 20px;
   background-color: #f9f9f9; /* Light background color for contrast */
   border-radius: 8px; /* Rounded corners for a modern look */
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
@@ -229,14 +229,15 @@ form div {
 .profile-container h2 {
   color: #333; /* Darker text color for heading */
   margin-bottom: 20px; /* Space below the heading */
+  margin-top: 20px; /* Space below the heading */
   font-weight: 700; /* Bold font weight for the heading */
 }
 
 /* Paragraphs */
 .profile-container p {
   color: #666; /* Lighter text color for paragraphs */
-  margin-bottom: 15px; /* Space below each paragraph */
-  font-size: 16px; /* Standard font size for readability */
+  margin-top: 20px; /* Space below the heading */
+  font-size: 20px; /* Standard font size for readability */
 }
 
 /* Loader */
@@ -302,7 +303,8 @@ form div {
   background-color: #f9f9f9; /* Light grey background color */
   border-radius: 8px; /* Rounded corners for a modern look */
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
-  text-align: center; /* Center text inside the form */
+  text-align: center;
+  align-items: center;
 }
 
 /* Form headings */
@@ -648,16 +650,7 @@ tbody td {
   text-align: left;
 }
 
-/* Archive page container styling */
-.archive-page-container {
-  max-width: 900px;
-  margin: 20px auto;
-  padding: 20px;
-  background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-  text-align: center;
-}
+
 
 /* Heading styling for the archive page */
 .archive-page-heading {
@@ -665,20 +658,89 @@ tbody td {
   margin-bottom: 20px;
   font-weight: 700;
   color: #333;
+  text-align: center;
   border-bottom: 2px solid #ddd;
   padding-bottom: 10px;
 }
 
-/* Grid container for archive page */
+.reopen-button {
+  font-size: 12px;
+  padding: 5px 10px;
+  background-color: #ff9800; /* Orange color for Reopen button */
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.reopen-button:hover {
+  background-color: #e68900; /* Darker orange on hover */
+}
+
+.archive-page-container {
+  max-width: 60%; /* Adjust the width of the component */
+  margin: 0 auto; /* Center the component */
+}
+
 .archive-grid-container {
   display: grid;
-  grid-template-columns: repeat(7, 1fr); /* Create a grid with 7 equal columns */
+  grid-template-columns: 15% 15% 15% 15% 15% 15% 15%; /* Adjust widths of columns */
+  gap: 5px; /* Space between columns */
+  width: 100%; /* Full width for the grid */
+}
+
+.archive-grid-header {
+  font-weight: bold;
+  padding: 10px;
+  background-color: #f0f0f0;
+  text-align: center; /* Center the text in header cells */
+  display: flex;
+  justify-content: center;
+  align-items: center; /* Vertically center the text */
+}
+
+.archive-grid-cell {
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+  text-align: center; /* Center the text in each cell */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.archive-button {
+  font-size: 12px;
+  padding: 5px 10px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.archive-button:hover {
+  background-color: #45a049;
+}
+
+.highlight-option-a {
+  background-color: #e0ffe0; /* Light green for highlighting Option A */
+}
+
+.highlight-option-b {
+  background-color: #ffe0e0; /* Light red for highlighting Option B */
+}
+
+
+/* Grid container for archive page */
+/* .archive-grid-container {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
   gap: 10px;
   margin-top: 20px;
   align-items: center;
 }
 
-/* Grid header styling for archive page */
+
 .archive-grid-header {
   font-weight: bold;
   background-color: #f5f5f5;
@@ -687,17 +749,16 @@ tbody td {
   text-align: center;
 }
 
-/* Grid row styling for archive page */
+
 .archive-grid-row {
-  display: contents; /* Allows the children to be part of the grid without creating a new block */
+  display: contents;
 }
 
-/* Cell styling for archive page */
 .archive-grid-cell {
   padding: 10px;
   border-bottom: 1px solid #eee;
   text-align: center;
-}
+} */
 
 /* Highlight styling for votes */
 .highlight-option-a {
@@ -1148,4 +1209,65 @@ tbody td {
 
 .edit-button:hover {
   background-color: #45a049; /* Darken background on hover */
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-label {
+  text-align: center;
+  margin-bottom: 5px;
+  font-weight: bold;
+  width: 100%; /* Ensure the label spans the full width for proper centering */
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* This will center the label and input horizontally */
+  width: 100%;
+}
+
+.form-input, .form-input-file {
+  width: 100%; /* Keep the inputs at full width */
+  max-width: 400px; /* Optional: Set a max width if you want to limit input size */
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.form-input-file {
+  padding: 5px;
+}
+
+.form-submit-button {
+  padding: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 20px;
+  border: none;
+  border-radius: 4px;
+  background-color: #4CAF50;
+  color: white;
+}
+
+.form-error {
+  color: red;
+  text-align: center;
+}
+
+.image-preview {
+  margin-top: 10px;
+  text-align: center;
+}
+
+.image-preview-img {
+  max-width: 200px;
+  height: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
 }

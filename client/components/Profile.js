@@ -121,10 +121,9 @@ const handleUpload = async () => {
     return soleDissenterCount;
   };
 
-  console.log("Image URL:", imageUrl);
 
   return (
-    <div className="profile-container">
+    <div className="profile-container" style={{marginTop: '20px'}}>
       <div>
       <h2>Profile</h2>
       {user.image && (
