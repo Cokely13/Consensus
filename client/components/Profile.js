@@ -148,6 +148,10 @@ const handleUpload = async () => {
           <p>Percentage of Popular Answers: {getPercentagePopularAnswers()}%</p>
           <p>With Consensus: {getConsensusCount()}</p>
           <p>Sole Dissenter: {getSoleDissenterCount()}</p>
+          <h4>Career High Streaks:</h4>
+      <p>Longest Win Streak: {user.careerHighWinStreak} days</p>
+      <p>Longest Loss Streak: {user.careerHighLossStreak} days</p>
+      <p>Longest No Vote Streak: {user.careerHighNoVoteStreak} days</p>
         </div>
       ) : (
         <p className="loading">Loading user data...</p>

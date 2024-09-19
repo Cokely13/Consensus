@@ -10,7 +10,6 @@ export const Home = props => {
 
   return (
     <div className="home-container">
-      {/* <h1 className="home-heading">Consensus</h1> */}
       <QuestionOfTheDay />
     </div>
   )

@@ -263,49 +263,13 @@ function QuestionOfTheDay() {
 
   return (
     <div className="question-of-the-day-container">
-      {yesterdayQuestion && (
-        <>
-          <div className="pie-chart-container">
-            <PieChart
-              data={chartData}
-              questionText={`Yesterday's Question: ${yesterdayQuestion.text}`}
-              optionALabel={yesterdayQuestion.optionA}
-              optionBLabel={yesterdayQuestion.optionB}
-            />
-          </div>
-          <div className="winner-image-container">
-            <h4>Yesterday's Winner:</h4>
-            {yesterdayQuestion.consensus.length > 0 && yesterdayQuestion.consensus[0].consensusAnswer ? (
-              <img
-                src={yesterdayQuestion.consensus[0].consensusAnswer === 'option_a' ? yesterdayQuestion.imageA : yesterdayQuestion.imageB}
-                alt="Yesterday's Winner"
-                className="winner-image"
-              />
-            ) : (
-              <p>No consensus winner yesterday.</p>
-            )}
-          </div>
-        </>
-      )}
-      <h3>Today's Date: {new Date().toLocaleDateString()}</h3>
-      <div>{yesterdayQuestionText}</div>
-      <div>{yesterdayConsensus}</div>
-      <div>{yesterdayResult}</div>
-      <h3>
-        {hasVoted ? 'Time Until the Next Question:' : 'Time Left to Answer the Question:'} {timeLeft}
-      </h3>
-      <h4>Current Streak:</h4>
-      {streak.correct > 0 && <p>Correct Streak: {streak.correct} days</p>}
-      {streak.incorrect > 0 && <p>Incorrect Streak: {streak.incorrect} days</p>}
-      {streak.noVote > 0 && <p>No Vote Streak: {streak.noVote} days</p>}
-      <h4>Career High Streaks:</h4>
-      <p>Longest Win Streak: {careerHigh.winStreak} days</p>
-      <p>Longest Loss Streak: {careerHigh.lossStreak} days</p>
-      <p>Longest No Vote Streak: {careerHigh.noVoteStreak} days</p>
       {selectedQuestion ? (
         <div>
-          <h2>Today's Question</h2>
-          <div>{selectedQuestion.text}</div>
+          <h2>Question of the Day {new Date().toLocaleDateString()}</h2>
+          {/* <div>{selectedQuestion.text}</div> */}
+          <h3>
+        {hasVoted ? 'Time Until the Next Question:' : 'Time Left to Answer the Question:'} {timeLeft}
+      </h3>
           {!hasVoted ? (
             <div className="options-container">
               <div className="option-image">
@@ -332,6 +296,41 @@ function QuestionOfTheDay() {
       ) : (
         <div>{questions.length > 0 ? 'No question for today.' : 'Loading questions...'}</div>
       )}
+      {yesterdayQuestion && (
+        <>
+          <div className="pie-chart-container">
+            <PieChart
+              data={chartData}
+              questionText={`Yesterday's Question: ${yesterdayQuestion.optionA} or ${yesterdayQuestion.optionB}`}
+              optionALabel={yesterdayQuestion.optionA}
+              optionBLabel={yesterdayQuestion.optionB}
+            />
+          </div>
+          <div className="winner-image-container">
+            <h4>Yesterday's Winner:</h4>
+            {yesterdayQuestion.consensus.length > 0 && yesterdayQuestion.consensus[0].consensusAnswer ? (
+              <img
+                src={yesterdayQuestion.consensus[0].consensusAnswer === 'option_a' ? yesterdayQuestion.imageA : yesterdayQuestion.imageB}
+                alt="Yesterday's Winner"
+                className="winner-image"
+              />
+            ) : (
+              <p>No consensus winner yesterday.</p>
+            )}
+          </div>
+        </>
+      )}
+      {/* <div>{yesterdayQuestionText}</div> */}
+      <div>{yesterdayConsensus}</div>
+      <div>{yesterdayResult}</div>
+      <h4>Current Streak:</h4>
+      {streak.correct > 0 && <p>Correct Streak: {streak.correct} days</p>}
+      {streak.incorrect > 0 && <p>Incorrect Streak: {streak.incorrect} days</p>}
+      {streak.noVote > 0 && <p>No Vote Streak: {streak.noVote} days</p>}
+      {/* <h4>Career High Streaks:</h4>
+      <p>Longest Win Streak: {careerHigh.winStreak} days</p>
+      <p>Longest Loss Streak: {careerHigh.lossStreak} days</p>
+      <p>Longest No Vote Streak: {careerHigh.noVoteStreak} days</p> */}
     </div>
   );
 }
