@@ -163,15 +163,13 @@ function GroupDetailPage() {
               Leader: <Link to={`/users/${leader.id}`}> {leader.username}</Link>
             </h3>
           )}
-          {currentUserId === selectedGroup.leaderId && (
-                <td>
-
-<Link to={`/edit-group/${selectedGroup.id}`}>
-        <button className="edit-button">Edit Group</button>
-        </Link>
-
-                </td>
-              )}
+       {currentUserId === selectedGroup.leaderId && (
+  <div className="edit-groupbutton-container">
+    <Link to={`/edit-group/${selectedGroup.id}`}>
+      <button className="edit-groupbutton">Edit Group</button>
+    </Link>
+  </div>
+)}
           <h3 className="group-detail-members-title">
             Group Members:{' '}
             <span onClick={handleToggleMembers} className="toggle-members-link">
@@ -181,7 +179,7 @@ function GroupDetailPage() {
           {showMembers && (
             <ul className="group-members-list">
               {selectedGroup.group_members.map((member) => (
-                <li key={`${member.userId}-${member.groupId}`}>
+                <ul key={`${member.userId}-${member.groupId}`}>
                   {member.user ? (
                     <Link to={`/users/${member.userId}`}>
                       <h2 className="group-member-name">{member.user.username}</h2>
@@ -189,7 +187,7 @@ function GroupDetailPage() {
                   ) : (
                     member.userId
                   )}
-                </li>
+                </ul>
               ))}
             </ul>
           )}
