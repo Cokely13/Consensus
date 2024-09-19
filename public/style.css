@@ -69,13 +69,16 @@ a:hover {
 
 /* Navbar Container */
 .navbar {
-  background-color: #fff; /* White background for a clean look */
-  border-bottom: 1px solid #ddd; /* Subtle border to separate from content */
+  /* background-color: #fff;  */
+  background-color: #124e66;
+  color: white;
+  border-bottom: 1px solid #2E3944; /* Subtle border to separate from content */
   padding: 10px 20px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   width: 110vw;
+  text-align: center;
 }
 
 
@@ -84,9 +87,10 @@ a:hover {
 .navbar h1 {
   font-size: 1.8rem;
   margin: 0;
-  color: #333; /* Dark text color for contrast */
+  color: #d3d9d4; /* Dark text color for contrast */
   font-weight: 700;
   text-transform: uppercase;
+  text-align: center;
 }
 
 /* Navbar Links Container */
@@ -99,7 +103,7 @@ a:hover {
 /* Navbar Links */
 .navbar-links a {
   text-decoration: none;
-  color: #333;
+  color: #d3d9d4;
   font-size: 1rem;
   font-weight: 500;
   padding: 8px 12px;
@@ -108,7 +112,7 @@ a:hover {
 }
 
 .navbar-links a:hover {
-  background-color: #007BFF; /* Accent color for hover */
+  background-color: #748D92; /* Accent color for hover */
   color: #fff;
 }
 
@@ -173,7 +177,9 @@ form div {
   margin: 0 auto; /* Center horizontally */
   padding: 20px;
   text-align: center; /* Center text alignment */
-  background-color: #f9f9f9; /* Light background for contrast */
+  /* background-color: #f9f9f9; */
+  background-color: #d3d9d4;
+  border: 2px solid #2e3944;
   border-radius: 8px; /* Rounded corners */
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
 }
@@ -221,7 +227,8 @@ form div {
   max-width: 600px; /* Limits the width to maintain readability */
   margin: 0 auto; /* Centers the container horizontally */
   padding: 20px;
-  background-color: #f9f9f9; /* Light background color for contrast */
+  background-color: #d3d9d4;
+  border: 2px solid #2e3944;
   border-radius: 8px; /* Rounded corners for a modern look */
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
   text-align: center; /* Center-align all text */
@@ -253,7 +260,8 @@ form div {
   max-width: 800px; /* Limits the width to maintain readability */
   margin: 20px auto; /* Centers the container horizontally and adds vertical spacing */
   padding: 20px;
-  background-color: #f9f9f9; /* Light background color for contrast */
+  background-color: #d3d9d4;
+  border: 2px solid #2e3944;
   border-radius: 8px; /* Rounded corners for a modern look */
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
   text-align: center; /* Center-align all text */
@@ -302,7 +310,8 @@ form div {
   max-width: 500px; /* Maximum width for the form */
   margin: 20px auto; /* Center horizontally and add vertical space */
   padding: 20px; /* Padding for inner content */
-  background-color: #f9f9f9; /* Light grey background color */
+  background-color: #d3d9d4;
+  border: 2px solid #2e3944;
   border-radius: 8px; /* Rounded corners for a modern look */
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
   text-align: center;
@@ -369,7 +378,8 @@ form div {
   max-width: 900px; /* Maximum width for the page */
   margin: 20px auto; /* Center horizontally and add vertical spacing */
   padding: 20px; /* Inner padding for content */
-  background-color: #fff; /* White background color for contrast */
+  background-color: #d3d9d4;
+  border: 2px solid #2e3944;
   border-radius: 8px; /* Rounded corners for modern look */
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05); /* Subtle shadow for depth */
   text-align: center; /* Center text alignment */
@@ -438,7 +448,8 @@ form div {
   max-width: 900px;
   margin: 20px auto;
   padding: 20px;
-  background-color: #fff;
+  background-color: #d3d9d4;
+  border: 2px solid #2e3944;
   border-radius: 8px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
   text-align: center;
@@ -503,7 +514,8 @@ form div {
   max-width: 900px;
   margin: 20px auto;
   padding: 20px;
-  background-color: #fff;
+  background-color: #d3d9d4;
+  border: 2px solid #2e3944;
   border-radius: 8px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
   text-align: center;
@@ -574,7 +586,8 @@ form div {
   max-width: 900px;
   margin: 20px auto;
   padding: 20px;
-  background-color: #fff;
+  background-color: #d3d9d4;
+  border: 2px solid #2e3944;
   border-radius: 8px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
   text-align: center;
@@ -685,10 +698,15 @@ tbody td {
 
 .archive-page-container {
   /* max-width: 900px;  */
+  margin: 0 auto; /* Center horizontally */
+  display: flex;
+  flex-direction: column; /* Stack items vertically */
+  justify-content: center; /* Center vertically */
   width: 70%;
-  margin: 20px auto; /* Center horizontally and add vertical spacing */
+  /* margin: 20px auto;  */
   padding: 20px; /* Inner padding for content */
-  background-color: #fff; /* White background color for contrast */
+  background-color: #d3d9d4;
+  border: 2px solid #2e3944;
   border-radius: 8px; /* Rounded corners for modern look */
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05); /* Subtle shadow for depth */
   text-align: center; /* Center text alignment */
@@ -698,17 +716,22 @@ tbody td {
 
 
 .archive-grid-container {
+  background-color: white;
+  border: 2px solid #2e3944;
+  border-radius: 4px;
   display: grid;
-  grid-template-columns: 15% 15% 15% 15% 15% 15% 15%; /* Adjust widths of columns */
+  grid-template-columns: repeat(7, 1fr); /* 7 equal columns */
   gap: 5px; /* Space between columns */
-  max-width: 100%;
-  margin: 0 auto; /* Center the grid */
-  width: 80%; /* Full width for the grid */
+  width: 80%; /* Set grid width */
+  margin: 0 auto; /* Center the grid horizontally */
+  padding: 10px; /* Add padding inside the grid */
 }
 
 .archive-grid-header {
   font-weight: bold;
   padding: 10px;
+  max-width: 100%;
+  width: 80%;
   background-color: #f0f0f0;
   text-align: center; /* Center the text in header cells */
   display: flex;
@@ -1138,53 +1161,11 @@ tbody td {
   font-size: 3rem;
   margin-bottom: 20px;
 }
-/*
-.questionstable-custom {
-  width: 100%;
-  table-layout: fixed;
-}
 
-.questionstable-custom th,
-.questionstable-custom td {
-  padding: 8px;
-  text-align: left;
-}
-
-.questionstable-custom th {
-  width: 20%;
-}
-
-.questionstable-custom .column-question {
-  width: 20%;
-}
-
-.questionstable-custom .column-option {
-  width: 10%;
-}
-
-.questionstable-custom .column-image {
-  width: 10%;
-}
-
-.questionstable-custom .column-date {
-  width: 15%;
-}
-
-.questionstable-custom .column-status {
-  width: 10%;
-}
-
-.questionstable-custom .column-action {
-  width: 15%;
-}
-
-.questionstable-custom img {
-  width: 50px;
-  height: 50px;
-  object-fit: cover;
-} */
 
 .questionstable-custom {
+  background-color: white;
+  border: 2px solid #2e3944;
   width: 100%;
   max-width: 1200px; /* Set a max width for the entire table */
   margin: 0 auto; /* Center the table on the page */
@@ -1296,8 +1277,9 @@ tbody td {
 }
 
 .content-container {
-  background-color: #2e2e2e;
-  /* color: white;  */
+  /* background-color: lightblue; */
+  /* background-color:  #748D92; */
+  /* color: #66fcf1; */
   min-height: 100vh; /* Ensure it takes up the full viewport height */
   padding: 20px; /* Add some padding to the content */
 }
