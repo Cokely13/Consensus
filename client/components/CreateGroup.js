@@ -148,7 +148,7 @@ function CreateGroup() {
         </div>
         <div >
           <label style={{textAlign: "center"}}>Group Image:</label>
-          <input type="file" onChange={handleFileChange} />
+          <input type="file" className="form-input-file" onChange={handleFileChange} />
         </div>
         {previewUrl && (
           <div className="preview-container">

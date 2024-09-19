@@ -146,7 +146,7 @@ function EditGroup() {
         </div>
         <div>
           <label>Group Image:</label>
-          <input type="file" onChange={handleFileChange} />
+          <input className="form-input" type="file" onChange={handleFileChange} />
           {previewImage && <img src={previewImage} alt="Group" className="question-image-thumbnail" />}
         </div>
         <button type="submit">Update Group</button>

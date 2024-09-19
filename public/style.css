@@ -771,14 +771,6 @@ tbody td {
 }
 
 
-/* Grid container for archive page */
-/* .archive-grid-container {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  gap: 10px;
-  margin-top: 20px;
-  align-items: center;
-}
 
 
 .archive-grid-header {
@@ -833,7 +825,8 @@ tbody td {
   max-width: 800px;
   margin: 40px auto;
   padding: 20px;
-  background-color: #fff;
+  background-color: #d3d9d4;
+  border: 2px solid #2e3944;
   border-radius: 8px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
   text-align: center;
@@ -872,7 +865,8 @@ tbody td {
   max-width: 900px;
   margin: 40px auto;
   padding: 20px;
-  background-color: #fff;
+  background-color: #d3d9d4;
+  border: 2px solid #2e3944;
   border-radius: 8px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
   text-align: center;
@@ -989,24 +983,34 @@ tbody td {
   border: 3px solid black;
 }
 
+
 .review-grid-container {
   display: grid;
-  grid-template-columns: repeat(8, 1fr);
+  grid-template-columns: repeat(8, 1fr); /* 8 equal columns */
   gap: 10px;
   padding: 10px;
+  background-color: white;
+  border: 2px solid #2e3944;
+  border-radius: 4px;
 }
 
 .review-grid-header {
   font-weight: bold;
   padding: 8px;
   border-bottom: 2px solid #ddd;
+  text-align: center; /* Center text horizontally */
+  display: flex;
+  justify-content: center; /* Center content horizontally */
+  align-items: center; /* Center content vertically */
 }
 
 .review-grid-row {
   padding: 8px;
   border-bottom: 1px solid #ddd;
   display: flex;
-  align-items: center;
+  justify-content: center; /* Center content horizontally */
+  align-items: center; /* Center content vertically */
+  text-align: center; /* Center text horizontally */
 }
 
 .review-image-thumbnail {
@@ -1014,7 +1018,10 @@ tbody td {
   height: auto;
   border: 1px solid #ddd;
   border-radius: 4px;
+  display: block;
+  margin: 0 auto; /* Center image horizontally */
 }
+
 
 .card-image-container {
   width: 100%; /* Make sure the container takes up the full width */
@@ -1067,22 +1074,6 @@ tbody td {
   border-radius: 10px;
 }
 
-/* .options-container {
-  display: flex;
-  justify-content: space-around;
-  margin-top: 20px;
-}
-
-.option-image {
-  text-align: center;
-}
-
-.option-image img {
-  width: 100px;
-  height: auto;
-  display: block;
-  margin: 0 auto 10px;
-} */
 
 .options-container {
   display: flex;
@@ -1240,7 +1231,9 @@ tbody td {
   max-width: 400px; /* Optional: Set a max width if you want to limit input size */
   padding: 10px;
   font-size: 16px;
-  border: 1px solid #ccc;
+  background-color: white;
+  /* border: 2px solid #2e3944; */
+
   border-radius: 4px;
 }
 
@@ -1284,14 +1277,44 @@ tbody td {
   padding: 20px; /* Add some padding to the content */
 }
 
+
+
 .invitesGrid {
+  background-color: white;
+  border: 2px solid #2e3944;
+  border-radius: 4px;
   display: grid;
-  grid-template-columns: 20% 20% 20% 20% 20%; /* Five equal columns */
-  gap: 10px; /* Add some spacing between cells */
-  max-width: 100%;
-  margin: 0 auto; /* Center the grid */
-  width: 80%; /* Full width for the grid */
+  grid-template-columns: repeat(5, 1fr); /* 7 equal columns */
+  gap: 5px; /* Space between columns */
+  width: 80%; /* Set grid width */
+  margin: 0 auto; /* Center the grid horizontally */
+  padding: 10px; /* Add padding inside the grid */
 }
+
+.myVotesGrid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr); /* 5 equal columns */
+  gap: 10px;
+  padding: 10px;
+  background-color: white;
+  border: 2px solid #2e3944;
+  border-radius: 4px;
+}
+
+.myVotesGrid-header {
+  font-weight: bold;
+  padding: 8px;
+  border-bottom: 2px solid #ddd;
+  text-align: center;
+}
+
+.myVotesGrid-cell {
+  padding: 8px;
+  border-bottom: 1px solid #ddd;
+  text-align: center;
+}
+
+
 
 
 
@@ -1336,7 +1359,8 @@ tbody td {
   max-width: 600px;
   margin: 20px auto; /* Center the container and add vertical margin */
   padding: 20px;
-  background-color: #fff;
+  background-color: #d3d9d4;
+  border: 2px solid #2e3944;
   border-radius: 8px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
 }

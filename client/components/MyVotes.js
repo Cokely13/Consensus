@@ -136,37 +136,64 @@ function MyVotes() {
     }
   };
 
+  // return (
+  //   <div className="my-votes-container">
+  //     <h2>My Votes</h2>
+  //     {filteredQuestions.length > 0 ? (
+  //       <table className="myVotesGrid" >
+  //         <thead>
+  //           <tr>
+  //             <th>Question</th>
+  //             <th>Option A</th>
+  //             <th>Option B</th>
+  //             <th>Date Asked</th>
+  //             <th>Your Vote</th>
+  //           </tr>
+  //         </thead>
+  //         <tbody>
+  //           {filteredQuestions.map((question) => (
+  //             <tr key={question.id}>
+  //               <td>{question.text}</td>
+  //               <td>{question.optionA}</td>
+  //               <td>{question.optionB}</td>
+  //               <td>{new Date(question.dateAsked).toLocaleDateString()}</td>
+  //               <td>{getUserVote(question)}</td>
+  //             </tr>
+  //           ))}
+  //         </tbody>
+  //       </table>
+  //     ) : (
+  //       <p className="loading">Loading or No Votes Found...</p>
+  //     )}
+  //   </div>
+  // );
   return (
     <div className="my-votes-container">
       <h2>My Votes</h2>
       {filteredQuestions.length > 0 ? (
-        <table>
-          <thead>
-            <tr>
-              <th>Question</th>
-              <th>Option A</th>
-              <th>Option B</th>
-              <th>Date Asked</th>
-              <th>Your Vote</th>
-            </tr>
-          </thead>
-          <tbody>
-            {filteredQuestions.map((question) => (
-              <tr key={question.id}>
-                <td>{question.text}</td>
-                <td>{question.optionA}</td>
-                <td>{question.optionB}</td>
-                <td>{new Date(question.dateAsked).toLocaleDateString()}</td>
-                <td>{getUserVote(question)}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+        <div className="myVotesGrid">
+          <div className="myVotesGrid-header">Question</div>
+          <div className="myVotesGrid-header">Option A</div>
+          <div className="myVotesGrid-header">Option B</div>
+          <div className="myVotesGrid-header">Date Asked</div>
+          <div className="myVotesGrid-header">Your Vote</div>
+
+          {filteredQuestions.map((question) => (
+            <React.Fragment key={question.id}>
+              <div className="myVotesGrid-cell">{question.text}</div>
+              <div className="myVotesGrid-cell">{question.optionA}</div>
+              <div className="myVotesGrid-cell">{question.optionB}</div>
+              <div className="myVotesGrid-cell">{new Date(question.dateAsked).toLocaleDateString()}</div>
+              <div className="myVotesGrid-cell">{getUserVote(question)}</div>
+            </React.Fragment>
+          ))}
+        </div>
       ) : (
         <p className="loading">Loading or No Votes Found...</p>
       )}
     </div>
   );
+
 }
 
 export default MyVotes;
