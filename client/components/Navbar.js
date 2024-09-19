@@ -11,18 +11,18 @@ const Navbar = ({ handleClick, isLoggedIn, isAdmin }) => (
           {/* The navbar will show these links after you log in */}
           <Link to="/home">Home</Link>
           <Link to="/profile">Profile</Link>
-          <Link to="/questions">Questions</Link>
           <Link to="/users">Users</Link>
           <Link to="/myvotes">MyVotes</Link>
           <Link to="/create">CreateQuestion</Link>
           <Link to="/group">CreateGroup</Link>
           <Link to="/groups">Groups</Link>
           <Link to="/mygroups">MyGroups</Link>
+          <Link to="/archive">Archive</Link>
           <Link to="/invites">Invites</Link>
           {/* Only show Archive and Review links for admin users */}
           {isAdmin && (
             <>
-              <Link to="/archive">Archive</Link>
+              <Link to="/questions">Questions</Link>
               <Link to="/review">Review</Link>
             </>
           )}

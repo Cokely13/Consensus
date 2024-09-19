@@ -44,9 +44,11 @@ function Archive() {
     dispatch(fetchQuestions());
   };
 
-  if (!user || !user.admin) {
-    return <p>You Are not an Admin!</p>;
-  }
+
+
+  const filteredQuestions = questions.filter((question) => {
+    return new Date(question.dateAsked) < new Date();
+  });
 
   return (
     <div className="archive-page-container">
@@ -62,7 +64,7 @@ function Archive() {
         <div className="archive-grid-header">Action</div>
 
         {/* Data Rows */}
-        {questions.map((question) => {
+        {filteredQuestions.map((question) => {
           const optionAVotes = calculateVotes(question.user_responses, 'option_a');
           const optionBVotes = calculateVotes(question.user_responses, 'option_b');
 
@@ -80,7 +82,7 @@ function Archive() {
               <div className="archive-grid-cell">{optionBVotes}</div>
               <div className="archive-grid-cell">{new Date(question.dateAsked).toLocaleDateString()}</div>
               <div className="archive-grid-cell">
-                {isExpired ? (
+                {user.admin ? isExpired ? (
                   <button
                     className="reopen-button"
                     onClick={() => handleReopenQuestion(question)}
@@ -94,7 +96,7 @@ function Archive() {
                   >
                     Create Consensus
                   </button>
-                )}
+                ) : <div></div>}
               </div>
             </React.Fragment>
           );
