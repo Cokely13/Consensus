@@ -70,7 +70,7 @@ function EditQuestion() {
 
   return (
     <div className="edit-question-container">
-      <h2>Edit Question</h2>
+      <h2 className="form-heading">Edit Question</h2>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
           <label className="form-label">Question Text:</label>

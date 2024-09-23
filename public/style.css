@@ -317,6 +317,9 @@ form div {
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
   text-align: center;
   align-items: center;
+}
+
+.form-heading {
   text-decoration: underline;
 }
 
@@ -1454,7 +1457,7 @@ tbody td {
   border: 2px solid #2e3944;
   border-radius: 8px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
-  text-decoration: underline;
+  /* text-decoration: underline; */
 }
 
 .edit-question-container h2 {

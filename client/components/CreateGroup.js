@@ -66,7 +66,7 @@ function CreateGroup() {
 
   return (
     <div className="form-container">
-      <h2>Create a New Group</h2>
+      <h2 className="form-heading">Create a New Group</h2>
       <form onSubmit={handleSubmit}>
         {error && <p className="error">{error}</p>}
         <div>

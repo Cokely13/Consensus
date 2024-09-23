@@ -52,7 +52,7 @@ function EditGroup() {
 
   return (
     <div className="edit-question-container">
-      <h2>Edit Group</h2>
+      <h2 className="form-heading">Edit Group</h2>
       <form onSubmit={handleSubmit}>
         <div>
           <label>Group Name:</label>
