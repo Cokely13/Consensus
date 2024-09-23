@@ -998,12 +998,15 @@ tbody td {
 
 .review-grid-container {
   display: grid;
-  grid-template-columns: repeat(8, 1fr); /* 8 equal columns */
+  grid-template-columns: repeat(7, 1fr); /* 8 equal columns */
   gap: 10px;
   padding: 10px;
   background-color: white;
   border: 2px solid #2e3944;
   border-radius: 4px;
+  /* width: 80%;  */
+  /* max-width: 3000px; */
+  margin: 0 auto; /* Center the grid horizontally */
 }
 
 .review-grid-header {
@@ -1026,9 +1029,9 @@ tbody td {
 }
 
 .review-image-thumbnail {
-  max-width: 50px;
+  max-width: 150px;
   height: auto;
-  border: 1px solid #ddd;
+  border: 4px solid #2e3944;
   border-radius: 4px;
   display: block;
   margin: 0 auto; /* Center image horizontally */
@@ -1284,6 +1287,18 @@ tbody td {
   width: 50px;
   height: 50px;
   object-fit: cover;
+}
+
+.action-container select {
+  margin-bottom: 30px; /* Add space between the select and button */
+  width: 100%; /* Make them take full width of the container */
+}
+
+.action-container button {
+  background-color: #4CAF50; /* Set a background color */
+  color: white; /* Set the text color */
+  border: none; /* Remove the border */
+  border-radius: 4px; /* Add slight rounding */
 }
 
 .edit-button {

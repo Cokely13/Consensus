@@ -74,7 +74,7 @@ function QuestionReview() {
         <div className="review-grid-header">Option B</div>
         <div className="review-grid-header">Image B</div>
         <div className="review-grid-header">Created By</div>
-        <div className="review-grid-header">Status</div>
+        {/* <div className="review-grid-header">Status</div> */}
         <div className="review-grid-header">Action</div>
         {waitingQuestions.map((question) => (
           <React.Fragment key={question.id}>
@@ -100,18 +100,19 @@ function QuestionReview() {
               )}
             </div>
             <div className="review-grid-row">{question.createdBy}</div>
-            <div className="review-grid-row">{question.status}</div>
             <div className="review-grid-row">
-              <select
-                value={selectedStatus[question.id] || ''}
-                onChange={(e) => handleStatusChange(question.id, e.target.value)}
-              >
-                <option value="">Select</option>
-                <option value="accepted">Accept</option>
-                <option value="rejected">Reject</option>
-              </select>
-              <button onClick={() => handleSubmit(question)}>Submit</button>
-            </div>
+  <div className="action-container">
+    <select
+      value={selectedStatus[question.id] || ''}
+      onChange={(e) => handleStatusChange(question.id, e.target.value)}
+    >
+      <option value="">Select</option>
+      <option value="accepted">Accept</option>
+      <option value="rejected">Reject</option>
+    </select>
+    <button onClick={() => handleSubmit(question)}>Submit</button>
+  </div>
+</div>
           </React.Fragment>
         ))}
       </div>
