@@ -65,7 +65,7 @@ function Invites() {
 </div>
               <div className="invitesGrid-cell">{invite.inviter.username}</div>
               <div className="invitesGrid-cell">{invite.status}</div>
-              <div className="button-group">
+              <div className="invitesGrid-cell" >
                 <button className="accept-button" onClick={() => handleInviteStatusChange(invite, 'accepted')}>
                   Accept
                 </button>
