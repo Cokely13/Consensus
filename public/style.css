@@ -2847,3 +2847,78 @@ body {
     min-height: auto;
   }
 }
+
+/* Questions Page Styles */
+
+.questions-page-container {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.questions-page-heading {
+  text-align: center;
+  font-size: 2.5em;
+  margin-bottom: 30px;
+  color: #333;
+}
+
+/* Adjust the number of columns based on whether the user is admin */
+.questions-grid {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  gap: 15px;
+  align-items: stretch;
+}
+
+.questions-grid-header {
+  font-weight: bold;
+  background-color: #1976d2;
+  color: #fff;
+  padding: 10px;
+  text-align: center;
+  border-radius: 5px;
+}
+
+.questions-grid-cell {
+  background-color: #f9f9f9;
+  border: 5px solid lightgray;
+  padding: 10px;
+  border-radius: 5px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100px;
+}
+
+.questions-image {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.questions-edit-button {
+  background-color: yellowgreen;
+  color: #fff;
+  padding: 8px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.questions-edit-button:hover {
+  background-color: #1565c0;
+}
+
+@media (max-width: 800px) {
+  .questions-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .questions-grid-header,
+  .questions-grid-cell {
+    text-align: left;
+    min-height: auto;
+  }
+}
