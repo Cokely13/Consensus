@@ -236,10 +236,10 @@ function GroupDetailPage() {
             <div className="invite-actions-container">
               <h3 className="invite-actions-title">Pending Invite:</h3>
               <p>You have a pending invite to this group.</p>
-              <button onClick={() => handleAcceptInvite(pendingInvite)} className="invite-button">
+              <button onClick={() => handleAcceptInvite(pendingInvite)} className="accept-button" style={{marginRight:"10px"}}>
                 Accept
               </button>
-              <button onClick={() => handleRejectInvite(pendingInvite)} className="invite-button">
+              <button onClick={() => handleRejectInvite(pendingInvite)} className="decline-button">
                 Reject
               </button>
             </div>

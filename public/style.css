@@ -1470,7 +1470,7 @@ tbody td {
 }
 
 .accept-button:hover {
-  background-color: #218838; /* Darker green */
+  background-color: darkblue; /* Darker green */
 }
 
 /* Styles for Decline Button */
@@ -1486,6 +1486,8 @@ tbody td {
 .decline-button:hover {
   background-color: #c82333; /* Darker red */
 }
+
+
 
 .invitesGrid .no-invites {
   grid-column: span 5;
