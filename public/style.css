@@ -2288,10 +2288,7 @@ body {
   text-decoration: none;
 }
 
-/* .groups-page-card-link {
-  text-decoration: none;
-  color: inherit;
-} */
+
 
 .groups-page-card-link * {
   text-decoration: none;
@@ -2367,5 +2364,409 @@ body {
 
   .groups-page-card {
     margin: 0 auto;
+  }
+}
+
+/* My Groups Page Styles */
+
+.my-groups-page-container {
+  padding: 20px;
+}
+
+.my-groups-page-heading {
+  text-align: center;
+  font-size: 2.5em;
+  margin-bottom: 40px;
+  color: #333;
+}
+
+.my-groups-card-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 30px;
+  justify-content: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.my-groups-card {
+  background-color: #fff;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s;
+  width: 220px;
+  text-align: center;
+  position: relative;
+}
+
+.my-groups-card:hover {
+  transform: translateY(-5px);
+}
+
+.my-groups-card-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+.my-groups-card-image-container {
+  width: 100%;
+  padding-top: 100%; /* 1:1 Aspect Ratio */
+  position: relative;
+  background-color: #e0e0e0;
+}
+
+.my-groups-card-image,
+.my-groups-card-placeholder {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.my-groups-card-image {
+  object-fit: cover;
+}
+
+.my-groups-card-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.my-groups-card-placeholder i {
+  font-size: 80px;
+  color: #9e9e9e;
+}
+
+.my-groups-card-heading {
+  font-size: 1.5em;
+  padding: 15px 10px 5px;
+  color: #333;
+}
+
+.my-groups-card-members {
+  font-size: 1em;
+  color: #555;
+  margin-bottom: 15px;
+}
+
+@media (max-width: 600px) {
+  .my-groups-card-container {
+    grid-template-columns: 1fr;
+  }
+
+  .my-groups-card {
+    margin: 0 auto;
+  }
+}
+
+/* Group Detail Page Styles */
+
+/* Container */
+.group-detail-page-container {
+  padding: 20px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+/* Heading */
+.group-detail-heading {
+  text-align: center;
+  font-size: 2.5em;
+  margin-bottom: 30px;
+  color: #333;
+}
+
+/* Image Container */
+.group-detail-image-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.group-detail-image {
+  width: 100%;
+  max-width: 300px;
+  border-radius: 15px;
+  object-fit: cover;
+  border: 3px solid #1976d2;
+}
+
+/* Leader Information */
+.group-detail-leader {
+  text-align: center;
+  font-size: 1.2em;
+  margin-bottom: 20px;
+}
+
+.group-detail-leader a {
+  color: #1976d2;
+  text-decoration: none;
+}
+
+.group-detail-leader a:hover {
+  text-decoration: underline;
+}
+
+/* Edit Group Button */
+.group-detail-edit-button-container {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.group-detail-edit-button {
+  background-color: #1976d2;
+  color: #fff;
+  padding: 12px 25px;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  font-size: 1em;
+  transition: background-color 0.3s;
+}
+
+.group-detail-edit-button:hover {
+  background-color: #1565c0;
+}
+
+/* Members Section */
+.group-detail-members-title {
+  font-size: 1.5em;
+  margin-bottom: 10px;
+  cursor: pointer;
+  color: #333;
+}
+
+.group-detail-toggle-members-link {
+  color: #1976d2;
+  text-decoration: underline;
+}
+
+.group-detail-members-list {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 20px;
+}
+
+.group-detail-members-list li {
+  margin-bottom: 10px;
+}
+
+.group-detail-member-name {
+  font-size: 1.2em;
+  color: #1976d2;
+  text-decoration: none;
+}
+
+.group-detail-member-name:hover {
+  text-decoration: underline;
+}
+
+/* Invite Section */
+.group-detail-invite-title {
+  font-size: 1.5em;
+  margin-bottom: 10px;
+}
+
+.group-detail-invite-select {
+  width: 100%;
+  max-width: 300px;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.group-detail-invite-button {
+  background-color: #388e3c;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.group-detail-invite-button:hover {
+  background-color: #2e7d32;
+}
+
+/* Pending Invites */
+.group-detail-pending-invites-container {
+  margin-top: 20px;
+}
+
+.group-detail-pending-invites-title {
+  font-size: 1.2em;
+  margin-bottom: 10px;
+}
+
+.group-detail-pending-invites-list {
+  list-style: none;
+  padding: 0;
+}
+
+.group-detail-pending-invites-list li {
+  margin-bottom: 5px;
+}
+
+/* Invite Actions */
+.group-detail-invite-actions-container {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.group-detail-invite-actions-title {
+  font-size: 1.5em;
+  margin-bottom: 10px;
+}
+
+.group-detail-accept-button,
+.group-detail-decline-button {
+  background-color: #1976d2;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.group-detail-accept-button {
+  background-color: #388e3c;
+}
+
+.group-detail-decline-button {
+  background-color: #d32f2f;
+}
+
+.group-detail-accept-button:hover {
+  background-color: #2e7d32;
+}
+
+.group-detail-decline-button:hover {
+  background-color: #c62828;
+}
+
+/* Question of the Day */
+.group-detail-question-title {
+  font-size: 1.5em;
+  margin-bottom: 10px;
+}
+
+.group-detail-question-date-select {
+  width: 100%;
+  max-width: 300px;
+  padding: 10px;
+  margin-bottom: 20px;
+}
+
+/* Consensus Data */
+.group-detail-consensus-data-container {
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+.group-detail-piechart-container {
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+/* Message Board */
+.group-detail-message-board-toggle-container {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.group-detail-message-board-toggle-button {
+  background-color: #1976d2;
+  color: #fff;
+  padding: 12px 25px;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  font-size: 1em;
+}
+
+.group-detail-message-board-toggle-button:hover {
+  background-color: #1565c0;
+}
+
+.group-detail-message-board-container {
+  background-color: #f0f0f0;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.group-detail-message-board-title {
+  font-size: 1.5em;
+  margin-bottom: 20px;
+}
+
+.group-detail-message-item {
+  background-color: #fff;
+  padding: 15px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  position: relative;
+}
+
+.group-detail-message-delete-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: #d32f2f;
+  color: #fff;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.group-detail-message-delete-button:hover {
+  background-color: #c62828;
+}
+
+.group-detail-message-textarea {
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  resize: vertical;
+}
+
+.group-detail-message-post-button {
+  background-color: #388e3c;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.group-detail-message-post-button:hover {
+  background-color: #2e7d32;
+}
+
+/* Loading Message */
+.group-detail-loading-message {
+  text-align: center;
+  font-size: 1.2em;
+  color: #555;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+  .group-detail-image {
+    max-width: 100%;
+  }
+
+  .group-detail-members-list li {
+    font-size: 1em;
+  }
+
+  .group-detail-message-board-container {
+    padding: 15px;
   }
 }

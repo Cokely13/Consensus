@@ -150,55 +150,55 @@ function GroupDetailPage() {
         <>
           <h2 className="group-detail-heading">{selectedGroup.name}'s Group</h2>
           {selectedGroup.image && (
-            <div className="group-image-container">
+            <div className="group-detail-image-container">
               <img
                 src={selectedGroup.image}
                 alt={`${selectedGroup.name} Group`}
-                className="group-image"
+                className="group-detail-image"
               />
             </div>
           )}
           {leader && (
-            <h3>
-              Leader: <Link to={`/users/${leader.id}`}> {leader.username}</Link>
+            <h3 className="group-detail-leader">
+              Leader: <Link to={`/users/${leader.id}`}>{leader.username}</Link>
             </h3>
           )}
-       {currentUserId === selectedGroup.leaderId && (
-  <div className="edit-groupbutton-container">
-    <Link to={`/edit-group/${selectedGroup.id}`}>
-      <button className="edit-groupbutton">Edit Group</button>
-    </Link>
-  </div>
-)}
+          {currentUserId === selectedGroup.leaderId && (
+            <div className="group-detail-edit-button-container">
+              <Link to={`/edit-group/${selectedGroup.id}`}>
+                <button className="group-detail-edit-button">Edit Group</button>
+              </Link>
+            </div>
+          )}
           <h3 className="group-detail-members-title">
             Group Members:{' '}
-            <span onClick={handleToggleMembers} className="toggle-members-link">
+            <span onClick={handleToggleMembers} className="group-detail-toggle-members-link">
               {selectedGroup.group_members.length}
             </span>
           </h3>
           {showMembers && (
-            <ul className="group-members-list">
+            <ul className="group-detail-members-list">
               {selectedGroup.group_members.map((member) => (
-                <ul key={`${member.userId}-${member.groupId}`}>
+                <li key={`${member.userId}-${member.groupId}`}>
                   {member.user ? (
                     <Link to={`/users/${member.userId}`}>
-                      <h2 className="group-member-name">{member.user.username}</h2>
+                      <h2 className="group-detail-member-name">{member.user.username}</h2>
                     </Link>
                   ) : (
                     member.userId
                   )}
-                </ul>
+                </li>
               ))}
             </ul>
           )}
 
           {currentUserId === selectedGroup.leaderId && (
             <>
-              <h3 className="group-invite-title">Invite Users to Group:</h3>
+              <h3 className="group-detail-invite-title">Invite Users to Group:</h3>
               <select
                 value={selectedUserId}
                 onChange={(e) => setSelectedUserId(e.target.value)}
-                className="group-invite-select"
+                className="group-detail-invite-select"
               >
                 <option value="">Select a user to invite</option>
                 {users
@@ -208,19 +208,19 @@ function GroupDetailPage() {
                       !pendingInvitesFromLeader.some((invite) => invite.inviteeId === user.id)
                   )
                   .map((user) => (
-                    <option  key={user.id} value={user.id}>
+                    <option key={user.id} value={user.id}>
                       {user.username}
                     </option>
                   ))}
               </select>
-              <button onClick={handleInvite} className="group-invite-button">
+              <button onClick={handleInvite} className="group-detail-invite-button" style={{marginLeft: "10px"}}>
                 Invite
               </button>
 
               {pendingInvitesFromLeader.length > 0 && (
-                <div className="pending-invites-container">
-                  <h3>Pending Invites:</h3>
-                  <ul className="pending-invites-list">
+                <div className="group-detail-pending-invites-container">
+                  <h3 className="group-detail-pending-invites-title">Pending Invites:</h3>
+                  <ul className="group-detail-pending-invites-list">
                     {pendingInvitesFromLeader.map((invite) => (
                       <li key={invite.id}>
                         {invite.invitee ? invite.invitee.username : 'Invite'} - Pending
@@ -233,13 +233,20 @@ function GroupDetailPage() {
           )}
 
           {pendingInvite && (
-            <div className="invite-actions-container">
-              <h3 className="invite-actions-title">Pending Invite:</h3>
+            <div className="group-detail-invite-actions-container">
+              <h3 className="group-detail-invite-actions-title">Pending Invite:</h3>
               <p>You have a pending invite to this group.</p>
-              <button onClick={() => handleAcceptInvite(pendingInvite)} className="accept-button" style={{marginRight:"10px"}}>
+              <button
+                onClick={() => handleAcceptInvite(pendingInvite)}
+                className="group-detail-accept-button"
+                style={{ marginRight: '10px' }}
+              >
                 Accept
               </button>
-              <button onClick={() => handleRejectInvite(pendingInvite)} className="decline-button">
+              <button
+                onClick={() => handleRejectInvite(pendingInvite)}
+                className="group-detail-decline-button"
+              >
                 Reject
               </button>
             </div>
@@ -251,7 +258,7 @@ function GroupDetailPage() {
               <select
                 value={selectedQuestionDate}
                 onChange={handleQuestionDateChange}
-                className="question-date-select"
+                className="group-detail-question-date-select"
               >
                 <option value="">Select a date</option>
                 {questionsWithConsensuses.map((question) => (
@@ -261,13 +268,17 @@ function GroupDetailPage() {
                 ))}
               </select>
               {consensusData && (
-                <div className="consensus-data-container">
+                <div className="group-detail-consensus-data-container">
                   <p>Asked Question: {consensusData.text}</p>
-                  <p>Option A: {consensusData.optionA}: {consensusData.percentageA}%</p>
-                  <p>Option B: {consensusData.optionB}: {consensusData.percentageB}%</p>
+                  <p>
+                    Option A: {consensusData.optionA}: {consensusData.percentageA}%
+                  </p>
+                  <p>
+                    Option B: {consensusData.optionB}: {consensusData.percentageB}%
+                  </p>
                   <p>No Vote: {consensusData.percentageNoVote}%</p>
                   {/* Render PieChart */}
-                  <div style={{ width: '300px', margin: '0 auto' }}>
+                  <div className="group-detail-piechart-container">
                     <PieChart
                       data={{
                         percentageA: parseFloat(consensusData.percentageA),
@@ -281,26 +292,31 @@ function GroupDetailPage() {
                   </div>
                 </div>
               )}
-              <div>
+              <div className="group-detail-message-board-toggle-container">
                 {/* Message Board Toggle Button */}
-                <button onClick={handleToggleMessageBoard} className="message-board-toggle-button">
+                <button
+                  onClick={handleToggleMessageBoard}
+                  className="group-detail-message-board-toggle-button"
+                >
                   {showMessageBoard ? 'Hide Message Board' : 'Show Message Board'}
                 </button>
               </div>
               {/* Conditional Rendering of Message Board */}
               {showMessageBoard && (
-                <div className="message-board-container">
-                  <h3>Message Board</h3>
+                <div className="group-detail-message-board-container">
+                  <h3 className="group-detail-message-board-title">Message Board</h3>
                   {messages.map((message) => (
-                    <div key={message.id} className="message-item">
+                    <div key={message.id} className="group-detail-message-item">
                       <p>
-                        <strong>{message.user ? message.user.username : 'New Post'}:</strong>{' '}
+                        <strong>
+                          {message.user ? message.user.username : 'New Post'}:
+                        </strong>{' '}
                         {message.content}
                       </p>
                       {message.userId === currentUserId && (
                         <button
                           onClick={() => handleDeleteMessage(message.id)}
-                          className="message-delete-button"
+                          className="group-detail-message-delete-button"
                         >
                           Delete
                         </button>
@@ -311,9 +327,9 @@ function GroupDetailPage() {
                     value={newMessage}
                     onChange={(e) => setNewMessage(e.target.value)}
                     placeholder="Type a message"
-                    className="message-textarea"
+                    className="group-detail-message-textarea"
                   />
-                  <button onClick={handlePostMessage} className="message-post-button">
+                  <button onClick={handlePostMessage} className="group-detail-message-post-button">
                     Post Message
                   </button>
                 </div>
@@ -322,7 +338,7 @@ function GroupDetailPage() {
           )}
         </>
       ) : (
-        <p className="loading-message">Loading group data...</p>
+        <p className="group-detail-loading-message">Loading group data...</p>
       )}
     </div>
   );
