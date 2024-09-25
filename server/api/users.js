@@ -46,7 +46,7 @@ router.get('/', async (req, res, next) => {
         },
         {
           model: UserResponse,
-          attributes: ['id', 'response', 'questionId'],
+          attributes: ['id', 'response', 'questionId',],
         },
         {
           model: Invite, // Include invites sent to this user
@@ -132,12 +132,12 @@ router.get('/:id', async (req, res, next) => {
         },
         {
           model: UserResponse,
-          attributes: ['id', 'response', 'questionId'],
+          attributes: ['id', 'response', 'questionId', 'createdAt'],
         },
         {
           model: Invite, // Include invites sent to this user
           as: 'invites',
-          attributes: ['id', 'status', 'groupId', 'inviterId', 'createdAt'],
+          attributes: ['id', 'status', 'groupId', 'inviterId',],
           include: [
             { model: Group, attributes: ['id', 'name'] },
             { model: User, as: 'inviter', attributes: ['id', 'username'] },

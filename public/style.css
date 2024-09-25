@@ -2509,7 +2509,7 @@ body {
 }
 
 .group-detail-edit-button {
-  background-color: #1976d2;
+  background-color: grey;
   color: #fff;
   padding: 12px 25px;
   border: none;
@@ -2520,7 +2520,7 @@ body {
 }
 
 .group-detail-edit-button:hover {
-  background-color: #1565c0;
+  background-color: green;
 }
 
 /* Members Section */
