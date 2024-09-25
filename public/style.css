@@ -132,6 +132,7 @@ a {
 
 label {
   display: block;
+  margin-bottom: 0.5em;
 }
 
 nav a {
@@ -141,7 +142,7 @@ nav a {
 
 form div {
   margin: 1em;
-  display: inline-block;
+  /* display: inline-block; */
 }
 
 .grid-container {
@@ -1288,28 +1289,18 @@ tbody td {
   gap: 20px;
 }
 
-.form-label {
-  text-align: center;
-  margin-bottom: 5px;
-  font-weight: bold;
-  width: 100%; /* Ensure the label spans the full width for proper centering */
-}
 
-.form-group {
-  display: flex;
-  flex-direction: column;
-  align-items: center; /* This will center the label and input horizontally */
-  width: 100%;
-}
+
 
 .form-input, .form-input-file {
   width: 100%; /* Keep the inputs at full width */
   max-width: 400px; /* Optional: Set a max width if you want to limit input size */
   padding: 10px;
   font-size: 16px;
+  border: 1px solid #ccc;
   background-color: white;
   /* border: 2px solid #2e3944; */
-
+  transition: border-color 0.3s ease;
   border-radius: 4px;
 }
 
@@ -1540,6 +1531,7 @@ tbody td {
   flex-direction: column;
   margin-bottom: 20px;
   align-items: center; /* Center labels above inputs */
+  width: 100%;
 }
 
 .form-label {
@@ -1821,9 +1813,9 @@ body {
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
 }
 
-input[type='file'] {
+/* input[type='file'] {
   display: none;
-}
+} */
 
 /* Base Button Styles */
 /* .button2 {
@@ -1867,7 +1859,7 @@ button {
 
 /* Base Button Styles */
 .button-common {
-  display: inline-block;
+  /* display: inline-block; */
   color: #fff;
   padding: 12px 25px;
   border: none;
@@ -1903,9 +1895,9 @@ button {
 }
 
 /* Hide the file input */
-input[type='file'] {
+/* input[type='file'] {
   display: none;
-}
+} */
 
 /* Specific Styles for Choose Photo Button */
 
@@ -1930,9 +1922,9 @@ input[type='file'] {
 }
 
 /* Adjust input field (hidden) */
-input[type='file'] {
+/* input[type='file'] {
   display: none;
-}
+} */
 
 
 .tabs {
@@ -2922,3 +2914,154 @@ body {
     min-height: auto;
   }
 }
+
+/* Question of the Day Styles */
+
+.qotd-container {
+  padding: 20px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.qotd-heading {
+  text-align: center;
+  font-size: 2.5em;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.qotd-date {
+  text-align: center;
+  font-size: 1.2em;
+  margin-bottom: 20px;
+  color: #555;
+}
+
+.qotd-timer {
+  text-align: center;
+  font-size: 1.2em;
+  margin-bottom: 30px;
+  color: #1976d2;
+}
+
+.qotd-options-container {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.qotd-option {
+  width: 45%;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.qotd-option-image {
+  height: 80%;
+  width: 100%;
+  max-width: 300px;
+  border-radius: 15px;
+  object-fit: cover;
+  margin-bottom: 10px;
+}
+
+.qotd-vote-button {
+  background-color: #1976d2;
+  color: #fff;
+  padding: 12px 25px;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  font-size: 1em;
+  transition: background-color 0.3s;
+}
+
+.qotd-vote-button:hover {
+  background-color: #1565c0;
+}
+
+.qotd-already-voted {
+  text-align: center;
+  font-size: 1.2em;
+  color: #555;
+  margin-bottom: 30px;
+}
+
+.qotd-no-question {
+  text-align: center;
+  font-size: 1.2em;
+  color: #555;
+  margin-bottom: 30px;
+}
+
+.qotd-yesterday-section {
+  margin-top: 40px;
+}
+
+.qotd-yesterday-heading {
+  text-align: center;
+  font-size: 2em;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.qotd-pie-chart-container {
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto 30px;
+}
+
+.qotd-pie-chart-title {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 1.5em;
+  color: #333;
+}
+
+.qotd-winner-image-container {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.qotd-winner-image {
+  width: 100%;
+  max-width: 300px;
+  border-radius: 15px;
+  object-fit: cover;
+}
+
+.qotd-yesterday-consensus,
+.qotd-yesterday-result {
+  text-align: center;
+  font-size: 1.2em;
+  color: #555;
+  margin-bottom: 10px;
+}
+
+.qotd-streak-section {
+  margin-top: 30px;
+  text-align: center;
+}
+
+.qotd-streak-section h4 {
+  font-size: 1.5em;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.qotd-streak-section p {
+  font-size: 1.2em;
+  color: #555;
+}
+
+@media (max-width: 800px) {
+  .qotd-options-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .qotd-option {
+    width: 80%;
+  }
+}
+

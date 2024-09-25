@@ -13,14 +13,18 @@ function QuestionOfTheDay() {
   const { id: userId } = useSelector((state) => state.auth);
   const user = useSelector((state) => state.singleUser);
   const [selectedQuestion, setSelectedQuestion] = useState(null);
-  const [yesterdayQuestion, setYesterdayQuestion] = useState(null); // For yesterday's question
+  const [yesterdayQuestion, setYesterdayQuestion] = useState(null);
   const [hasVoted, setHasVoted] = useState(false);
+  const [todaysVote, setTodaysVote] = useState("");
   const [timeLeft, setTimeLeft] = useState('');
   const [yesterdayConsensus, setYesterdayConsensus] = useState('');
-  const [yesterdayQuestionText, setYesterdayQuestionText] = useState('');
   const [yesterdayResult, setYesterdayResult] = useState('');
   const [streak, setStreak] = useState({ correct: 0, incorrect: 0, noVote: 0 });
-  const [careerHigh, setCareerHigh] = useState({ winStreak: 0, lossStreak: 0, noVoteStreak: 0 });
+  const [careerHigh, setCareerHigh] = useState({
+    winStreak: 0,
+    lossStreak: 0,
+    noVoteStreak: 0,
+  });
 
   useEffect(() => {
     dispatch(fetchQuestions());
@@ -34,11 +38,10 @@ function QuestionOfTheDay() {
       const todayQuestion = questions.find((question) => question.dateAsked === today);
 
       if (todayQuestion) {
-        setSelectedQuestion(todayQuestion); // Set today's question
+        setSelectedQuestion(todayQuestion);
         const hasUserVoted = user.user_responses.some(
           (response) => response.questionId === todayQuestion.id
         );
-
         setHasVoted(hasUserVoted);
       } else {
         setSelectedQuestion(null);
@@ -48,22 +51,18 @@ function QuestionOfTheDay() {
       yesterday.setDate(yesterday.getDate() - 1);
       const yesterdayDate = yesterday.toISOString().split('T')[0];
 
-      const yQuestion = questions.find(
-        (question) => question.dateAsked === yesterdayDate
-      );
+      const yQuestion = questions.find((question) => question.dateAsked === yesterdayDate);
 
       if (yQuestion) {
-        setYesterdayQuestion(yQuestion); // Set yesterday's question
-        setYesterdayQuestionText(
-          `Yesterday's question was ${yQuestion.optionA} or ${yQuestion.optionB}.`
-        );
+        setYesterdayQuestion(yQuestion);
 
-        if (yQuestion.consensus.length  > 0 && yQuestion.consensus[0].consensusAnswer) {
+        if (yQuestion.consensus.length > 0 && yQuestion.consensus[0].consensusAnswer) {
           const consensusAnswer = yQuestion.consensus[0].consensusAnswer;
-          const otherOption =
-            consensusAnswer === 'option_a' ? yQuestion.optionB : yQuestion.optionA;
           const consensusOption =
             consensusAnswer === 'option_a' ? yQuestion.optionA : yQuestion.optionB;
+          const otherOption =
+            consensusAnswer === 'option_a' ? yQuestion.optionB : yQuestion.optionA;
+
           setYesterdayConsensus(
             `The consensus yesterday was that ${consensusOption} is better than ${otherOption}.`
           );
@@ -77,11 +76,11 @@ function QuestionOfTheDay() {
               setYesterdayResult('You were right yesterday!');
               calculateStreak(user.user_responses, 'correct');
             } else {
-              setYesterdayResult('You were WRONG yesterday!');
+              setYesterdayResult('You were wrong yesterday.');
               calculateStreak(user.user_responses, 'incorrect');
             }
           } else {
-            setYesterdayResult("You didn't vote yesterday!!");
+            setYesterdayResult("You didn't vote yesterday.");
             calculateStreak(user.user_responses, 'noVote');
           }
         } else {
@@ -89,8 +88,7 @@ function QuestionOfTheDay() {
           setYesterdayResult('');
         }
       } else {
-        setYesterdayQuestionText('No question was asked yesterday.');
-        setYesterdayConsensus('');
+        setYesterdayConsensus('No question was asked yesterday.');
         setYesterdayResult('');
       }
 
@@ -98,7 +96,7 @@ function QuestionOfTheDay() {
     }
   }, [questions, user]);
 
-    const calculateStreak = (userResponses, streakType) => {
+  const calculateStreak = (userResponses, streakType) => {
     let currentStreak = 0;
 
     const sortedResponses = userResponses.sort(
@@ -129,11 +127,10 @@ function QuestionOfTheDay() {
       }
     }
 
-    setStreak({
-      correct: streakType === 'correct' ? currentStreak : streak.correct,
-      incorrect: streakType === 'incorrect' ? currentStreak : streak.incorrect,
-      noVote: streakType === 'noVote' ? currentStreak : streak.noVote,
-    });
+    setStreak((prevStreak) => ({
+      ...prevStreak,
+      [streakType]: currentStreak,
+    }));
   };
 
   const calculateCareerHigh = (userResponses) => {
@@ -220,6 +217,7 @@ function QuestionOfTheDay() {
   }, []);
 
   const handleVote = (option) => {
+    setTodaysVote(option === 'optionA' ? 'option_a' : 'option_b')
     const responseOption = option === 'optionA' ? 'option_a' : 'option_b';
     const userResponse = {
       userId,
@@ -261,44 +259,72 @@ function QuestionOfTheDay() {
 
   const chartData = calculateChartData();
 
+  console.log('todays', todaysVote)
+
   return (
-    <div className="question-of-the-day-container">
+    <div className="qotd-container">
       {selectedQuestion ? (
-        <div>
-          <h2>Question of the Day {new Date().toLocaleDateString()}</h2>
-          {/* <div>{selectedQuestion.text}</div> */}
-          <h3>
-        {hasVoted ? 'Time Until the Next Question:' : 'Time Left to Answer the Question:'} {timeLeft}
-      </h3>
+        <div className="qotd-question-section">
+          <h2 className="qotd-heading">Question of the Day</h2>
+          <p className="qotd-date">{new Date().toLocaleDateString()}</p>
+          <h3 className="qotd-timer">
+            {hasVoted
+              ? 'Time Until the Next Question:'
+              : 'Time Left to Answer the Question:'}{' '}
+            {timeLeft}
+          </h3>
           {!hasVoted ? (
-            <div className="options-container">
-              <div className="option-image">
+            <div className="qotd-options-container">
+              <div className="qotd-option">
                 <img
                   src={selectedQuestion.imageA}
                   alt={selectedQuestion.optionA}
-                  className="option-image"
+                  className="qotd-option-image"
                 />
-                <button onClick={() => handleVote('optionA')}>{selectedQuestion.optionA}</button>
+                <button
+                  onClick={() => handleVote('optionA')}
+                  className="qotd-vote-button"
+                >
+                  {selectedQuestion.optionA}
+                </button>
               </div>
-              <div className="option-image">
+              <div className="qotd-option">
                 <img
                   src={selectedQuestion.imageB}
                   alt={selectedQuestion.optionB}
-                  className="option-image"
+                  className="qotd-option-image"
                 />
-                <button onClick={() => handleVote('optionB')}>{selectedQuestion.optionB}</button>
+                <button
+                  onClick={() => handleVote('optionB')}
+                  className="qotd-vote-button"
+                >
+                  {selectedQuestion.optionB}
+                </button>
               </div>
             </div>
-          ) : (
-            <div>You have already voted</div>
+          ) : (<div className="qotd-already-voted">
+             Your Vote:
+            <div className="qotd-already-voted"> {todaysVote === 'option_a' ? <img
+              src={selectedQuestion.imageA}
+              alt={selectedQuestion.optionA}
+              className="qotd-option-image"
+            />: <img
+              src={selectedQuestion.imageB}
+              alt={selectedQuestion.optionB}
+              className="qotd-option-image"
+            />}</div>
+            </div>
           )}
         </div>
       ) : (
-        <div>{questions.length > 0 ? 'No question for today.' : 'Loading questions...'}</div>
+        <div className="qotd-no-question">
+          {questions.length > 0 ? 'No question for today.' : 'Loading questions...'}
+        </div>
       )}
       {yesterdayQuestion && (
-        <>
-          <div className="pie-chart-container">
+        <div className="qotd-yesterday-section">
+          <h3 className="qotd-yesterday-heading">Yesterday's Question Results</h3>
+          <div className="qotd-pie-chart-container">
             <PieChart
               data={chartData}
               questionText={`Yesterday's Question: ${yesterdayQuestion.optionA} or ${yesterdayQuestion.optionB}`}
@@ -306,31 +332,33 @@ function QuestionOfTheDay() {
               optionBLabel={yesterdayQuestion.optionB}
             />
           </div>
-          <div className="winner-image-container">
+          <div className="qotd-winner-image-container">
             <h4>Yesterday's Winner:</h4>
-            {yesterdayQuestion.consensus.length > 0 && yesterdayQuestion.consensus[0].consensusAnswer ? (
+            {yesterdayQuestion.consensus.length > 0 &&
+            yesterdayQuestion.consensus[0].consensusAnswer ? (
               <img
-                src={yesterdayQuestion.consensus[0].consensusAnswer === 'option_a' ? yesterdayQuestion.imageA : yesterdayQuestion.imageB}
+                src={
+                  yesterdayQuestion.consensus[0].consensusAnswer === 'option_a'
+                    ? yesterdayQuestion.imageA
+                    : yesterdayQuestion.imageB
+                }
                 alt="Yesterday's Winner"
-                className="winner-image"
+                className="qotd-winner-image"
               />
             ) : (
               <p>No consensus winner yesterday.</p>
             )}
           </div>
-        </>
+          <p className="qotd-yesterday-consensus">{yesterdayConsensus}</p>
+          <p className="qotd-yesterday-result">{yesterdayResult}</p>
+        </div>
       )}
-      {/* <div>{yesterdayQuestionText}</div> */}
-      <div>{yesterdayConsensus}</div>
-      <div>{yesterdayResult}</div>
-      <h4>Current Streak:</h4>
-      {streak.correct > 0 && <p>Correct Streak: {streak.correct} days</p>}
-      {streak.incorrect > 0 && <p>Incorrect Streak: {streak.incorrect} days</p>}
-      {streak.noVote > 0 && <p>No Vote Streak: {streak.noVote} days</p>}
-      {/* <h4>Career High Streaks:</h4>
-      <p>Longest Win Streak: {careerHigh.winStreak} days</p>
-      <p>Longest Loss Streak: {careerHigh.lossStreak} days</p>
-      <p>Longest No Vote Streak: {careerHigh.noVoteStreak} days</p> */}
+      <div className="qotd-streak-section">
+        <h4>Current Streak:</h4>
+        {streak.correct > 0 && <p>Correct Streak: {streak.correct} days</p>}
+        {streak.incorrect > 0 && <p>Incorrect Streak: {streak.incorrect} days</p>}
+        {streak.noVote > 0 && <p>No Vote Streak: {streak.noVote} days</p>}
+      </div>
     </div>
   );
 }
