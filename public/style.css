@@ -1267,6 +1267,7 @@ tbody td {
   color: white; /* Set the text color */
   border: none; /* Remove the border */
   border-radius: 4px; /* Add slight rounding */
+  padding: 4px;
 }
 
 .edit-button {
@@ -3065,3 +3066,9 @@ body {
   }
 }
 
+.activity-image{
+  max-width: 200px;
+  height: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
