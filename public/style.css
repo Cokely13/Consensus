@@ -67,63 +67,193 @@ a:hover {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* Navbar Container */
 .navbar {
-  /* background-color: #fff;  */
   background-color: #124e66;
   color: white;
-  border-bottom: 1px solid #2E3944; /* Subtle border to separate from content */
-  padding: 10px 20px;
+  border-bottom: 1px solid #2E3944;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  z-index: 999;
+}
+
+.navbar-container {
   display: flex;
-  align-items: center;
   justify-content: space-between;
-  width: 110vw;
-  text-align: center;
+  align-items: center;
+  height: 60px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
 }
 
-
-
-/* Logo or Title */
-.navbar h1 {
+/* Logo or Brand Name */
+.navbar-logo {
+  color: #d3d9d4;
   font-size: 1.8rem;
-  margin: 0;
-  color: #d3d9d4; /* Dark text color for contrast */
   font-weight: 700;
-  text-transform: uppercase;
-  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
 }
 
-/* Navbar Links Container */
-.navbar-links {
+/* Hamburger Menu Icon */
+.menu-icon {
+  display: none;
+  font-size: 1.8rem;
+  cursor: pointer;
+  color: #d3d9d4;
+}
+
+/* Navigation Menu */
+.nav-menu {
   display: flex;
-  gap: 20px; /* Spacing between links */
   align-items: center;
 }
 
-/* Navbar Links */
-.navbar-links a {
+.nav-menu.active {
+  display: block;
+  position: fixed;
+  top: 60px;
+  left: 0;
+  background-color: #124e66;
+  width: 100%;
+  height: calc(100vh - 60px);
+  overflow-y: auto;
+  text-align: center;
+  z-index: 998;
+}
+
+.nav-links {
+  display: flex;
+  list-style: none;
+  gap: 20px;
+}
+
+.nav-links li {
+  position: relative;
+}
+
+.nav-links li a,
+.nav-links li .nav-link {
   text-decoration: none;
   color: #d3d9d4;
   font-size: 1rem;
   font-weight: 500;
   padding: 8px 12px;
   border-radius: 4px;
-  transition: background-color 0.3s, color 0.3s; /* Smooth transition for hover effect */
+  transition: background-color 0.3s, color 0.3s;
+  cursor: pointer;
 }
 
-.navbar-links a:hover {
-  background-color: #748D92; /* Accent color for hover */
+.nav-links li a:hover,
+.nav-links li .nav-link:hover {
+  background-color: #748D92;
+  color: #fff;
+}
+
+/* Active Link */
+.nav-links li a.active {
+  background-color: #748D92;
   color: #fff;
 }
 
 /* Logout Link */
-.navbar-links a.logout {
-  color: #FF4D4D; /* Red color for logout to signify action */
+.nav-links li a.logout {
+  color: #FF4D4D;
 }
 
-.navbar-links a.logout:hover {
+.nav-links li a.logout:hover {
   background-color: #FF4D4D;
   color: #fff;
+}
+
+/* Dropdown Styles */
+.nav-item {
+  position: relative;
+}
+
+.nav-item .dropdown-menu {
+  display: none;
+  position: absolute;
+  background-color: #124e66;
+  top: 100%;
+  left: 0;
+  min-width: 160px;
+  z-index: 999;
+}
+
+.nav-item:hover .dropdown-menu {
+  display: block;
+}
+
+.dropdown-menu li {
+  width: 100%;
+}
+
+.dropdown-menu li a {
+  padding: 10px;
+  text-align: left;
+}
+
+.dropdown-menu li a:hover {
+  background-color: #748D92;
+}
+
+/* Mobile View Adjustments */
+@media screen and (max-width: 768px) {
+  .navbar-container {
+    justify-content: space-between;
+  }
+
+  .nav-menu {
+    display: none;
+    flex-direction: column;
+  }
+
+  .nav-menu.active {
+    display: block;
+  }
+
+  .menu-icon {
+    display: block;
+  }
+
+  .nav-links {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .nav-links li {
+    width: 100%;
+  }
+
+  .nav-links li a,
+  .nav-links li .nav-link {
+    display: block;
+    width: 100%;
+    padding: 15px;
+  }
+
+  .nav-item .dropdown-menu {
+    display: none;
+    position: static;
+    background-color: inherit;
+  }
+
+  .nav-item .nav-link {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .nav-item .nav-link.active + .dropdown-menu,
+  .nav-item .nav-link + .dropdown-menu {
+    display: block;
+  }
+
+  .nav-item .nav-link .fas.fa-caret-down {
+    margin-left: 5px;
+  }
 }
 
 a {
@@ -1699,7 +1829,7 @@ body {
   font-family: 'Roboto', sans-serif;
   background: linear-gradient(135deg, #ece9e6, #ffffff);
   margin: 0;
-  padding: 0;
+  padding-top: 60px;
 }
 
 .profile-container {
