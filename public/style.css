@@ -3202,3 +3202,173 @@ body {
   border: 1px solid #ddd;
   border-radius: 4px;
 }
+
+
+/* CreateQuestion Component Styles */
+
+/* Container */
+.create-question-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  background-color: #fff;
+  border-radius: 15px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Heading */
+.create-question-heading {
+  text-align: center;
+  font-size: 2em;
+  margin-bottom: 30px;
+  color: #333;
+}
+
+/* Form */
+.create-question-form {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Form Group */
+.form-group {
+  margin-bottom: 20px;
+}
+
+/* Labels */
+.form-label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 8px;
+  color: #555;
+}
+
+/* Inputs */
+.form-input {
+  width: 100%;
+  padding: 12px 15px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1em;
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+.form-input:focus {
+  border-color: #1976d2;
+}
+
+/* Textarea */
+.textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+/* Option Sections */
+.form-option {
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.option-heading {
+  font-size: 1.5em;
+  margin-bottom: 15px;
+  color: #1976d2;
+}
+
+/* File Inputs */
+.form-input-file {
+  display: block;
+}
+
+.form-input-file::-webkit-file-upload-button {
+  visibility: hidden;
+}
+
+.form-input-file::before {
+  content: 'Choose Image';
+  display: inline-block;
+  background: grey;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  outline: none;
+  white-space: nowrap;
+  cursor: pointer;
+  font-size: 1em;
+  border-radius: 8px;
+  margin-right: 10px;
+}
+
+.form-input-file:hover::before {
+  background: #1565c0;
+}
+
+/* Image Preview */
+.image-preview {
+  margin-top: 15px;
+  text-align: center;
+}
+
+.image-preview-img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+  border: 2px solid #ccc;
+}
+
+/* Submit Button */
+.form-submit-button {
+  padding: 15px 30px;
+  background-color: #1976d2;
+  color: white;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  font-size: 1.2em;
+  margin: 0 auto;
+  display: block;
+  transition: background-color 0.3s;
+}
+
+.form-submit-button:hover {
+  background-color: #1565c0;
+}
+
+/* Error Message */
+.form-error {
+  color: #d32f2f;
+  text-align: center;
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+  .create-question-container {
+    padding: 20px 15px;
+  }
+
+  .option-heading {
+    font-size: 1.2em;
+  }
+
+  .form-input {
+    font-size: 0.9em;
+  }
+
+  .form-submit-button {
+    font-size: 1em;
+    padding: 12px 25px;
+  }
+}
+
+.form-success {
+  color: #388e3c;
+  text-align: center;
+  margin-bottom: 20px;
+  font-weight: bold;
+}
