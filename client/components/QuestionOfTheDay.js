@@ -327,7 +327,7 @@ function QuestionOfTheDay() {
           <div className="qotd-pie-chart-container">
             <PieChart
               data={chartData}
-              questionText={`Yesterday's Question: ${yesterdayQuestion.optionA} or ${yesterdayQuestion.optionB}`}
+              questionText={`${yesterdayQuestion.optionA} or ${yesterdayQuestion.optionB}`}
               optionALabel={yesterdayQuestion.optionA}
               optionBLabel={yesterdayQuestion.optionB}
             />

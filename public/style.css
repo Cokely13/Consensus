@@ -3154,6 +3154,8 @@ body {
   margin: 0 auto 30px;
 }
 
+
+
 .qotd-pie-chart-title {
   text-align: center;
   margin-bottom: 20px;
@@ -3488,4 +3490,12 @@ body {
   .message-delete-button {
     right: 5px;
   }
+}
+
+:root {
+  --primary-color: #124e66;
+  --secondary-color: #748D92;
+  --accent-color: #FFCE56;
+  --light-bg-color: #d3d9d4;
+  --text-color: #2E3944;
 }

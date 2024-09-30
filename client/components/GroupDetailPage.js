@@ -269,14 +269,14 @@ function GroupDetailPage() {
               </select>
               {consensusData && (
                 <div className="group-detail-consensus-data-container">
-                  <p>Asked Question: {consensusData.text}</p>
+                  {/* <p>Asked Question: {consensusData.text}</p>
                   <p>
                     Option A: {consensusData.optionA}: {consensusData.percentageA}%
                   </p>
                   <p>
                     Option B: {consensusData.optionB}: {consensusData.percentageB}%
                   </p>
-                  <p>No Vote: {consensusData.percentageNoVote}%</p>
+                  <p>No Vote: {consensusData.percentageNoVote}%</p> */}
                   {/* Render PieChart */}
                   <div className="group-detail-piechart-container">
                     <PieChart
@@ -305,29 +305,6 @@ function GroupDetailPage() {
               {showMessageBoard && (
                 <div className="group-detail-message-board-container">
                   <h3 className="group-detail-message-board-title">Message Board</h3>
-                  {/* {messages.map((message) => (
-                    <div key={message.id} className="group-detail-message-item">
-                      <p>
-                        <strong>
-                        {message.user ?  <img
-                  src={message.user.image}
-                  alt=""
-                  className="questions-image"
-                /> : 'New Post'}
-                          {message.user ? message.user.username : 'New Post'}
-                        </strong>{' '}
-                        {message.content}
-                      </p>
-                      {message.userId === currentUserId && (
-                        <button
-                          onClick={() => handleDeleteMessage(message.id)}
-                          className="group-detail-message-delete-button"
-                        >
-                          Delete
-                        </button>
-                      )}
-                    </div>
-                  ))} */}
                   {messages.map((message) => (
   <div key={message.id} className="message-item">
     <div className="message-content">

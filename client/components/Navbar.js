@@ -140,6 +140,11 @@ const Navbar = ({ handleClick, isLoggedIn, isAdmin }) => {
                     </NavLink>
                   </li>
                   <li>
+                <NavLink to="/group" onClick={closeMobileMenu}>
+                  CreateGroup
+                </NavLink>
+              </li>
+                  <li>
                     <NavLink to="/invites" onClick={closeMobileMenu}>
                       Invites
                     </NavLink>
@@ -171,11 +176,6 @@ const Navbar = ({ handleClick, isLoggedIn, isAdmin }) => {
               <li>
                 <NavLink to="/archive" onClick={closeMobileMenu}>
                   Archive
-                </NavLink>
-              </li>
-              <li>
-                <NavLink to="/group" onClick={closeMobileMenu}>
-                  CreateGroup
                 </NavLink>
               </li>
               <li>
