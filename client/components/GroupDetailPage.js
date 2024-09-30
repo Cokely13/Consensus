@@ -305,11 +305,16 @@ function GroupDetailPage() {
               {showMessageBoard && (
                 <div className="group-detail-message-board-container">
                   <h3 className="group-detail-message-board-title">Message Board</h3>
-                  {messages.map((message) => (
+                  {/* {messages.map((message) => (
                     <div key={message.id} className="group-detail-message-item">
                       <p>
                         <strong>
-                          {message.user ? message.user.username : 'New Post'}:
+                        {message.user ?  <img
+                  src={message.user.image}
+                  alt=""
+                  className="questions-image"
+                /> : 'New Post'}
+                          {message.user ? message.user.username : 'New Post'}
                         </strong>{' '}
                         {message.content}
                       </p>
@@ -322,7 +327,53 @@ function GroupDetailPage() {
                         </button>
                       )}
                     </div>
-                  ))}
+                  ))} */}
+                  {messages.map((message) => (
+  <div key={message.id} className="message-item">
+    <div className="message-content">
+      {/* User Image and Username */}
+      {message.user ? (
+        <div className="user-info">
+          {message.user.image ? (
+            <img
+              src={message.user.image}
+              alt={`${message.user.username}'s avatar`}
+              className="message-user-image"
+            />
+          ) : (
+            <div className="message-placeholder-image">
+              {message.user.username.charAt(0).toUpperCase()}
+            </div>
+          )}
+          <p className="message-username">{message.user.username}</p>
+        </div>
+      ) : (
+        <div className="user-info">
+          <div className="message-placeholder-image">N</div>
+          <p className="message-username">New Post</p>
+        </div>
+      )}
+
+      {/* Message Bubble */}
+      <div className="message-bubble">
+        <p className="message-text">{message.content}</p>
+      </div>
+    </div>
+
+    {/* Delete Button */}
+    {message.userId === currentUserId && (
+      <button
+        onClick={() => handleDeleteMessage(message.id)}
+        className="message-delete-button"
+      >
+        Delete
+      </button>
+    )}
+  </div>
+))}
+
+
+
                   <textarea
                     value={newMessage}
                     onChange={(e) => setNewMessage(e.target.value)}

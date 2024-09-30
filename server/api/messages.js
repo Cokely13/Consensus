@@ -7,7 +7,7 @@ router.get('/:groupId', async (req, res, next) => {
   try {
     const messages = await Message.findAll({
       where: { groupId: req.params.groupId },
-      include: [{ model: User, attributes: ['id', 'username'] }]
+      include: [{ model: User, attributes: ['id', 'username', 'image'] }]
     });
     res.json(messages);
   } catch (err) {
