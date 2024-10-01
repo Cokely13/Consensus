@@ -28,15 +28,35 @@ export const me = () => async dispatch => {
   }
 }
 
-export const authenticate = (username, password, method) => async dispatch => {
+// export const authenticate = (username, password, method) => async dispatch => {
+//   try {
+//     const res = await axios.post(`/auth/${method}`, {username, password})
+//     window.localStorage.setItem(TOKEN, res.data.token)
+//     dispatch(me())
+//   } catch (authError) {
+//     return dispatch(setAuth({error: authError}))
+//   }
+// }
+
+export const authenticate = (username, password, formName, email) => async (dispatch) => {
   try {
-    const res = await axios.post(`/auth/${method}`, {username, password})
-    window.localStorage.setItem(TOKEN, res.data.token)
-    dispatch(me())
+    let res;
+    if (formName === 'signup') {
+      res = await axios.post(`/auth/${formName}`, { username, password, email });
+      window.localStorage.setItem(TOKEN, res.data.token)
+          dispatch(me())
+    } else {
+      res = await axios.post(`/auth/${formName}`, { username, password });
+      window.localStorage.setItem(TOKEN, res.data.token)
+          dispatch(me())
+    }
+
+    // dispatch(setAuth(res.data));
   } catch (authError) {
-    return dispatch(setAuth({error: authError}))
+    dispatch(setAuth({ error: authError }));
   }
-}
+};
+
 
 export const logout = () => {
   window.localStorage.removeItem(TOKEN)
