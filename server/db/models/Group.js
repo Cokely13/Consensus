@@ -17,7 +17,7 @@ const Group = db.define('group', {
   },
   image: {
     type: Sequelize.STRING,
-    defaultValue: 'client/images.imax.jpg' // Provide a default image if needed
+    defaultValue: '/group.jpg' // Provide a default image if needed
   },
 });
 

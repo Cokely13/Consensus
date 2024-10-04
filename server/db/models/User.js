@@ -23,7 +23,7 @@ const User = db.define('user', {
   },
   image: {
     type: Sequelize.STRING,
-    defaultValue: 'client/images.qb.jpg', // Provide a default image if needed
+    defaultValue: 'profile.jpg', // Provide a default image if needed
   },
   password: {
     type: Sequelize.STRING,
