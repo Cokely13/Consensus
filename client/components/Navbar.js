@@ -1,4 +1,3 @@
-
 // import React, { useState } from 'react';
 // import { connect } from 'react-redux';
 // import { Link, NavLink } from 'react-router-dom';
@@ -6,13 +5,28 @@
 
 // const Navbar = ({ handleClick, isLoggedIn, isAdmin }) => {
 //   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
+//   const [activeDropdown, setActiveDropdown] = useState(null);
 
 //   const toggleMobileMenu = () => {
 //     setMobileMenuOpen(!isMobileMenuOpen);
+//     setActiveDropdown(null);
 //   };
 
 //   const closeMobileMenu = () => {
 //     setMobileMenuOpen(false);
+//     setActiveDropdown(null);
+//   };
+
+//   const closeDropdownMenu = () => {
+//     setActiveDropdown(null);
+//   };
+
+//   const toggleDropdown = (dropdownName) => {
+//     if (activeDropdown === dropdownName) {
+//       setActiveDropdown(null);
+//     } else {
+//       setActiveDropdown(dropdownName);
+//     }
 //   };
 
 //   return (
@@ -32,101 +46,157 @@
 //         <nav className={isMobileMenuOpen ? 'nav-menu active' : 'nav-menu'}>
 //           {isLoggedIn ? (
 //             <ul className="nav-links">
-//               <li>
-//                 <NavLink to="/home" onClick={closeMobileMenu}>
+//               <li className="nav-item">
+//                 <NavLink to="/home" onClick={closeMobileMenu} className="nav-link">
 //                   Home
 //                 </NavLink>
 //               </li>
-//               <li className="nav-item dropdown">
-//                 <span className="nav-link" onClick={closeMobileMenu}>
+
+//               {/* Personal Dropdown */}
+//               <li
+//                 className={`nav-item dropdown ${
+//                   activeDropdown === 'personal' ? 'active' : ''
+//                 }`}
+//                 onMouseEnter={() => setActiveDropdown('personal')}
+//                 onMouseLeave={() => setActiveDropdown(null)}
+//               >
+//                 <span
+//                   className="nav-link"
+//                   onClick={() => {
+//                     if (window.innerWidth <= 768) {
+//                       toggleDropdown('personal');
+//                     }
+//                   }}
+//                 >
 //                   Personal <i className="fas fa-caret-down"></i>
 //                 </span>
 //                 <ul className="dropdown-menu">
 //                   <li>
-//                   <NavLink to="/profile" onClick={closeMobileMenu}>
-//                   Profile
-//                 </NavLink>
+//                     <NavLink to="/profile" onClick={closeDropdownMenu}>
+//                       Profile
+//                     </NavLink>
 //                   </li>
 //                   <li>
-//                   <NavLink to="/users" onClick={closeMobileMenu}>
-//                   Users
-//                 </NavLink>
+//                     <NavLink to="/users" onClick={closeDropdownMenu}>
+//                       Users
+//                     </NavLink>
 //                   </li>
 //                   <li>
-//                   <NavLink to="/myvotes" onClick={closeMobileMenu}>
-//                   MyVotes
-//                 </NavLink>
-//               </li>
+//                     <NavLink to="/myvotes" onClick={closeDropdownMenu}>
+//                       MyVotes
+//                     </NavLink>
+//                   </li>
 //                   <li>
-//                     <NavLink to="/invites" onClick={closeMobileMenu}>
+//                     <NavLink to="/invites" onClick={closeDropdownMenu}>
 //                       Invites
 //                     </NavLink>
 //                   </li>
 //                 </ul>
 //               </li>
 
+//               {/* Repeat for other dropdowns... */}
+
 //               {/* Groups Dropdown */}
-//               <li className="nav-item dropdown">
-//                 <span className="nav-link" onClick={closeMobileMenu}>
+//               <li
+//                 className={`nav-item dropdown ${
+//                   activeDropdown === 'groups' ? 'active' : ''
+//                 }`}
+//                 onMouseEnter={() => setActiveDropdown('groups')}
+//                 onMouseLeave={() => setActiveDropdown(null)}
+//               >
+//                 <span
+//                   className="nav-link"
+//                   onClick={() => {
+//                     if (window.innerWidth <= 768) {
+//                       toggleDropdown('groups');
+//                     }
+//                   }}
+//                 >
 //                   Groups <i className="fas fa-caret-down"></i>
 //                 </span>
 //                 <ul className="dropdown-menu">
 //                   <li>
-//                     <NavLink to="/groups" onClick={closeMobileMenu}>
+//                     <NavLink to="/groups" onClick={closeDropdownMenu}>
 //                       Groups
 //                     </NavLink>
 //                   </li>
 //                   <li>
-//                     <NavLink to="/mygroups" onClick={closeMobileMenu}>
+//                     <NavLink to="/mygroups" onClick={closeDropdownMenu}>
 //                       MyGroups
 //                     </NavLink>
 //                   </li>
 //                   <li>
-//                 <NavLink to="/group" onClick={closeMobileMenu}>
-//                   CreateGroup
-//                 </NavLink>
-//               </li>
+//                     <NavLink to="/group" onClick={closeDropdownMenu}>
+//                       CreateGroup
+//                     </NavLink>
+//                   </li>
 //                   <li>
-//                     <NavLink to="/invites" onClick={closeMobileMenu}>
+//                     <NavLink to="/invites" onClick={closeDropdownMenu}>
 //                       Invites
 //                     </NavLink>
 //                   </li>
 //                 </ul>
 //               </li>
-//               <li className="nav-item dropdown">
-//                 <span className="nav-link" onClick={closeMobileMenu}>
+
+//               {/* Questions Dropdown */}
+//               <li
+//                 className={`nav-item dropdown ${
+//                   activeDropdown === 'questions' ? 'active' : ''
+//                 }`}
+//                 onMouseEnter={() => setActiveDropdown('questions')}
+//                 onMouseLeave={() => setActiveDropdown(null)}
+//               >
+//                 <span
+//                   className="nav-link"
+//                   onClick={() => {
+//                     if (window.innerWidth <= 768) {
+//                       toggleDropdown('questions');
+//                     }
+//                   }}
+//                 >
 //                   Questions <i className="fas fa-caret-down"></i>
 //                 </span>
 //                 <ul className="dropdown-menu">
-
 //                   <li>
-//                 <NavLink to="/archive" onClick={closeMobileMenu}>
-//                   Archive
-//                 </NavLink>
-//               </li>
-//               <li>
-//                 <NavLink to="/create" onClick={closeMobileMenu}>
-//                   CreateQuestion
-//                 </NavLink>
-//               </li>
-
+//                     <NavLink to="/archive" onClick={closeDropdownMenu}>
+//                       Archive
+//                     </NavLink>
+//                   </li>
+//                   <li>
+//                     <NavLink to="/create" onClick={closeDropdownMenu}>
+//                       CreateQuestion
+//                     </NavLink>
+//                   </li>
 //                 </ul>
 //               </li>
 
 //               {/* Admin Dropdown */}
 //               {isAdmin && (
-//                 <li className="nav-item dropdown">
-//                   <span className="nav-link" onClick={closeMobileMenu}>
+//                 <li
+//                   className={`nav-item dropdown ${
+//                     activeDropdown === 'admin' ? 'active' : ''
+//                   }`}
+//                   onMouseEnter={() => setActiveDropdown('admin')}
+//                   onMouseLeave={() => setActiveDropdown(null)}
+//                 >
+//                   <span
+//                     className="nav-link"
+//                     onClick={() => {
+//                       if (window.innerWidth <= 768) {
+//                         toggleDropdown('admin');
+//                       }
+//                     }}
+//                   >
 //                     Admin <i className="fas fa-caret-down"></i>
 //                   </span>
 //                   <ul className="dropdown-menu">
 //                     <li>
-//                       <NavLink to="/questions" onClick={closeMobileMenu}>
+//                       <NavLink to="/questions" onClick={closeDropdownMenu}>
 //                         Questions
 //                       </NavLink>
 //                     </li>
 //                     <li>
-//                       <NavLink to="/review" onClick={closeMobileMenu}>
+//                       <NavLink to="/review" onClick={closeDropdownMenu}>
 //                         Review
 //                       </NavLink>
 //                     </li>
@@ -134,21 +204,21 @@
 //                 </li>
 //               )}
 
-//               <li>
-//                 <a href="#" onClick={handleClick} className="logout">
+//               <li className="nav-item">
+//                 <a href="#" onClick={handleClick} className="nav-link logout">
 //                   Logout
 //                 </a>
 //               </li>
 //             </ul>
 //           ) : (
 //             <ul className="nav-links">
-//               <li>
-//                 <NavLink to="/login" onClick={closeMobileMenu}>
+//               <li className="nav-item">
+//                 <NavLink to="/login" onClick={closeMobileMenu} className="nav-link">
 //                   Login
 //                 </NavLink>
 //               </li>
-//               <li>
-//                 <NavLink to="/signup" onClick={closeMobileMenu}>
+//               <li className="nav-item">
+//                 <NavLink to="/signup" onClick={closeMobileMenu} className="nav-link">
 //                   Sign Up
 //                 </NavLink>
 //               </li>
@@ -160,24 +230,18 @@
 //   );
 // };
 
-// const mapState = (state) => {
-//   return {
-//     isLoggedIn: !!state.auth.id,
-//     isAdmin: state.auth.admin,
-//   };
-// };
+// const mapState = (state) => ({
+//   isLoggedIn: !!state.auth.id,
+//   isAdmin: state.auth.admin,
+// });
 
-// const mapDispatch = (dispatch) => {
-//   return {
-//     handleClick() {
-//       dispatch(logout());
-//     },
-//   };
-// };
+// const mapDispatch = (dispatch) => ({
+//   handleClick() {
+//     dispatch(logout());
+//   },
+// });
 
 // export default connect(mapState, mapDispatch)(Navbar);
-
-// Navbar.jsx
 
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
@@ -186,15 +250,19 @@ import { logout } from '../store';
 
 const Navbar = ({ handleClick, isLoggedIn, isAdmin }) => {
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [activeDropdown, setActiveDropdown] = useState(null); // For mobile dropdowns
+  const [activeDropdown, setActiveDropdown] = useState(null);
 
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!isMobileMenuOpen);
-    setActiveDropdown(null); // Close any open dropdowns
+    setActiveDropdown(null);
   };
 
   const closeMobileMenu = () => {
     setMobileMenuOpen(false);
+    setActiveDropdown(null);
+  };
+
+  const closeDropdownMenu = () => {
     setActiveDropdown(null);
   };
 
@@ -223,18 +291,26 @@ const Navbar = ({ handleClick, isLoggedIn, isAdmin }) => {
         <nav className={isMobileMenuOpen ? 'nav-menu active' : 'nav-menu'}>
           {isLoggedIn ? (
             <ul className="nav-links">
+              {/* Home Link */}
               <li className="nav-item">
                 <NavLink to="/home" onClick={closeMobileMenu} className="nav-link">
                   Home
                 </NavLink>
               </li>
+
               {/* Personal Dropdown */}
               <li
-                className={`nav-item dropdown ${
-                  activeDropdown === 'personal' ? 'active' : ''
-                }`}
-                onMouseEnter={() => setActiveDropdown('personal')}
-                onMouseLeave={() => setActiveDropdown(null)}
+                className={`nav-item dropdown ${activeDropdown === 'personal' ? 'active' : ''}`}
+                onMouseEnter={() => {
+                  if (window.innerWidth > 768) {
+                    setActiveDropdown('personal');
+                  }
+                }}
+                onMouseLeave={() => {
+                  if (window.innerWidth > 768) {
+                    setActiveDropdown(null);
+                  }
+                }}
               >
                 <span
                   className="nav-link"
@@ -248,22 +324,22 @@ const Navbar = ({ handleClick, isLoggedIn, isAdmin }) => {
                 </span>
                 <ul className="dropdown-menu">
                   <li>
-                    <NavLink to="/profile" onClick={closeMobileMenu}>
+                    <NavLink to="/profile" onClick={closeDropdownMenu}>
                       Profile
                     </NavLink>
                   </li>
                   <li>
-                    <NavLink to="/users" onClick={closeMobileMenu}>
+                    <NavLink to="/users" onClick={closeDropdownMenu}>
                       Users
                     </NavLink>
                   </li>
                   <li>
-                    <NavLink to="/myvotes" onClick={closeMobileMenu}>
+                    <NavLink to="/myvotes" onClick={closeDropdownMenu}>
                       MyVotes
                     </NavLink>
                   </li>
                   <li>
-                    <NavLink to="/invites" onClick={closeMobileMenu}>
+                    <NavLink to="/invites" onClick={closeDropdownMenu}>
                       Invites
                     </NavLink>
                   </li>
@@ -272,11 +348,17 @@ const Navbar = ({ handleClick, isLoggedIn, isAdmin }) => {
 
               {/* Groups Dropdown */}
               <li
-                className={`nav-item dropdown ${
-                  activeDropdown === 'groups' ? 'active' : ''
-                }`}
-                onMouseEnter={() => setActiveDropdown('groups')}
-                onMouseLeave={() => setActiveDropdown(null)}
+                className={`nav-item dropdown ${activeDropdown === 'groups' ? 'active' : ''}`}
+                onMouseEnter={() => {
+                  if (window.innerWidth > 768) {
+                    setActiveDropdown('groups');
+                  }
+                }}
+                onMouseLeave={() => {
+                  if (window.innerWidth > 768) {
+                    setActiveDropdown(null);
+                  }
+                }}
               >
                 <span
                   className="nav-link"
@@ -290,22 +372,22 @@ const Navbar = ({ handleClick, isLoggedIn, isAdmin }) => {
                 </span>
                 <ul className="dropdown-menu">
                   <li>
-                    <NavLink to="/groups" onClick={closeMobileMenu}>
+                    <NavLink to="/groups" onClick={closeDropdownMenu}>
                       Groups
                     </NavLink>
                   </li>
                   <li>
-                    <NavLink to="/mygroups" onClick={closeMobileMenu}>
+                    <NavLink to="/mygroups" onClick={closeDropdownMenu}>
                       MyGroups
                     </NavLink>
                   </li>
                   <li>
-                    <NavLink to="/group" onClick={closeMobileMenu}>
+                    <NavLink to="/group" onClick={closeDropdownMenu}>
                       CreateGroup
                     </NavLink>
                   </li>
                   <li>
-                    <NavLink to="/invites" onClick={closeMobileMenu}>
+                    <NavLink to="/invites" onClick={closeDropdownMenu}>
                       Invites
                     </NavLink>
                   </li>
@@ -314,11 +396,17 @@ const Navbar = ({ handleClick, isLoggedIn, isAdmin }) => {
 
               {/* Questions Dropdown */}
               <li
-                className={`nav-item dropdown ${
-                  activeDropdown === 'questions' ? 'active' : ''
-                }`}
-                onMouseEnter={() => setActiveDropdown('questions')}
-                onMouseLeave={() => setActiveDropdown(null)}
+                className={`nav-item dropdown ${activeDropdown === 'questions' ? 'active' : ''}`}
+                onMouseEnter={() => {
+                  if (window.innerWidth > 768) {
+                    setActiveDropdown('questions');
+                  }
+                }}
+                onMouseLeave={() => {
+                  if (window.innerWidth > 768) {
+                    setActiveDropdown(null);
+                  }
+                }}
               >
                 <span
                   className="nav-link"
@@ -332,12 +420,12 @@ const Navbar = ({ handleClick, isLoggedIn, isAdmin }) => {
                 </span>
                 <ul className="dropdown-menu">
                   <li>
-                    <NavLink to="/archive" onClick={closeMobileMenu}>
+                    <NavLink to="/archive" onClick={closeDropdownMenu}>
                       Archive
                     </NavLink>
                   </li>
                   <li>
-                    <NavLink to="/create" onClick={closeMobileMenu}>
+                    <NavLink to="/create" onClick={closeDropdownMenu}>
                       CreateQuestion
                     </NavLink>
                   </li>
@@ -347,11 +435,17 @@ const Navbar = ({ handleClick, isLoggedIn, isAdmin }) => {
               {/* Admin Dropdown */}
               {isAdmin && (
                 <li
-                  className={`nav-item dropdown ${
-                    activeDropdown === 'admin' ? 'active' : ''
-                  }`}
-                  onMouseEnter={() => setActiveDropdown('admin')}
-                  onMouseLeave={() => setActiveDropdown(null)}
+                  className={`nav-item dropdown ${activeDropdown === 'admin' ? 'active' : ''}`}
+                  onMouseEnter={() => {
+                    if (window.innerWidth > 768) {
+                      setActiveDropdown('admin');
+                    }
+                  }}
+                  onMouseLeave={() => {
+                    if (window.innerWidth > 768) {
+                      setActiveDropdown(null);
+                    }
+                  }}
                 >
                   <span
                     className="nav-link"
@@ -365,12 +459,12 @@ const Navbar = ({ handleClick, isLoggedIn, isAdmin }) => {
                   </span>
                   <ul className="dropdown-menu">
                     <li>
-                      <NavLink to="/questions" onClick={closeMobileMenu}>
+                      <NavLink to="/questions" onClick={closeDropdownMenu}>
                         Questions
                       </NavLink>
                     </li>
                     <li>
-                      <NavLink to="/review" onClick={closeMobileMenu}>
+                      <NavLink to="/review" onClick={closeDropdownMenu}>
                         Review
                       </NavLink>
                     </li>
@@ -378,6 +472,7 @@ const Navbar = ({ handleClick, isLoggedIn, isAdmin }) => {
                 </li>
               )}
 
+              {/* Logout */}
               <li className="nav-item">
                 <a href="#" onClick={handleClick} className="nav-link logout">
                   Logout
@@ -386,6 +481,7 @@ const Navbar = ({ handleClick, isLoggedIn, isAdmin }) => {
             </ul>
           ) : (
             <ul className="nav-links">
+              {/* Login and Sign Up Links */}
               <li className="nav-item">
                 <NavLink to="/login" onClick={closeMobileMenu} className="nav-link">
                   Login
