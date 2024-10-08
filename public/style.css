@@ -1601,6 +1601,92 @@ tbody td {
   color: #777;
 }
 
+@media screen and (max-width: 768px) {
+  /* Hide the grid on mobile */
+  .invitesGrid {
+    display: none;
+  }
+
+  /* Card Styles */
+  .invite-card {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    margin-bottom: 20px;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .invite-card-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+
+  .invite-card-label {
+    font-weight: bold;
+    color: #333;
+    width: 100%;
+    margin-bottom: 5px;
+  }
+
+  .invite-card-row > span {
+    width: 100%;
+    margin-bottom: 5px;
+  }
+
+  .invite-card-image {
+    width: 100%;
+    max-width: 200px;
+    height: auto;
+    border-radius: 4px;
+  }
+
+  .invite-card-buttons {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .accept-button,
+  .decline-button {
+    width: 48%;
+    padding: 10px;
+    font-size: 1em;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  .accept-button {
+    background-color: blue;
+    color: white;
+  }
+
+  .decline-button {
+    background-color: #dc3545;
+    color: white;
+  }
+
+  .accept-button:hover {
+    background-color: darkblue;
+  }
+
+  .decline-button:hover {
+    background-color: #c82333;
+  }
+
+  /* No Invites Message */
+  .no-invites-message {
+    text-align: center;
+    padding: 20px;
+    font-size: 16px;
+    color: #777;
+  }
+}
+
+
 /* Add this to your global stylesheet or component-specific stylesheet */
 
 .edit-question-container {
