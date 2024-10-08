@@ -1,5 +1,5 @@
-// import { useDispatch, useSelector } from 'react-redux';
 // import React, { useEffect } from 'react';
+// import { useDispatch, useSelector } from 'react-redux';
 // import { fetchQuestions } from '../store/allQuestionsStore';
 // import { Link } from 'react-router-dom';
 
@@ -17,58 +17,58 @@
 //     (a, b) => new Date(b.dateAsked) - new Date(a.dateAsked)
 //   );
 
-
 //   return (
-//     <div className="page-container">
-//       <h2 className="page-heading">Questions</h2>
-//       <table className="questionstable-custom">
-//         <thead>
-//           <tr>
-//             <th>Question</th>
-//             <th>Option A</th>
-//             <th>Image A</th>
-//             <th>Option B</th>
-//             <th>Image B</th>
-//             <th>Date Asked</th>
-//             <th>Status</th>
-//             {user.admin && <th>Action</th>}
-//           </tr>
-//         </thead>
-//         <tbody>
-//           {sortedQuestions.map((question) => (
-//             <tr key={question.id}>
-//               <td>{question.text}</td>
-//               <td>{question.optionA}</td>
-//               <td>
-//                 {question.imageA && (
-//                   <img
-//                     src={question.imageA}
-//                     style={{ width: '50px', height: '50px', objectFit: 'cover' }}
-//                   />
-//                 )}
-//               </td>
-//               <td>{question.optionB}</td>
-//               <td>
-//                 {question.imageB && (
-//                   <img
-//                     src={question.imageB}
-//                     style={{ width: '50px', height: '50px', objectFit: 'cover' }}
-//                   />
-//                 )}
-//               </td>
-//               <td>{new Date(question.dateAsked).toLocaleDateString()}</td>
-//               <td>{question.status}</td>
-//               {user.admin && (
-//                 <td>
-//                   <Link to={`/edit-question/${question.id}`}>
-//                     <button className="edit-button">Edit Question</button>
-//                   </Link>
-//                 </td>
+//     <div className="questions-page-container">
+//       <h2 className="questions-page-heading">Questions</h2>
+//       <div className="questions-grid">
+//         {/* Grid Headers */}
+//         <div className="questions-grid-header">Question</div>
+//         <div className="questions-grid-header">Option A</div>
+//         <div className="questions-grid-header">Image A</div>
+//         <div className="questions-grid-header">Option B</div>
+//         <div className="questions-grid-header">Image B</div>
+//         <div className="questions-grid-header">Date Asked</div>
+//         <div className="questions-grid-header">Status</div>
+//         {user.admin && <div className="questions-grid-header">Action</div>}
+
+//         {/* Grid Rows */}
+//         {sortedQuestions.map((question) => (
+//           <React.Fragment key={question.id}>
+//             <div className="questions-grid-cell">{question.text}</div>
+//             <div className="questions-grid-cell">{question.optionA}</div>
+//             <div className="questions-grid-cell">
+//               {question.imageA && (
+//                 <img
+//                   src={question.imageA}
+//                   alt="Option A"
+//                   className="questions-image"
+//                 />
 //               )}
-//             </tr>
-//           ))}
-//         </tbody>
-//       </table>
+//             </div>
+//             <div className="questions-grid-cell">{question.optionB}</div>
+//             <div className="questions-grid-cell">
+//               {question.imageB && (
+//                 <img
+//                   src={question.imageB}
+//                   alt="Option B"
+//                   className="questions-image"
+//                 />
+//               )}
+//             </div>
+//             <div className="questions-grid-cell">
+//               {new Date(question.dateAsked).toLocaleDateString()}
+//             </div>
+//             <div className="questions-grid-cell">{question.status}</div>
+//             {user.admin && (
+//               <div className="questions-grid-cell">
+//                 <Link to={`/edit-question/${question.id}`}>
+//                   <button className="questions-edit-button">Edit Question</button>
+//                 </Link>
+//               </div>
+//             )}
+//           </React.Fragment>
+//         ))}
+//       </div>
 //     </div>
 //   );
 // }
@@ -97,6 +97,8 @@ function Questions() {
   return (
     <div className="questions-page-container">
       <h2 className="questions-page-heading">Questions</h2>
+
+      {/* Grid View for Desktop */}
       <div className="questions-grid">
         {/* Grid Headers */}
         <div className="questions-grid-header">Question</div>
@@ -144,6 +146,59 @@ function Questions() {
               </div>
             )}
           </React.Fragment>
+        ))}
+      </div>
+
+      {/* Card View for Mobile */}
+      <div className="questions-card-container">
+        {sortedQuestions.map((question) => (
+          <div className="questions-card" key={question.id}>
+            <div className="questions-card-item">
+              <span className="questions-card-label">Question:</span>
+              {question.text}
+            </div>
+            <div className="questions-card-item">
+              <span className="questions-card-label">Option A:</span>
+              {question.optionA}
+            </div>
+            {question.imageA && (
+              <div className="questions-card-item">
+                <img
+                  src={question.imageA}
+                  alt="Option A"
+                  className="questions-image"
+                />
+              </div>
+            )}
+            <div className="questions-card-item">
+              <span className="questions-card-label">Option B:</span>
+              {question.optionB}
+            </div>
+            {question.imageB && (
+              <div className="questions-card-item">
+                <img
+                  src={question.imageB}
+                  alt="Option B"
+                  className="questions-image"
+                />
+              </div>
+            )}
+            <div className="questions-card-item">
+              <span className="questions-card-label">Date Asked:</span>
+              {new Date(question.dateAsked).toLocaleDateString()}
+            </div>
+            <div className="questions-card-item">
+              <span className="questions-card-label">Status:</span>
+              {question.status}
+            </div>
+            {user.admin && (
+              <div className="questions-card-item">
+                <Link to={`/edit-question/${question.id}`}>
+                  <button className="questions-edit-button">Edit Question</button>
+                </Link>
+              </div>
+            )}
+          </div>
         ))}
       </div>
     </div>

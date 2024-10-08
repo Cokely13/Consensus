@@ -30,9 +30,11 @@ const Navbar = ({ handleClick, isLoggedIn, isAdmin }) => {
     <header className="navbar">
       <div className="navbar-container">
         {/* Logo or Brand Name */}
+        {isLoggedIn &&  (
         <Link to="/home" className="navbar-logo" onClick={closeMobileMenu}>
         <img src="/logo.png" alt="Logo" className="navbar-logo-image" />
-        </Link>
+        </Link>)}
+
 
         {/* Hamburger Menu Icon */}
         <div className="menu-icon" onClick={toggleMobileMenu} aria-label="Menu">

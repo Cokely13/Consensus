@@ -3374,13 +3374,46 @@ body {
 
 @media (max-width: 800px) {
   .questions-grid {
-    grid-template-columns: 1fr;
+    display: none;
   }
 
-  .questions-grid-header,
-  .questions-grid-cell {
-    text-align: left;
-    min-height: auto;
+  /* Card Container */
+  .questions-card-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  /* Individual Card */
+  .questions-card {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+
+  /* Card Items */
+  .questions-card-item {
+    margin-bottom: 10px;
+  }
+
+  .questions-card-label {
+    font-weight: bold;
+    margin-right: 5px;
+  }
+
+  .questions-image {
+    max-width: 50%;
+    height: auto;
+    margin-bottom: 10px;
+  }
+
+  .questions-edit-button {
+    width: 100%;
+    padding: 10px;
+    font-size: 1em;
   }
 }
 
