@@ -2993,15 +2993,40 @@ body {
 }
 
 /* Responsive Design */
-@media (max-width: 800px) {
+@media screen and (max-width: 768px) {
+  /* Hide the grid on mobile */
   .myvotes-grid {
-    grid-template-columns: 1fr;
+    display: none;
   }
 
-  .myvotes-grid-header,
-  .myvotes-grid-cell {
-    text-align: left;
-    min-height: auto;
+  /* Card Container */
+  .myvotes-card {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    margin-bottom: 20px;
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Rows within the Card */
+  .myvotes-card-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+
+  /* Labels within the Card */
+  .myvotes-card-label {
+    font-weight: bold;
+    color: #333;
+    margin-right: 10px;
+  }
+
+  /* Adjust the vote image on mobile */
+  .my-votes-vote-image {
+    max-width: 80px;
   }
 }
 
