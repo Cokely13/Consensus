@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { Link, NavLink } from 'react-router-dom';
 import { logout } from '../store';
+// import logo from '../images/logo.png'
 
 const Navbar = ({ handleClick, isLoggedIn, isAdmin }) => {
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -30,7 +31,7 @@ const Navbar = ({ handleClick, isLoggedIn, isAdmin }) => {
       <div className="navbar-container">
         {/* Logo or Brand Name */}
         <Link to="/home" className="navbar-logo" onClick={closeMobileMenu}>
-          MyApp
+        <img src="/logo.png" alt="Logo" className="navbar-logo-image" />
         </Link>
 
         {/* Hamburger Menu Icon */}

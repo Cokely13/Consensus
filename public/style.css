@@ -69,6 +69,18 @@ a:hover {
 
 
 /* Navbar Styles */
+/* .navbar {
+  background-color: #124e66;
+  color: white;
+  border-bottom: 1px solid #2E3944;
+  width: 100%;
+  position: fixed;
+  display: flex;
+  align-items: center;
+  top: 0;
+  z-index: 999;
+} */
+
 .navbar {
   background-color: #124e66;
   color: white;
@@ -77,13 +89,18 @@ a:hover {
   position: fixed;
   top: 0;
   z-index: 999;
+  display: flex;
+  align-items: center;
+  padding: 0;
+  height: 70px; /* Increased height */
 }
+
 
 .navbar-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 60px;
+  height: 70px;
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 20px;
@@ -91,10 +108,22 @@ a:hover {
 
 .navbar-logo {
   color: #d3d9d4;
-  font-size: 1.8rem;
-  font-weight: 700;
   text-decoration: none;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar-logo-image {
+  height: 60px; /* Adjusted height */
+  width: auto;
+  cursor: pointer;
+  border-radius: 50%;    /* Make it a circle */
+  object-fit: cover;     /* Ensure the image scales properly */
+  margin: 0;
+  padding: 0;
 }
 
 .menu-icon {
@@ -141,16 +170,6 @@ a:hover {
   margin-left: 5px;
 }
 
-/* .nav-links li a:hover,
-.nav-links li .nav-link:hover {
-  background-color: #748D92;
-  color: #fff;
-} */
-
-/* .nav-links li a.active {
-  background-color: #748D92;
-  color: #fff;
-} */
 
 .nav-links li a.logout {
   color: #FF4D4D;
@@ -201,8 +220,26 @@ a:hover {
 
 /* Mobile Styles */
 @media screen and (max-width: 768px) {
+  .navbar {
+    height: 60px;
+  }
+
+  .navbar-container {
+    height: 60px;
+  }
+
+  .navbar-logo-image {
+    height: 40px;
+  }
+
   .menu-icon {
+    position: fixed;
+    top: 15px;
+    right: 20px;
     display: block;
+    font-size: 1.8rem;
+    cursor: pointer;
+    color: #d3d9d4;
   }
 
   .nav-menu {
