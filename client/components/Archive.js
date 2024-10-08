@@ -1,113 +1,3 @@
-// import React, { useEffect } from 'react';
-// import { useDispatch, useSelector } from 'react-redux';
-// import { fetchQuestions } from '../store/allQuestionsStore';
-// import { createConsensus } from '../store/allConsensusesStore';
-// import { updateSingleQuestion } from '../store/singleQuestionStore';
-
-// function Archive() {
-//   const dispatch = useDispatch();
-//   const questions = useSelector((state) => state.allQuestions);
-//   const user = useSelector((state) => state.auth);
-
-//   useEffect(() => {
-//     dispatch(fetchQuestions());
-//   }, [dispatch]);
-
-//   const calculateVotes = (userResponses, option) => {
-//     return userResponses.filter((response) => response.response === option).length;
-//   };
-
-//   const handleCreateConsensus = async (question) => {
-//     const optionAVotes = calculateVotes(question.user_responses, 'option_a');
-//     const optionBVotes = calculateVotes(question.user_responses, 'option_b');
-
-//     if (optionAVotes === optionBVotes) {
-//       alert('Cannot Do, No Consensus');
-//       return;
-//     }
-
-//     const consensusAnswer = optionAVotes > optionBVotes ? 'option_a' : 'option_b';
-
-//     await dispatch(
-//       createConsensus({
-//         questionId: question.id,
-//         consensusAnswer,
-//         calculatedAt: new Date().toISOString(),
-//       })
-//     );
-
-//     dispatch(fetchQuestions());
-//   };
-
-//   const handleReopenQuestion = async (question) => {
-//     await dispatch(updateSingleQuestion(question.id, { expired: false }));
-//     dispatch(fetchQuestions());
-//   };
-
-
-
-//   const filteredQuestions = questions.filter((question) => {
-//     return new Date(question.dateAsked) < new Date();
-//   });
-
-//   return (
-//     <div className="archive-page-container">
-//       <h2 className="archive-page-heading">Archive</h2>
-//       <div className="archive-grid-container">
-//         {/* Header Row */}
-//         <div className="archive-grid-header">Question</div>
-//         <div className="archive-grid-header">Option A</div>
-//         <div className="archive-grid-header">Votes for Option A</div>
-//         <div className="archive-grid-header">Option B</div>
-//         <div className="archive-grid-header">Votes for Option B</div>
-//         <div className="archive-grid-header">Date Asked</div>
-//         <div className="archive-grid-header">Action</div>
-
-//         {/* Data Rows */}
-//         {filteredQuestions.map((question) => {
-//           const optionAVotes = calculateVotes(question.user_responses, 'option_a');
-//           const optionBVotes = calculateVotes(question.user_responses, 'option_b');
-
-//           const highlightOptionA = optionAVotes > optionBVotes ? 'highlight-option-a' : '';
-//           const highlightOptionB = optionBVotes > optionAVotes ? 'highlight-option-b' : '';
-
-//           const isExpired = question.consensus.length ? true : false;
-
-//           return (
-//             <React.Fragment  key={question.id}>
-//               <div className="archive-grid-cell">{question.text}</div>
-//               <div className={`archive-grid-cell ${highlightOptionA}`}>{question.optionA}</div>
-//               <div className="archive-grid-cell">{optionAVotes}</div>
-//               <div className={`archive-grid-cell ${highlightOptionB}`}>{question.optionB}</div>
-//               <div className="archive-grid-cell">{optionBVotes}</div>
-//               <div className="archive-grid-cell">{new Date(question.dateAsked).toLocaleDateString()}</div>
-//               <div className="archive-grid-cell">
-//                 {user.admin ? isExpired ? (
-//                   <button
-//                     className="reopen-button"
-//                     onClick={() => handleReopenQuestion(question)}
-//                   >
-//                     Reopen the Question
-//                   </button>
-//                 ) : (
-//                   <button
-//                     className="archive-button"
-//                     onClick={() => handleCreateConsensus(question)}
-//                   >
-//                     Create Consensus
-//                   </button>
-//                 ) : <div></div>}
-//               </div>
-//             </React.Fragment>
-//           );
-//         })}
-//       </div>
-//     </div>
-//   );
-// }
-
-// export default Archive;
-
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchQuestions } from '../store/allQuestionsStore';
@@ -164,9 +54,18 @@ function Archive() {
     dispatch(fetchQuestions());
   };
 
+
+  const today = new Date();
+const yesterday = new Date(today);
+yesterday.setDate(yesterday.getDate() - 1);
+yesterday.setHours(0, 0, 0, 0); // Set time to midnight
+
   const filteredQuestions = questions.filter((question) => {
-    return new Date(question.dateAsked) < new Date();
+    const questionDate = new Date(question.dateAsked);
+    return questionDate < yesterday && question.status === 'accepted';
   });
+
+
 
   return (
     <div className="archive-page-container">
