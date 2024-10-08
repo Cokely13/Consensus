@@ -1926,10 +1926,23 @@ tbody td {
 /* Container to center the form */
 .auth-container {
   display: flex;
+  flex-direction: column; /* Stack items vertically */
   justify-content: center;
   align-items: center;
   height: 100vh; /* Full viewport height */
   background-color: #f7f7f7; /* Soft background color */
+}
+
+.auth-logo {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.auth-logo-image {
+  width: 200px;          /* Adjust the size as needed */
+  height: 200px;
+  border-radius: 50%;    /* Make it circular */
+  object-fit: cover;     /* Ensure the image scales properly */
 }
 
 .auth-form {
