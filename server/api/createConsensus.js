@@ -1,6 +1,6 @@
 // createConsensus.js
 
-const { models: { Question, UserResponse, Consensus } } = require('./db');
+const { models: { Question, UserResponse, Consensus } } = require('../db');
 
 const createConsensus = async () => {
   console.log('Running scheduled task to create consensus...');
