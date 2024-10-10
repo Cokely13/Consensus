@@ -6,6 +6,7 @@ import { fetchSingleUser, updateSingleUser } from '../store/singleUserStore';
 import { createUserResponse } from '../store/allUserResponsesStore';
 import PieChart from './PieChart';
 import { CountdownCircleTimer } from 'react-countdown-circle-timer';
+import { format } from 'date-fns';
 
 function QuestionOfTheDay() {
   const dispatch = useDispatch();
@@ -21,6 +22,7 @@ function QuestionOfTheDay() {
   const [yesterdayConsensus, setYesterdayConsensus] = useState('');
   const [yesterdayResult, setYesterdayResult] = useState('');
   const [streak, setStreak] = useState({ correct: 0, incorrect: 0, noVote: 0 });
+  const formattedDate = format(new Date(), 'EEEE, MMMM do, yyyy');
   const [timeLeftSeconds, setTimeLeftSeconds] = useState(0);
   const [careerHigh, setCareerHigh] = useState({
     winStreak: 0,
@@ -279,14 +281,20 @@ function QuestionOfTheDay() {
       {selectedQuestion ? (
         <div className="qotd-question-section">
           <h2 className="qotd-heading">Question of the Day</h2>
-          <p className="qotd-date">{new Date().toLocaleDateString()}</p>
+          {/* <p className="qotd-date">{new Date().toLocaleDateString()}</p> */}
+          <div className="qotd-date-container">
+  <p className="qotd-date">
+    <i className="fas fa-calendar-alt" style={{ marginRight: '10px' }}></i>
+    {formattedDate}
+  </p>
+</div>
           <h3 className="qotd-timer">
             <p>
             {hasVoted
               ? 'Time Until the Next Question:'
               : 'Time Left to Answer the Question:'}{' '}
               </p>
-              <div className="countdown-container">
+              {/* <div className="countdown-container">
     <CountdownCircleTimer
       isPlaying
       duration={86400}
@@ -312,7 +320,36 @@ function QuestionOfTheDay() {
         );
       }}
     </CountdownCircleTimer>
-  </div>
+  </div> */}
+  <div className="countdown-container">
+              <div className="timer-border">
+                <CountdownCircleTimer
+                  isPlaying
+                  duration={86400}
+                  initialRemainingTime={timeLeftSeconds}
+                  colors={[
+                    ['#004777', 0.33],
+                    ['#F7B801', 0.33],
+                    ['#A30000'],
+                  ]}
+                  size={200}
+                  strokeWidth={16}
+                  trailColor="#d9d9d9"
+                  onComplete={() => ({ shouldRepeat: false })}
+                >
+                  {({ remainingTime }) => {
+                    const hours = Math.floor((remainingTime / 3600) % 24);
+                    const minutes = Math.floor((remainingTime / 60) % 60);
+                    const seconds = remainingTime % 60;
+                    return (
+                      <div className="timer-text">
+                        {hours}h {minutes}m {seconds}s
+                      </div>
+                    );
+                  }}
+                </CountdownCircleTimer>
+              </div>
+            </div>
             {timeLeft}
           </h3>
           {!hasVoted ? (

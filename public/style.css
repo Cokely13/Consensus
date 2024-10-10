@@ -3451,12 +3451,53 @@ body {
   color: #555;
 } */
 
-.qotd-date {
+/* .qotd-date {
   font-size: 1.2em;
   font-weight: 400;
   text-align: center;
-  color: #777; /* Lighter gray */
+  color: #777;
   margin-bottom: 20px;
+} */
+/*
+.qotd-date {
+  font-size: 1.8em;
+  font-weight: 600;
+  color: #124e66;
+  text-align: center;
+  margin-bottom: 15px;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 5px;
+  display: inline-block;
+  padding: 10px 20px;
+  border: 3px solid #124e66;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(18, 78, 102, 0.3);
+  background-color: #f9f9f9;
+} */
+
+.qotd-date {
+  position: relative;
+  font-size: 1.8em;
+  font-weight: 600;
+  color: #124e66;
+  margin: 0;
+  padding: 10px 20px;
+  border-radius: 10px;
+  background: linear-gradient(#fff, #fff) padding-box,
+              linear-gradient(to right, #124e66, #00aaff) border-box;
+  border: 3px solid transparent;
+}
+
+.qotd-date-container {
+  display: flex;
+  justify-content: center; /* Centers the date horizontally */
+  margin-bottom: 20px; /* Space below the date */
+}
+
+/* Optional: Icon styles */
+.qotd-date i {
+  color: #555;
+  margin-right: 8px;
 }
 
 /* .qotd-yesterday-heading,
@@ -3491,6 +3532,16 @@ body {
   font-weight: bold;
   color: #124e66;
 }
+
+.timer-section-border {
+  padding: 20px;
+  border: 3px solid #124e66;
+  border-radius: 15px;
+  background-color: #f0f8ff; /* Light blue background */
+  box-shadow: 0 0 10px rgba(18, 78, 102, 0.2);
+  margin-bottom: 30px;
+}
+
 
 
 /* .qotd-timer {
