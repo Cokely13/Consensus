@@ -5,6 +5,7 @@ import { fetchUsers } from '../store/allUsersStore';
 import { fetchSingleUser, updateSingleUser } from '../store/singleUserStore';
 import { createUserResponse } from '../store/allUserResponsesStore';
 import PieChart from './PieChart';
+import { CountdownCircleTimer } from 'react-countdown-circle-timer';
 
 function QuestionOfTheDay() {
   const dispatch = useDispatch();
@@ -20,6 +21,7 @@ function QuestionOfTheDay() {
   const [yesterdayConsensus, setYesterdayConsensus] = useState('');
   const [yesterdayResult, setYesterdayResult] = useState('');
   const [streak, setStreak] = useState({ correct: 0, incorrect: 0, noVote: 0 });
+  const [timeLeftSeconds, setTimeLeftSeconds] = useState(0);
   const [careerHigh, setCareerHigh] = useState({
     winStreak: 0,
     lossStreak: 0,
@@ -107,6 +109,7 @@ function QuestionOfTheDay() {
     }
   }, [questions, user]);
 
+
   useEffect(() => {
     const calculateTimeLeft = () => {
       const now = new Date();
@@ -116,12 +119,10 @@ function QuestionOfTheDay() {
       const timeDifference = midnight - now;
 
       if (timeDifference > 0) {
-        const hours = Math.floor((timeDifference / (1000 * 60 * 60)) % 24);
-        const minutes = Math.floor((timeDifference / (1000 * 60)) % 60);
-        const seconds = Math.floor((timeDifference / 1000) % 60);
-        setTimeLeft(`${hours}h ${minutes}m ${seconds}s`);
+        const totalSeconds = Math.floor(timeDifference / 1000);
+        setTimeLeftSeconds(totalSeconds);
       } else {
-        setTimeLeft('Time is up!');
+        setTimeLeftSeconds(0);
       }
     };
 
@@ -280,9 +281,38 @@ function QuestionOfTheDay() {
           <h2 className="qotd-heading">Question of the Day</h2>
           <p className="qotd-date">{new Date().toLocaleDateString()}</p>
           <h3 className="qotd-timer">
+            <p>
             {hasVoted
               ? 'Time Until the Next Question:'
               : 'Time Left to Answer the Question:'}{' '}
+              </p>
+              <div className="countdown-container">
+    <CountdownCircleTimer
+      isPlaying
+      duration={86400}
+      initialRemainingTime={timeLeftSeconds}
+      colors={[
+        ['#004777', 0.33],
+        ['#F7B801', 0.33],
+        ['#A30000'],
+      ]}
+      size={200} // Increased size
+      strokeWidth={12}
+      trailColor="#d9d9d9"
+      onComplete={() => ({ shouldRepeat: false })}
+    >
+      {({ remainingTime }) => {
+        const hours = Math.floor((remainingTime / 3600) % 24);
+        const minutes = Math.floor((remainingTime / 60) % 60);
+        const seconds = remainingTime % 60;
+        return (
+          <div className="timer-text">
+            {hours}h {minutes}m {seconds}s
+          </div>
+        );
+      }}
+    </CountdownCircleTimer>
+  </div>
             {timeLeft}
           </h3>
           {!hasVoted ? (
@@ -372,7 +402,7 @@ function QuestionOfTheDay() {
               <p>No consensus winner yesterday.</p>
             )}
           </div>
-          <p className="qotd-yesterday-consensus">{yesterdayConsensus}</p>
+          {/* <p className="qotd-yesterday-consensus">{yesterdayConsensus}</p> */}
           <p className="qotd-yesterday-result">{yesterdayResult}</p>
         </div>
       )}

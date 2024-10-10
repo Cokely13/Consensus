@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
 /* Base Styles */
 body {
   font-family: 'Roboto', sans-serif;
@@ -3420,31 +3422,83 @@ body {
 /* Question of the Day Styles */
 
 .qotd-container {
+  font-family: 'Roboto', sans-serif;
+  color: #333;
   padding: 20px;
   max-width: 1000px;
   margin: 0 auto;
 }
 
-.qotd-heading {
+/* .qotd-heading {
   text-align: center;
   font-size: 2.5em;
   margin-bottom: 10px;
   color: #333;
+} */
+
+.qotd-heading {
+  font-size: 2.5em;
+  font-weight: 700;
+  text-align: center;
+  color: #124e66; /* Deep blue color */
+  margin-bottom: 10px;
 }
 
-.qotd-date {
+/* .qotd-date {
   text-align: center;
   font-size: 1.2em;
   margin-bottom: 20px;
   color: #555;
+} */
+
+.qotd-date {
+  font-size: 1.2em;
+  font-weight: 400;
+  text-align: center;
+  color: #777; /* Lighter gray */
+  margin-bottom: 20px;
 }
 
+/* .qotd-yesterday-heading,
 .qotd-timer {
+  font-size: 1.8em;
+  font-weight: 600;
+  text-align: center;
+  color: #124e66;
+  margin-bottom: 10px;
+} */
+
+.qotd-timer {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.countdown-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.qotd-timer p {
+  font-size: 1.2em;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.timer-text {
+  font-size: 1.5em;
+  font-weight: bold;
+  color: #124e66;
+}
+
+
+/* .qotd-timer {
   text-align: center;
   font-size: 1.2em;
   margin-bottom: 30px;
   color: #1976d2;
-}
+} */
 
 .qotd-options-container {
   display: flex;
@@ -3482,11 +3536,19 @@ body {
   background-color: #1565c0;
 }
 
-.qotd-already-voted {
+/* .qotd-already-voted {
   text-align: center;
   font-size: 1.2em;
   color: #555;
   margin-bottom: 30px;
+} */
+
+.qotd-already-voted {
+  text-align: center;
+  font-size: 1.2em;
+  color: #333;
+  font-weight: 600;
+  margin-top: 10px;
 }
 
 .qotd-no-question {
@@ -3504,7 +3566,8 @@ body {
   text-align: center;
   font-size: 2em;
   margin-bottom: 20px;
-  color: #333;
+  font-weight: 700;
+  color: #124e66;
 }
 
 .qotd-pie-chart-container {
@@ -3523,6 +3586,10 @@ body {
 }
 
 .qotd-winner-image-container {
+  font-size: 2em;
+  margin-bottom: 20px;
+  font-weight: 700;
+  color: #124e66;
   text-align: center;
   margin-bottom: 20px;
 }
@@ -3539,8 +3606,19 @@ body {
   text-align: center;
   font-size: 1.2em;
   color: #555;
+  font-size: 1.5em;
+  font-weight: 600;
   margin-bottom: 10px;
 }
+
+/* .qotd-yesterday-consensus,
+.qotd-yesterday-result {
+  font-size: 1.1em;
+  font-weight: 400;
+  color: #555;
+  margin-top: 15px;
+  text-align: center;
+} */
 
 .qotd-streak-section {
   margin-top: 30px;
