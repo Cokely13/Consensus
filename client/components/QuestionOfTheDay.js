@@ -276,6 +276,8 @@ function QuestionOfTheDay() {
 
     const chartData = calculateChartData();
 
+    console.log("selected", selectedQuestion)
+
   return (
     <div className="qotd-container">
       {selectedQuestion ? (
@@ -384,6 +386,10 @@ function QuestionOfTheDay() {
           {questions.length > 0 ? 'No question for today.' : 'Loading questions...'}
         </div>
       )}
+      <div>
+        {selectedQuestion ? <div> Number of Votes: {selectedQuestion.user_responses ? selectedQuestion.user_responses.length : 0 }</div> :
+        <div> Number of Votes: 0 </div>}
+         </div>
       {yesterdayQuestion && (
         <div className="qotd-yesterday-section">
           <h3 className="qotd-yesterday-heading">Yesterday's Question Results</h3>
