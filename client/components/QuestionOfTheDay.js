@@ -134,7 +134,8 @@ function QuestionOfTheDay() {
     return () => clearInterval(timer);
   }, []);
 
-  const handleVote = (option) => {
+
+  const handleVote = async (option) => {
     const responseOption = option === 'optionA' ? 'option_a' : 'option_b';
     const userResponse = {
       userId,
@@ -142,10 +143,23 @@ function QuestionOfTheDay() {
       response: responseOption,
     };
 
-    dispatch(createUserResponse(userResponse)).then(() => {
+    try {
+      // Dispatch action to create user response
+      await dispatch(createUserResponse(userResponse));
+
+      // Update local state to reflect that the user has voted
       setHasVoted(true);
       setTodaysVote(responseOption);
-    });
+
+      // Re-fetch questions to update the vote count
+      await dispatch(fetchQuestions());
+
+      // **Dispatch action to fetch updated user data**
+      await dispatch(fetchSingleUser(userId));
+    } catch (error) {
+      console.error('Error casting vote:', error);
+      // Optionally, handle the error (e.g., show a notification)
+    }
   };
 
   const calculateStreak = (userResponses, streakType) => {
@@ -435,3 +449,4 @@ function QuestionOfTheDay() {
 }
 
 export default QuestionOfTheDay;
+
