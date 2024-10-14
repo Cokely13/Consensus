@@ -386,10 +386,19 @@ function QuestionOfTheDay() {
           {questions.length > 0 ? 'No question for today.' : 'Loading questions...'}
         </div>
       )}
-      <div>
-        {selectedQuestion ? <div> Number of Votes: {selectedQuestion.user_responses ? selectedQuestion.user_responses.length : 0 }</div> :
-        <div> Number of Votes: 0 </div>}
-         </div>
+   <div className="qotd-total-votes-container">
+  {selectedQuestion ? (
+    <div className="qotd-total-votes">
+      <i className="fas fa-vote-yea vote-icon"></i>
+      <span>Total Votes: {selectedQuestion.user_responses ? selectedQuestion.user_responses.length : 0}</span>
+    </div>
+  ) : (
+    <div className="qotd-total-votes">
+      <i className="fas fa-vote-yea vote-icon"></i>
+      <span>Total Votes: 0</span>
+    </div>
+  )}
+</div>
       {yesterdayQuestion && (
         <div className="qotd-yesterday-section">
           <h3 className="qotd-yesterday-heading">Yesterday's Question Results</h3>
@@ -418,16 +427,9 @@ function QuestionOfTheDay() {
               <p>No consensus winner yesterday.</p>
             )}
           </div>
-          {/* <p className="qotd-yesterday-consensus">{yesterdayConsensus}</p> */}
           <p className="qotd-yesterday-result">{yesterdayResult}</p>
         </div>
       )}
-      {/* <div className="qotd-streak-section">
-        <h4>Current Streak:</h4>
-        {streak.correct > 0 && <p>Correct Streak: {streak.correct} days</p>}
-        {streak.incorrect > 0 && <p>Incorrect Streak: {streak.incorrect} days</p>}
-        {streak.noVote > 0 && <p>No Vote Streak: {streak.noVote} days</p>}
-      </div> */}
     </div>
   );
 }
