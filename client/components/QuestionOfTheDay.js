@@ -294,33 +294,6 @@ function QuestionOfTheDay() {
               ? 'Time Until the Next Question:'
               : 'Time Left to Answer the Question:'}{' '}
               </p>
-              {/* <div className="countdown-container">
-    <CountdownCircleTimer
-      isPlaying
-      duration={86400}
-      initialRemainingTime={timeLeftSeconds}
-      colors={[
-        ['#004777', 0.33],
-        ['#F7B801', 0.33],
-        ['#A30000'],
-      ]}
-      size={200} // Increased size
-      strokeWidth={12}
-      trailColor="#d9d9d9"
-      onComplete={() => ({ shouldRepeat: false })}
-    >
-      {({ remainingTime }) => {
-        const hours = Math.floor((remainingTime / 3600) % 24);
-        const minutes = Math.floor((remainingTime / 60) % 60);
-        const seconds = remainingTime % 60;
-        return (
-          <div className="timer-text">
-            {hours}h {minutes}m {seconds}s
-          </div>
-        );
-      }}
-    </CountdownCircleTimer>
-  </div> */}
   <div className="countdown-container">
               <div className="timer-border">
                 <CountdownCircleTimer
